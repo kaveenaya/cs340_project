@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset = "UTF-8">
+    <meta name = "viewport" content = "width=device-width, initial-scale=1.0">
+    <link rel = "stylesheet" href = "styles.css">
+    <title>Moonlight Melodies - Customers</title>
+  </head>
+  <body>
+    <header>
+    </header>
+      <h2>Customers Table</h2>
+      <table id="customers-table">
+        <thead>
+            <tr>
+                <th>customerID</th>
+                <th>customerFname</th>
+                <th>customerLname</th>
+                <th>customerPhone</th>
+                <th>customerEmail</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr data-value>
+                <td>1</td>
+                <td>John</td>
+                <td>Doe</td>
+                <td>123-456-7890</td>
+                <td>johnD@gmail.com</td>
+                <td><button onclick="deleteCustomer(1)">Delete</button></td>
+            </tr>
+            <tr data-value>
+                <td>2</td>
+                <td>Joe</td>
+                <td>Doe</td>
+                <td>123-422-3322</td>
+                <td>joeDoe@gmail.com</td>
+                <td><button onclick="deleteCustomer(2)">Delete</button></td>
+            </tr>
+            <tr data-value>
+                <td>3</td>
+                <td>Jane</td>
+                <td>Smith</td>
+                <td>125-423-3324</td>
+                <td>janeS@gmail.com</td>
+                <td><button onclick="deleteCustomer(3)">Delete</button></td>
+            </tr>
+            <tr data-value>
+                <td>4</td>
+                <td>Michale</td>
+                <td>Doe</td>
+                <td>124-424-3222</td>
+                <td>doeMich@gmail.com</td>
+                <td><button onclick="deleteCustomer(4)">Delete</button></td>
+            </tr>
+        </tbody>
+      </table>
+
+    <form id="add-customer">
+        <h2>Add an Customer</h2>
+        <div>
+            <label for="customerFname">First Name:</label>
+            <input type="text" id="customerFname" name="customerFname" required>
+        </div>
+        <div>
+            <label for="customerLname">Last Name:</label>
+            <input type="text" id="customerLname" name="customerLname" required>
+        </div>
+        <div>
+            <label for="customerPhone">Phone Number:</label>
+            <input type="text" id="customerPhone" name="customerPhone" required>
+        </div>
+        <div>
+            <label for="customerEmail">Email:</label>
+            <input type="text" id="customerEmail" name="customerEmail" required>
+        </div>
+        <button onclick="addCustomer()">Add Customer</button>
+    </form>
+
+    <form id="update-customer">
+        <h2>Update Customer</h2>
+        <div>
+            <label for="customerSelect">Select the Customer:</label>
+            <select id="customerSelect" name="customerSelect">
+                <option value="" disabled selected>Select the Customer</option>
+                <option value="John Doe">John Doe</option>
+                <option value="Joe Doe">Joe Doe</option>
+                <option value="Jane Smith">Jane Smith</option>
+                <option value="Michale Doe">Michale Doe</option>
+            </select>
+        </div>
+        <div>
+            <label for="customerFname">First Name:</label>
+            <input type="text" id="customerFname" name="customerFname" required>
+        </div>
+        <div>
+            <label for="customerLname">Last Name:</label>
+            <input type="text" id="customerLname" name="customerLname" required>
+        </div>
+        <div>
+            <label for="customerPhone">Phone:</label>
+            <input type="text" id="customerPhone" name="customerPhone" required>
+        </div>
+        <div>
+            <label for="customerEmail">Email:</label>
+            <input type="text" id="customerEmail" name="customerEmail" required>
+        </div>
+        <button onclick="updateCustomer()">Update Customer</button>
+    </form>
+  </body>
+</html>

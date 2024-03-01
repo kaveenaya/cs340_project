@@ -10,7 +10,7 @@ app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 app.use(express.static('public'))
 
-PORT        = 4101;                 // Set a port number at the top so it's easy to change in the future
+PORT        = 4161;                 // Set a port number at the top so it's easy to change in the future
 
 
 // app.js
@@ -28,13 +28,44 @@ var db = require('./database/db-connector')
 
 // app.js
 
-app.get('/', function(req, res)
+/*
+    ROUTES
+*/                                                         
+
+app.get('/shopping_cart', function (req, res) {
+
+    res.render('shopping_cart');                  
+})
+                                                       // received back from the query
+
+app.get('/songs', function (req, res) {
+
+    res.render('songs');                  
+})
+
+app.get('/sales', function (req, res) {
+
+    res.render('sales');                  
+})
+
+app.get('/employees', function (req, res) {
+
+    res.render('employees');                  
+})
+
+
+app.get('/customers', function (req, res) {
+
+    res.render('customers');                  
+})
+
+app.get('/instruments', function(req, res)
     {  
         let query1 = "SELECT * FROM Instruments;";               // Define our query
 
         db.pool.query(query1, function(error, rows, fields){    // Execute the query
             //let instruments = rows;
-            res.render('index', {data: rows});                  // Render the index.hbs file, and also send the renderer
+            res.render('instruments', {data: rows});                  // Render the index.hbs file, and also send the renderer
         })                                                      // an object where 'data' is equal to the 'rows' we
     });      
     
@@ -44,7 +75,7 @@ app.get('/', function(req, res)
 
 app.get('/', function(req, res)
     {
-        res.render('index');                    // Note the call to render() and not send(). Using render() ensures the templating engine
+        res.render('home');                    // Note the call to render() and not send(). Using render() ensures the templating engine
     });                                         // will process this file, before sending the finished HTML to the client.
 
 // app.js

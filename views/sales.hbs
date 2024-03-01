@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css">
+  <title>Moonlight Melodies - Sales</title>
+</head>
+<body>
+  <header>
+</header>
+<h2>Sales Table </h2>
+  <table id="sales">
+    <thead>
+      <tr>
+        <th>salesID</th>
+        <th>customerID</th>
+        <th>employeeID</th>
+        <th>saleAmount</th>
+        <th>saleDate</th>
+        <th>saleTime</th>
+        <th>Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr data-value>
+        <td>1</td>
+        <td>1</td>
+        <td>2</td>
+        <td>NULL</td>
+        <td>2023-02-07</td>
+        <td>2:15PM</td>
+        <td>
+          <button onclick="deleteSales(1)">Delete</button>
+        </td>
+      </tr>
+      <tr data-value>
+        <td>2</td>
+        <td>2</td>
+        <td>4</td>
+        <td>30.00</td>
+        <td>2023-02-08</td>
+        <td>12:43PM</td>
+        <td>
+          <button onclick="deleteSales(2)">Delete</button>
+        </td>
+      </tr>
+      <tr data-value>
+        <td>3</td>
+        <td>3</td>
+        <td>3</td>
+        <td>310.00</td>
+        <td>2023-02-07</td>
+        <td>9:32AM</td>
+        <td>
+          <button onclick="deleteSales(3)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+<h2>Add Sale</h2>
+<form id="add-sale-form">
+  <label for="customerID">Customer ID:</label>
+  <select id="customerID" name="customerID">
+    <option value="123">1</option>
+    <option value="124">2</option>
+    <option value="125">3</option>
+    <option value="125">4</option>
+  </select><br>
+
+  <label for="employeeID">Employee ID:</label>
+  <select id="employeeID" name="employeeID">
+    <option value="233321">1</option>
+    <option value="233321">2</option>
+    <option value="234322">3</option>
+    <option value="235323">4</option>
+  </select><br>
+
+  <label for="saleDate">Sale Date:</label>
+  <input type="date" id="saleDate" name="saleDate" required><br>
+
+  <label for="saleTime">Sale Time:</label>
+  <input type="time" id="saleTime" name="saleTime" required><br>
+
+  <button onclick="updateSale()">Add Sale</button>
+</form>
+</body>
+</html>
