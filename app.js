@@ -77,15 +77,16 @@ app.get('/', function(req, res) {
     res.render('home'); // Note the call to render() and not send(). Using render() ensures the templating engine will process this file, before sending the finished HTML to the client.
 });
 
+// Define a route to handle the GET request for the '/instruments' endpoint
 app.get('/instruments', function(req, res) {
-    // Your code to handle the request. This might involve querying your database
-    // and sending back the information to the client, like so:
-    db.pool.query('SELECT * FROM Instruments;', function(error, results, fields) {
+    let query1 = "SELECT * FROM Instruments;"; // Define our query
+
+    db.pool.query(query1, function(error, rows, fields) { // Execute the query
         if (error) {
-            res.status(500).send('Internal Server Error');
+            console.error("Error fetching instruments:", error);
+            res.status(500).send("Internal Server Error"); // Send internal server error status and message
         } else {
-            // Assuming you want to send back a web page and you have a template called 'instruments'
-            res.render('instruments', { instruments: results });
+            res.render('instruments', { data: rows }); // Render the 'instruments.hbs' file and send the data to the template
         }
     });
 });
