@@ -79,16 +79,24 @@ app.get('/', function(req, res) {
 
 // Define a route to handle the GET request for the '/instruments' endpoint
 app.get('/instruments', function(req, res) {
-    let query = "SELECT * FROM Instruments;"; // Define our query
+    let query1 = "SELECT * FROM Instruments;"; // Define our query
+    let query2 = "SELECT * FROM Instruments;"; // Define our query
 
-    db.pool.query(query, function(error, rows, fields) { // Execute the query
+
+    db.pool.query(query1, function(error, rows, fields) { // Execute the query
         if (error) {
             console.error("Error fetching instruments:", error);
             res.status(500).send("Internal Server Error"); // Send internal server error status and message
         } else {
             // Render the 'instruments.hbs' file and send the data to the template
-            res.render('instruments', { data: rows });
-            // 'rows' contains the results from your query
+            let mainTable = rows;
+
+            db.pool.query(query2, (error, rows, fields) => {
+            
+                // Save the planets
+                let instrumentIDS = rows;
+                return res.render('instruments', {data: mainTable, instrumentIDS: instrumentIDS});
+            })
         }
     });
 });

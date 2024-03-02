@@ -75,8 +75,8 @@
     <select name="input-instrument" id="input-instrument">
         <option value="0">Select an Instrument ID</option>
         <!-- Populate this dropdown dynamically with instrument data -->
-        {{#each instruments}}
-        <option value="{{this.instrumentID}}">{{this.instrumentName}}</option>
+        {{#each instrumentIDS}}
+        <option value="{{this.instrumentID}}">{{this.name}}</option>
         {{/each}}
     </select>
 
