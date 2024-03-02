@@ -130,3 +130,30 @@ app.post('/add-instrument-form', function(req, res){
 app.listen(PORT, function(){            // This is the basic syntax for what is called the 'listener' which receives incoming requests on the specified PORT.
     console.log('Express started on http://localhost:' + PORT + '; press Ctrl-C to terminate.')
 });
+
+///delete function 
+app.delete('/delete-instrument-ajax', function(req, res, next) {
+    let data = req.body;
+    let instrumentID = parseInt(data.id);
+    let deleteBsg_Cert_Instruments = `DELETE FROM bsg_cert_instruments WHERE instrumentID = ?`;
+    let deleteBsg_Instruments = `DELETE FROM bsg_instruments WHERE id = ?`;
+
+    // Run the 1st query
+    db.pool.query(deleteBsg_Cert_Instruments, [instrumentID], function(error, rows, fields) {
+        if (error) {
+            // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+            console.log(error);
+            res.sendStatus(400);
+        } else {
+            // Run the second query
+            db.pool.query(deleteBsg_Instruments, [instrumentID], function(error, rows, fields) {
+                if (error) {
+                    console.log(error);
+                    res.sendStatus(400);
+                } else {
+                    res.sendStatus(204);
+                }
+            });
+        }
+    });
+});

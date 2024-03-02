@@ -22,7 +22,7 @@
 
         {{!-- For each row, print the id, fname, lname, homeworld and age, in order --}}
         {{#each data}}
-        <tr>
+        <tr data-value={{this.instrumentID}}>
             <td>{{this.instrumentID}}</td>
             <td>{{this.instrumentName}}</td>
             <td>{{this.instrumentColor}}</td>
@@ -30,10 +30,12 @@
             <td>{{this.instrumentSize}}</td>
             <td>{{this.instrumentYear}}</td>
             <td>{{this.instrumentPrice}}</td>
+             <td><button onclick="deleteInstrument({{this.instrumentID}})">Delete</button></td>
         </tr>
         {{/each}}
     </tbody>
 </table>
+<script src="./js/delete_instrument.js"></script>
 
 <!-- /views/index.hbs -->
 <h2>Adding Data using an HTML form</h2>
