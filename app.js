@@ -29,15 +29,14 @@ var db = require('./database/db-connector')
 app.put('/put-instrument-ajax', function(req,res,next){
     let data = req.body;
 
-    let id = parseInt(data.id);
-    let year = parseInt(data.year);
-    let price = parseInt(data.price);
-
-    let queryUpdateWorld = `UPDATE bsg_people SET homeworld = ? WHERE bsg_people.id = ?`;
-    let selectWorld = `SELECT * FROM bsg_planets WHERE id = ?`;
+    let instrumentID = parseInt(data.id);
+    let updateBsg_Cert_Instruments = `UPDATE Instruments 
+    SET instrumentName = ?, instrumentColor = ?, instrumentMaterial = ?, instrumentSize = ?, instrumentYear = ?, instrumentPrice = ?
+    WHERE instrumentID = ?;`;
+    let update_instruments = `UPDATE Instruments;`;
 
     // Run the 1st query
-    db.pool.query(queryUpdateWorld, [homeworld, person], function(error, rows, fields){
+    db.pool.query(updateBsg_Cert_Instruments, [instrumentID], function(error, rows, fields){
         if (error) {
             // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
             console.log(error);
@@ -45,7 +44,7 @@ app.put('/put-instrument-ajax', function(req,res,next){
         } else {
             // If there was no error, we run our second query and return that data so we can use it to update the people's table on the front-end
             // Run the second query
-            db.pool.query(selectWorld, [homeworld], function(error, rows, fields) {
+            db.pool.query(update_instruments, [instrumentID], function(error, rows, fields) {
                 if (error) {
                     console.log(error);
                     res.sendStatus(400);
