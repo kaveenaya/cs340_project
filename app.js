@@ -93,16 +93,7 @@ app.get('/', function(req, res) {
 
 // Define a route to handle the GET request for the '/instruments' endpoint
 app.get('/instruments', function(req, res) {
-    let query1 = "SELECT * FROM Instruments;"; // Define our query
-
-    db.pool.query(query1, function(error, rows, fields) { // Execute the query
-        if (error) {
-            console.error("Error fetching instruments:", error);
-            res.status(500).send("Internal Server Error"); // Send internal server error status and message
-        } else {
-            res.render('instruments', { data: rows }); // Render the 'instruments.hbs' file and send the data to the template
-        }
-    });
+    res.render('instruments'); 
 });
 
 
