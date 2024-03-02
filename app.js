@@ -79,33 +79,22 @@ app.get('/', function(req, res) {
 
 // Define a route to handle the GET request for the '/instruments' endpoint
 app.get('/instruments', function(req, res) {
-    let query1 = "SELECT * FROM Instruments;"; // Define our query
+    let query = "SELECT * FROM Instruments;"; // Define our query
 
-    db.pool.query(query1, function(error, rows, fields) { // Execute the query
+    db.pool.query(query, function(error, rows, fields) { // Execute the query
         if (error) {
             console.error("Error fetching instruments:", error);
             res.status(500).send("Internal Server Error"); // Send internal server error status and message
         } else {
-            res.render('instruments', { data: rows }); // Render the 'instruments.hbs' file and send the data to the template
+            // Render the 'instruments.hbs' file and send the data to the template
+            res.render('instruments', { instruments: rows });
+            // 'rows' contains the results from your query
         }
     });
 });
 
 
-// Route to handle getting details for a specific instrument
-app.get('/get-instrument-details/:id', function(req, res) {
-    const instrumentID = req.params.id;
-    const query = "SELECT * FROM Instruments WHERE instrumentID = ?;";
 
-    db.pool.query(query, [instrumentID], function(error, rows, fields) {
-        if (error) {
-            console.error("Error fetching instrument details:", error);
-            res.status(500).send("Internal Server Error");
-        } else {
-            res.json(rows[0]); // Send the details of the instrument back to the client
-        }
-    });
-});
 
 
 
