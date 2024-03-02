@@ -26,11 +26,12 @@ var db = require('./database/db-connector')
 */
 
 // Define a route to handle the PUT request for updating a person's homeworld
-app.put('/put-person-ajax', function(req,res,next){
+app.put('/put-instrument-ajax', function(req,res,next){
     let data = req.body;
 
-    let homeworld = parseInt(data.homeworld);
-    let person = parseInt(data.fullname);
+    let id = parseInt(data.id);
+    let year = parseInt(data.year);
+    let price = parseInt(data.price);
 
     let queryUpdateWorld = `UPDATE bsg_people SET homeworld = ? WHERE bsg_people.id = ?`;
     let selectWorld = `SELECT * FROM bsg_planets WHERE id = ?`;
@@ -57,6 +58,32 @@ app.put('/put-person-ajax', function(req,res,next){
 });
 
 // Remaining routes...
+app.get('/shopping_cart', function (req, res) {
+
+    res.render('shopping_cart');                  
+})
+                                                       // received back from the query
+
+app.get('/songs', function (req, res) {
+
+    res.render('songs');                  
+})
+
+app.get('/sales', function (req, res) {
+
+    res.render('sales');                  
+})
+
+app.get('/employees', function (req, res) {
+
+    res.render('employees');                  
+})
+
+
+app.get('/customers', function (req, res) {
+
+    res.render('customers');                  
+})
 
 // app.js
 
@@ -124,8 +151,8 @@ app.listen(PORT, function() {
 app.delete('/delete-instrument-ajax', function(req, res, next) {
     let data = req.body;
     let instrumentID = parseInt(data.id);
-    let deleteBsg_Cert_Instruments = `DELETE FROM bsg_cert_instruments WHERE instrumentID = ?`;
-    let deleteBsg_Instruments = `DELETE FROM bsg_instruments WHERE id = ?`;
+    let deleteBsg_Cert_Instruments = `DELETE FROM Instruments WHERE instrumentID = ?`;
+    let deleteBsg_Instruments = `DELETE FROM Instruments WHERE id = ?`;
 
     // Run the 1st query
     db.pool.query(deleteBsg_Cert_Instruments, [instrumentID], function(error, rows, fields) {

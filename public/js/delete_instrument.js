@@ -1,4 +1,4 @@
-function deletePerson(instrumentID) {
+function deleteInstrument(instrumentID) {
     // Put our data we want to send in a javascript object
     let data = {
         id: instrumentID
