@@ -26,32 +26,19 @@ var db = require('./database/db-connector')
 */
 
 // Define a route to handle the PUT request for updating a person's homeworld
-app.put('/put-instrument-ajax', function(req,res,next){
+// Route to handle updating an instrument
+app.put('/put-instrument-ajax', function(req, res) {
     let data = req.body;
 
-    let instrumentID = parseInt(data.id);
-    let updateBsg_Cert_Instruments = `UPDATE Instruments 
-    SET instrumentName = ?, instrumentColor = ?, instrumentMaterial = ?, instrumentSize = ?, instrumentYear = ?, instrumentPrice = ?
-    WHERE instrumentID = ?;`;
-    let update_instruments = `UPDATE Instruments;`;
+    // Assuming data contains { instrumentID: '', instrumentName: '', instrumentColor: '', ... }
+    let updateQuery = `UPDATE Instruments SET instrumentName = ?, instrumentColor = ?, instrumentMaterial = ?, instrumentSize = ?, instrumentYear = ?, instrumentPrice = ? WHERE instrumentID = ?;`;
 
-    // Run the 1st query
-    db.pool.query(updateBsg_Cert_Instruments, [instrumentID], function(error, rows, fields){
+    db.pool.query(updateQuery, [data.instrumentName, data.instrumentColor, data.instrumentMaterial, data.instrumentSize, data.instrumentYear, data.instrumentPrice, data.instrumentID], function(error, results) {
         if (error) {
-            // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
             console.log(error);
             res.sendStatus(400);
         } else {
-            // If there was no error, we run our second query and return that data so we can use it to update the people's table on the front-end
-            // Run the second query
-            db.pool.query(update_instruments, [instrumentID], function(error, rows, fields) {
-                if (error) {
-                    console.log(error);
-                    res.sendStatus(400);
-                } else {
-                    res.send(rows);
-                }
-            })
+            res.sendStatus(200);
         }
     });
 });
@@ -90,19 +77,35 @@ app.get('/', function(req, res) {
     res.render('home'); // Note the call to render() and not send(). Using render() ensures the templating engine will process this file, before sending the finished HTML to the client.
 });
 
-// Define a route to handle the GET request for the '/instruments' endpoint
 app.get('/instruments', function(req, res) {
-    let query1 = "SELECT * FROM Instruments;"; // Define our query
-
-    db.pool.query(query1, function(error, rows, fields) { // Execute the query
+    // Your code to handle the request. This might involve querying your database
+    // and sending back the information to the client, like so:
+    db.pool.query('SELECT * FROM Instruments;', function(error, results, fields) {
         if (error) {
-            console.error("Error fetching instruments:", error);
-            res.status(500).send("Internal Server Error"); // Send internal server error status and message
+            res.status(500).send('Internal Server Error');
         } else {
-            res.render('instruments', { data: rows }); // Render the 'instruments.hbs' file and send the data to the template
+            // Assuming you want to send back a web page and you have a template called 'instruments'
+            res.render('instruments', { instruments: results });
         }
     });
 });
+
+
+// Route to handle getting details for a specific instrument
+app.get('/get-instrument-details/:id', function(req, res) {
+    const instrumentID = req.params.id;
+    const query = "SELECT * FROM Instruments WHERE instrumentID = ?;";
+
+    db.pool.query(query, [instrumentID], function(error, rows, fields) {
+        if (error) {
+            console.error("Error fetching instrument details:", error);
+            res.status(500).send("Internal Server Error");
+        } else {
+            res.json(rows[0]); // Send the details of the instrument back to the client
+        }
+    });
+});
+
 
 
 app.post('/add-instrument-form', function(req, res){
@@ -134,7 +137,7 @@ app.post('/add-instrument-form', function(req, res){
             console.log(error)
             res.sendStatus(400);
         } else {
-            res.redirect('/');
+            res.redirect('/instruments');
         }
     })
 });

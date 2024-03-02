@@ -71,9 +71,9 @@
 
 <form id="update-instrument-form">
 
-    <label for="input-instrument">Select the Instrument: </label>
+    <label for="input-instrument">Select the Instrument ID: </label>
     <select name="input-instrument" id="input-instrument">
-        <option value="0">Select an Instrument</option>
+        <option value="0">Select an Instrument ID</option>
         <!-- Populate this dropdown dynamically with instrument data -->
         {{#each instruments}}
         <option value="{{this.id}}">{{this.name}}</option>
