@@ -87,7 +87,7 @@ app.get('/instruments', function(req, res) {
             res.status(500).send("Internal Server Error"); // Send internal server error status and message
         } else {
             // Render the 'instruments.hbs' file and send the data to the template
-            res.render('instruments', { instruments: rows });
+            res.render('instruments', { data: rows });
             // 'rows' contains the results from your query
         }
     });
