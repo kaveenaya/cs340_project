@@ -140,18 +140,17 @@ addRowToTable = (data) => {
 
     // Create a row and 4 cells
     let row = document.createElement("TR");
-    let idCell = document.createElement("TD");
-    let firstNameCell = document.createElement("TD");
-    let lastNameCell = document.createElement("TD");
-    let homeworldCell = document.createElement("TD");
-    let ageCell = document.createElement("TD");
-
+    let instrumentNameCell = document.createElement("TD");
+    let instrumentColorCell = document.createElement("TD");
+    let instrumentMaterialCell = document.createElement("TD");
+    let instrumentSizeCell = document.createElement("TD");
+    let instrumentYearCell = document.createElement("TD");
+    let instrumentPriceCell = document.createElement("TD");
     let deleteCell = document.createElement("TD");
 
     // Fill the cells with correct data
   
     // Fill the cells with correct data
-    instrumentIDCell.innerText = newRow.instrumentID;
     instrumentNameCell.innerText = newRow.instrumentName;
     instrumentColorCell.innerText = newRow.instrumentColor;
     instrumentMaterialCell.innerText = newRow.instrumentMaterial;
@@ -167,7 +166,6 @@ addRowToTable = (data) => {
 
 
       // Add the cells to the row 
-      row.appendChild(instrumentIDCell);
       row.appendChild(instrumentNameCell);
       row.appendChild(instrumentColorCell);
       row.appendChild(instrumentMaterialCell);
@@ -181,4 +179,10 @@ addRowToTable = (data) => {
 
     // Add the row to the table
     currentTable.appendChild(row);
+
+    let selectID = document.getElementById("input-instrument-ajax");
+    let option = document.createElement("option");
+    option.text = newRow.instrumentName;
+    option.value = newRow.instrumentID;
+    selectID.add(option);
 }

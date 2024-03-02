@@ -72,31 +72,31 @@
 <form id="update-instrument-form">
 
     <label for="input-instrument">Select the Instrument ID: </label>
-    <select name="input-instrument" id="input-instrument">
+    <select name="input-instrument" id="input-instrument-ajax">
         <option value="0">Select an Instrument ID</option>
-        <!-- Populate this dropdown dynamically with instrument data -->
         {{#each instrumentIDS}}
-        <option value="{{this.instrumentID}}">{{this.name}}</option>
+        <option value="{{this.instrumentID}}">{{this.instrumentID}}</option>
         {{/each}}
     </select>
 
-    <label for="input-instrument-name">Instrument Name: </label>
-    <input type="text" name="input-instrument-name" id="input-instrument-name">
 
-    <label for="input-instrument-color">Instrument Color: </label>
-    <input type="text" name="input-instrument-color" id="input-instrument-color">
+    <label for="input-name">Name: </label>
+    <input type="text" name="input-name" id="input-name">
+    
+    <label for="input-color">Color: </label>
+    <input type="text" name="input-color" id="input-color">
 
-    <label for="input-instrument-material">Instrument Material: </label>
-    <input type="text" name="input-instrument-material" id="input-instrument-material">
+    <label for="input-material">Material: </label>
+    <input type="text" name="input-material" id="input-material">
 
-    <label for="input-instrument-size">Instrument Size: </label>
-    <input type="text" name="input-instrument-size" id="input-instrument-size">
+    <label for="input-size">Size: </label>
+    <input type="text" name="input-size" id="input-size">
 
-    <label for="input-instrument-year">Instrument Year: </label>
-    <input type="text" name="input-instrument-year" id="input-instrument-year">
+    <label for="input-year">Year: </label>
+    <input type="number" name="input-year" id="input-year">
 
-    <label for="input-instrument-price">Instrument Price: </label>
-    <input type="text" name="input-instrument-price" id="input-instrument-price">
+    <label for="input-price">Price: </label>
+    <input type="number" name="input-price" id="input-price">
 
     <input type="submit">
 

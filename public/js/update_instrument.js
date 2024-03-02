@@ -1,52 +1,71 @@
-document.addEventListener('DOMContentLoaded', function() {
-    const selectElement = document.getElementById('input-instrument');
 
-    selectElement.addEventListener('change', function(event) {
-        const instrumentID = event.target.value;
-        // Fetch the instrument details
-        fetch('/get-instrument-details/' + instrumentID)
-            .then(response => response.json())
-            .then(data => {
-                // Update form fields
-                document.getElementById('input-instrument-name').value = data.instrumentName || '';
-                document.getElementById('input-instrument-color').value = data.instrumentColor || '';
-                document.getElementById('input-instrument-material').value = data.instrumentMaterial || '';
-                document.getElementById('input-instrument-size').value = data.instrumentSize || '';
-                document.getElementById('input-instrument-year').value = data.instrumentYear || '';
-                document.getElementById('input-instrument-price').value = data.instrumentPrice || '';
-            });
-    });
+// Get the objects we need to modify
+let updateInstrumentForm = document.getElementById('update-instrument-form');
 
-    const updateInstrumentForm = document.getElementById('update-instrument-form');
+// Modify the objects we need
+updateInstrumentForm.addEventListener("submit", function (e) {
+   
+    // Prevent the form from submitting
+    e.preventDefault();
 
-    updateInstrumentForm.addEventListener("submit", function(e) {
-        e.preventDefault();
+    // Get form fields we need to get data from
+    let inputInstrumentID = document.getElementById("input-instrument-ajax");
 
-        // Collect data from form...
-        const formData = {
-            id: document.getElementById("input-instrument").value,
-            name: document.getElementById("input-instrument-name").value,
-            color: document.getElementById("input-instrument-color").value,
-            material: document.getElementById("input-instrument-material").value,
-            size: document.getElementById("input-instrument-size").value,
-            year: document.getElementById("input-instrument-year").value,
-            price: document.getElementById("input-instrument-price").value
-        };
+    // Get the values from the form fields
+    let instrumentIDValue = inputInstrumentID.value;
+    
+    // currently the database table for bsg_people does not allow updating values to NULL
+    // so we must abort if being bassed NULL for homeworld
 
-        fetch('/put-instrument-ajax', {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(formData),
-        })
-        .then(response => {
-            if (response.ok) {
-                console.log("Instrument updated successfully!");
-                // Optionally, refresh the page or update the UI accordingly
-            } else {
-                console.log("There was an error with the update.");
-            }
-        });
-    });
-});
+    if (isNaN(instrumentIDValue)) 
+    {
+        return;
+    }
+
+
+    // Put our data we want to send in a javascript object
+    let data = {
+        instrumentID: instrumentIDValue
+    }
+    
+    // Setup our AJAX request
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("POST", "/update-instrument-ajax", true);
+    xhttp.setRequestHeader("Content-type", "application/json");
+
+    // Tell our AJAX request how to resolve
+    xhttp.onreadystatechange = () => {
+        if (xhttp.readyState == 4 && xhttp.status == 200) {
+
+            // Add the new data to the table
+            updateRow(xhttp.response, instrumentIDValue);
+
+        }
+        else if (xhttp.readyState == 4 && xhttp.status != 200) {
+            console.log("There was an error with the input.")
+        }
+    }
+
+    // Send the request and wait for the response
+    xhttp.send(JSON.stringify(data));
+
+})
+
+
+function updateRow(data, personID){
+    let parsedData = JSON.parse(data);
+    
+    // Get the table we want to update
+    let table = document.getElementById("instruments-table");
+
+    for (let i = 0, row; row = table.rows[i]; i++) {
+        if (row.cells[0].innerHTML == personID) {
+            row.cells[1].innerHTML = parsedData[0].instrumentName;
+            row.cells[2].innerHTML = parsedData[0].instrumentColor;
+            row.cells[3].innerHTML = parsedData[0].instrumentMaterial;
+            row.cells[4].innerHTML = parsedData[0].instrumentSize;
+            row.cells[5].innerHTML = parsedData[0].instrumentYear;
+            row.cells[6].innerHTML = parsedData[0].instrumentPrice;
+        }
+    }
+}

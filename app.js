@@ -30,15 +30,16 @@ var db = require('./database/db-connector')
 app.put('/put-instrument-ajax', function(req, res) {
     let data = req.body;
 
-    // Assuming data contains { instrumentID: '', instrumentName: '', instrumentColor: '', ... }
-    let updateQuery = `UPDATE Instruments SET instrumentName = ?, instrumentColor = ?, instrumentMaterial = ?, instrumentSize = ?, instrumentYear = ?, instrumentPrice = ? WHERE instrumentID = ?;`;
+    let instrumentID = parseInt(data.instrumentID);
 
-    db.pool.query(updateQuery, [data.instrumentName, data.instrumentColor, data.instrumentMaterial, data.instrumentSize, data.instrumentYear, data.instrumentPrice, data.instrumentID], function(error, results) {
+    let query = `UPDATE Instruments SET instrumentName = ?, instrumentColor = ?, instrumentMaterial = ?, instrumentSize = ?, instrumentYear = ?, instrumentPrice = ? WHERE instrumentID = ?;`;
+
+    db.pool.query(query, [data.instrumentName, data.instrumentColor, data.instrumentMaterial, data.instrumentSize, data.instrumentYear, data.instrumentPrice, instrumentID], function(error, results) {
         if (error) {
             console.log(error);
             res.sendStatus(400);
         } else {
-            res.sendStatus(200);
+            res.send(results);
         }
     });
 });
