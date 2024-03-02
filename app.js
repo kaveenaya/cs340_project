@@ -155,7 +155,7 @@ app.delete('/delete-instrument-ajax', function(req, res, next) {
     let data = req.body;
     let instrumentID = parseInt(data.id);
     let deleteBsg_Cert_Instruments = `DELETE FROM Instruments WHERE instrumentID = ?`;
-    let deleteBsg_Instruments = `DELETE FROM Instruments WHERE id = ?`;
+    let deleteBsg_Instruments = `DELETE FROM Instruments WHERE instrumentID = ?`;
 
     // Run the 1st query
     db.pool.query(deleteBsg_Cert_Instruments, [instrumentID], function(error, rows, fields) {
