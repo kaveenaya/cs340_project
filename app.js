@@ -166,7 +166,7 @@ app.listen(PORT, function() {
     console.log('Express started on http://localhost:' + PORT + '; press Ctrl-C to terminate.')
 });
 
-///delete function 
+///delete function for instrumnet
 app.delete('/delete-instrument-ajax', function(req, res, next) {
     let data = req.body;
     let instrumentID = parseInt(data.id);
@@ -182,6 +182,96 @@ app.delete('/delete-instrument-ajax', function(req, res, next) {
         } else {
             // Run the second query
             db.pool.query(deleteBsg_Instruments, [instrumentID], function(error, rows, fields) {
+                if (error) {
+                    console.log(error);
+                    res.sendStatus(400);
+                } else {
+                    res.sendStatus(204);
+                }
+            });
+        }
+    });
+});
+
+
+///delete function songs
+app.delete('/delete-song-ajax', function(req, res, next) {
+    let data = req.body;
+    let songID = parseInt(data.id);
+    let deleteBsg_Cert_Songs = `DELETE FROM Songs WHERE songID = '${songID}'` ;
+    let deleteBsg_Songs = `DELETE FROM Songs WHERE songID = '${songID}'`;
+
+    // Run the 1st query
+    db.pool.query(deleteBsg_Cert_Songs, [songID], function(error, rows, fields) {
+        if (error) {
+            // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+            console.log(error);
+            res.sendStatus(400);
+        } else {
+            // Run the second query
+            db.pool.query(deleteBsg_Songs, [songID], function(error, rows, fields) {
+                if (error) {
+                    console.log(error);
+                    res.sendStatus(400);
+                } else {
+                    res.sendStatus(204);
+                }
+            });
+        }
+    });
+});
+
+
+//delete for Sales
+app.delete('/delete-sales-ajax/', function(req,res,next){
+    let data = req.body;
+    let salesID = parseInt(data.id);
+    let deleteBsg_Cert_Sales = `DELETE FROM bsg_cert_sales WHERE pid = ?`;
+    let deleteBsg_Sales = `DELETE FROM bsg_sales WHERE id = ?`;
+  
+  
+          // Run the 1st query
+          db.pool.query(deleteBsg_Cert_Sales, [salesID], function(error, rows, fields){
+              if (error) {
+  
+              // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+              console.log(error);
+              res.sendStatus(400);
+              }
+  
+              else
+              {
+                  // Run the second query
+                  db.pool.query(deleteBsg_Sales, [salesID], function(error, rows, fields) {
+  
+                      if (error) {
+                          console.log(error);
+                          res.sendStatus(400);
+                      } else {
+                          res.sendStatus(204);
+                      }
+                  })
+              }
+  })});
+
+
+
+  // delete customeres 
+  app.delete('/delete-customers-ajax', function(req, res, next) {
+    let data = req.body;
+    let customersID = parseInt(data.id);
+    let deleteBsg_Cert_Customers = `DELETE FROM Customers WHERE customerID = ?`;
+    let deleteBsg_Customers = `DELETE FROM Customers WHERE customerID = ?`;
+
+    // Run the 1st query
+    db.pool.query(deleteBsg_Cert_Customers, [customersID], function(error, rows, fields) {
+        if (error) {
+            // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+            console.log(error);
+            res.sendStatus(400);
+        } else {
+            // Run the second query
+            db.pool.query(deleteBsg_Customers, [customersID], function(error, rows, fields) {
                 if (error) {
                     console.log(error);
                     res.sendStatus(400);
