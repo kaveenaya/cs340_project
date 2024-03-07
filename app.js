@@ -70,8 +70,26 @@ app.get('/shopping_cart', function (req, res) {
                                                        // received back from the query
 
 app.get('/songs', function (req, res) {
+    let query1 = "SELECT * FROM Songs;"; // Define our query
+    let query2 = "SELECT * FROM Songs;"; // Define our query
 
-    res.render('songs');                  
+
+    db.pool.query(query1, function(error, rows, fields) { // Execute the query
+        if (error) {
+            console.error("Error fetching songs:", error);
+            res.status(500).send("Internal Server Error"); // Send internal server error status and message
+        } else {
+            // Render the 'instruments.hbs' file and send the data to the template
+            let mainTable = rows;
+
+            db.pool.query(query2, (error, rows, fields) => {
+            
+                // Save the planets
+                let songIDS = rows;
+                return res.render('songs', {data: mainTable, songIDS: songIDS});
+            })
+        }
+    });
 })
 
 app.get('/sales', function (req, res) {
