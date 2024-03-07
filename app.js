@@ -294,7 +294,7 @@ app.delete('/delete-song-ajax', function(req, res, next) {
 });
 
 
-//This works 
+//For sales
 app.delete('/delete-sales-ajax/', function(req, res, next) {
     let data = req.body;
     let salesID = parseInt(data.id);
@@ -313,7 +313,7 @@ app.delete('/delete-sales-ajax/', function(req, res, next) {
 
 
 
-  // This works
+// For customers
   app.delete('/delete-customers-ajax', function(req, res, next) {
     let data = req.body;
     let customerID = parseInt(data.id);
@@ -341,7 +341,7 @@ app.delete('/delete-sales-ajax/', function(req, res, next) {
 
 
 
-// This works 
+// For shoppingcart
 app.delete('/delete-shoppingcart-ajax', function(req, res, next) {
     let data = req.body;
     let shoppingCartID = parseInt(data.id);
@@ -349,6 +349,24 @@ app.delete('/delete-shoppingcart-ajax', function(req, res, next) {
 
     // Run the query
     db.pool.query(deleteShoppingCartQuery, [shoppingCartID], function(error, rows, fields) {
+        if (error) {
+            console.log(error);
+            res.sendStatus(400); // Bad request
+        } else {
+            res.sendStatus(204); // No Content
+        }
+    });
+});
+
+
+// For Employees
+app.delete('/delete-employee-ajax/', function(req, res, next) {
+    let data = req.body;
+    let employeeID = parseInt(data.id);
+    let deleteEmployeeQuery = `DELETE FROM Employees WHERE employeeID = ?`;
+
+    // Run the query
+    db.pool.query(deleteEmployeeQuery, [employeeID], function(error, rows, fields) {
         if (error) {
             console.log(error);
             res.sendStatus(400); // Bad request
