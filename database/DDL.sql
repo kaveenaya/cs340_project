@@ -48,14 +48,13 @@ CREATE OR REPLACE TABLE Songs (
     songArtist VARCHAR(255),
     songGenre VARCHAR(255),
     songLength TIME,
-    songYear INT,
+    songYear INT
 );
 
 
 
 INSERT INTO Instruments (instrumentID,instrumentName, instrumentColor, instrumentMaterial, instrumentSize, instrumentYear, instrumentPrice)
 VALUES 
-('1','Flute', 'Blue', 'Wood', 'Medium', 2023, 100.00),
 ('2','Violin', 'Brown', 'Wood', 'Medium', 2023, 200.00),
 ('3','Trumpet', 'Brass', 'Brass', 'Medium', 2023, 300.00),
 ('4','Drums', 'Black', 'Wood', 'Large', 2023, 400.00);
