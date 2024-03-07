@@ -1,4 +1,4 @@
-function deleteInstrument(salesID) {
+function deleteSale(salesID) {
     // Put our data we want to send in a javascript object
     let data = {
         id: salesID

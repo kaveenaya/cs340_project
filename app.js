@@ -354,3 +354,32 @@ app.delete('/delete-sales-ajax/', function(req,res,next){
         }
     });
 });
+
+
+
+  // delete shopping cart 
+  app.delete('/delete-shoppingcart-ajax', function(req, res, next) {
+    let data = req.body;
+    let shoppingCartID = parseInt(data.id);
+    let deleteBsg_Cert_shoppingcart = `DELETE FROM Customers WHERE shoppingCartID = ?`;
+    let deleteBsg_shoppingcart = `DELETE FROM Customers WHERE shoppingCartID = ?`;
+
+    // Run the 1st query
+    db.pool.query(deleteBsg_Cert_shoppingcart, [shoppingCartID], function(error, rows, fields) {
+        if (error) {
+            // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+            console.log(error);
+            res.sendStatus(400);
+        } else {
+            // Run the second query
+            db.pool.query(deleteBsg_shoppingcart, [shoppingCartID], function(error, rows, fields) {
+                if (error) {
+                    console.log(error);
+                    res.sendStatus(400);
+                } else {
+                    res.sendStatus(204);
+                }
+            });
+        }
+    });
+});
