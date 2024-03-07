@@ -22,13 +22,13 @@ CREATE OR REPLACE TABLE Sales (
 );
 
 CREATE OR REPLACE TABLE ShoppingCart (
-    shoppingCartId INT AUTO_INCREMENT PRIMARY KEY,
+    shoppingCartID INT AUTO_INCREMENT PRIMARY KEY,
     salesID INT,
-    ItemType VARCHAR(255),
+    itemType VARCHAR(255),
     itemID INT,
     itemQuantity INT,
     itemPrice DECIMAL(10, 2),
-    ItemTotalPrice DECIMAL(10, 2),
+    itemTotalPrice DECIMAL(10, 2),
     FOREIGN KEY (salesID) REFERENCES Sales(salesID)
 );
 
@@ -61,7 +61,7 @@ VALUES
 ('4','Drums', 'Black', 'Wood', 'Large', 2023, 400.00);
 
 -- Insert data into Songs table
-INSERT INTO Songs (songID, albumID, songName, songArtist, songGenre, songLength, songYear)
+INSERT INTO Songs (songID, songName, songArtist, songGenre, songLength, songYear)
 VALUES
 (1, 'Bohemian Rhapsody', 'Queen', 'Rock', '00:05:55', 1975),
 (2, 'Billie Jean', 'Michael Jackson', 'Pop', '00:04:54', 1982),
@@ -91,7 +91,7 @@ VALUES
 (1255, 125, 235323, 300, '2023-02-07');
 
 -- Insert data into ShoppingCart table
-INSERT INTO ShoppingCart (shoppingCartId, salesID, ItemType, itemID, itemQuantity, itemPrice, ItemTotalPrice)
+INSERT INTO ShoppingCart (shoppingCartID, salesID, itemType, itemID, itemQuantity, itemPrice, itemTotalPrice)
 VALUES
 (12331, 1233, 'Drake', 1014, 2, 100.00, 200.00),
 (12441, 1244, 'Khalid', 1064, 3, 20.00, 60.00),

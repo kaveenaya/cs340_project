@@ -1,95 +1,105 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
-    <title>Moonlight Melodies - Shopping Cart</title>
-  </head>
-  <body>
-    <header>
-  </header>
-     <h2>Shopping Cart Table </h2>
-    <table id="shoppingcart-table">
-      <thead>
+<!-- index.hbs -->
+
+{{!-- Create a table --}}
+<table id="shoppingCart-table">
+
+    {{!-- Header section --}}
+    <thead>
+
+        {{!-- For just the first row, we print each key of the row object as a header cell so we
+        know what each column means when the page renders --}}
         <tr>
-          <th>shoppingCartId</th>
-          <th>salesID</th>
-          <th>songID</th>
-          <th>instrumentID</th>
-          <th>itemQuantity</th>
-          <th>itemTotalPrice</th>
-          <th>Delete</th>
+            {{#each data.[0]}}
+            <th>
+                {{@key}}
+            </th>
+            {{/each}}
         </tr>
-      </thead>
-      <tbody>
-        <tr data-value>
-          <td>1</td>
-          <td>2</td>
-          <td>3</td>
-          <td>NULL</td>
-          <td>1</td>
-          <td>30.00</td>
-          <td>
-            <button onclick="deleteShoppingCart(1)">Delete</button>
-          </td>
+    </thead>
+
+    {{!-- Body section --}}
+    <tbody>
+
+        {{!-- For each row, print the id, fname, lname, homeworld and age, in order --}}
+        {{#each data}}
+        <tr data-value={{this.shoppingCartID}}>
+            <td>{{this.shoppingCartID}}</td>
+            <td>{{this.salesID}}</td>
+            <td>{{this.itemType}}</td>
+            <td>{{this.itemID}}</td>
+            <td>{{this.itemQuantity}}</td>
+            <td>{{this.itemPrice}}</td>
+            <td>{{this.itemTotalPrice}}</td>
+             <td><button onclick="deleteShoppingCart({{this.shoppingCartID}})">Delete</button></td>
         </tr>
-        <tr data-value>
-          <td>2</td>
-          <td>3</td>
-          <td>4</td>
-          <td>3</td>
-          <td>2</td>
-          <td>310.00</td>
-          <td>
-            <button onclick="deleteShoppingCart(2)">Delete</button>
-          </td>
-        </tr>
-        <tr data-value>
-          <td>3</td>
-          <td>4</td>
-          <td>NULL</td>
-          <td>2</td>
-          <td>1</td>
-          <td>200.00</td>
-          <td>
-            <button onclick="deleteShoppingCart(3)">Delete</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-<h2>Add To Cart</h2>
-    <form id="add-to-cart-form">
-      <label for="salesID">Sales ID:</label>
-      <select id="salesID" name="salesID">
-        <option value="1233">1</option>
-        <option value="1233">2</option>
-        <option value="1244">3</option>
-        <option value="1255">4</option>
-      </select><br>
+        {{/each}}
+    </tbody>
+</table>
+<script src="./js/delete_shoppingCart.js"></script>
 
-      <label for="songID">Song ID:</label>
-      <select id="songID" name="songID">
-        <option value="">None</option>
-        <option value="201">1</option>
-        <option value="201">2</option>
-        <option value="201">3</option>
-        <option value="202">4</option>
-      </select><br>
+<!-- /views/index.hbs -->
+<h2>Adding Data using an HTML form</h2>
+<p>To add a new instrument, please enter their information below nad click `Submit`!</p>
+<form id="add-instrument-form" method="POST" action="/add-instrument-form">
+    <label for="input-id">ID: </label>
+    <input type="number" name="input-id" id="input-id">
 
-      <label for="instrumentID">Instrument ID:</label>
-      <select id="instrumentID" name="instrumentID">
-        <option value=""disabled selected>None</option>
-        <option value="2">1</option>
-        <option value="2">2</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-      </select><br>
+    <label for="input-name">Name: </label>
+    <input type="text" name="input-name" id="input-name">
+    
+    <label for="input-color">Color: </label>
+    <input type="text" name="input-color" id="input-color">
 
-      <label for="itemQuantity">Item Quantity:</label>
-      <input type="number" id="itemQuantity" name="itemQuantity" min="1" required><br>
+    <label for="input-material">Material: </label>
+    <input type="text" name="input-material" id="input-material">
 
-      <button onclick="updateCart()">Add to Cart</button>
-    </form>
-  </body>
-  </html>
+    <label for="input-size">Size: </label>
+    <input type="text" name="input-size" id="input-size">
+
+    <label for="input-year">Year: </label>
+    <input type="number" name="input-year" id="input-year">
+
+    <label for="input-price">Price: </label>
+    <input type="number" name="input-price" id="input-price">
+
+    <input type="submit">
+</form>
+
+
+<h2>Updating Instrument Form</h2>
+<p>Select the instrument from the dropdown below and update its information:</p>
+
+<form id="update-instrument-form">
+
+    <label for="input-instrument">Select the Instrument ID: </label>
+    <select name="input-instrument" id="input-instrument-ajax">
+        <option value="0">Select an Instrument ID</option>
+        {{#each instrumentIDS}}
+        <option value="{{this.instrumentID}}">{{this.instrumentID}}</option>
+        {{/each}}
+    </select>
+
+
+    <label for="input-name">Name: </label>
+    <input type="text" name="input-name" id="input-name">
+    
+    <label for="input-color">Color: </label>
+    <input type="text" name="input-color" id="input-color">
+
+    <label for="input-material">Material: </label>
+    <input type="text" name="input-material" id="input-material">
+
+    <label for="input-size">Size: </label>
+    <input type="text" name="input-size" id="input-size">
+
+    <label for="input-year">Year: </label>
+    <input type="number" name="input-year" id="input-year">
+
+    <label for="input-price">Price: </label>
+    <input type="number" name="input-price" id="input-price">
+
+    <input type="submit">
+
+</form>
+
+<script src="./js/update_instrument.js"></script>
