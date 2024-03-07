@@ -294,61 +294,45 @@ app.delete('/delete-song-ajax', function(req, res, next) {
 });
 
 
-//delete for Sales
-app.delete('/delete-sales-ajax/', function(req,res,next){
+//This works 
+app.delete('/delete-sales-ajax/', function(req, res, next) {
     let data = req.body;
     let salesID = parseInt(data.id);
-    let deleteBsg_Cert_Sales = `DELETE FROM bsg_cert_sales WHERE pid = ?`;
-    let deleteBsg_Sales = `DELETE FROM bsg_sales WHERE id = ?`;
-  
-  
-          // Run the 1st query
-          db.pool.query(deleteBsg_Cert_Sales, [salesID], function(error, rows, fields){
-              if (error) {
-  
-              // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
-              console.log(error);
-              res.sendStatus(400);
-              }
-  
-              else
-              {
-                  // Run the second query
-                  db.pool.query(deleteBsg_Sales, [salesID], function(error, rows, fields) {
-  
-                      if (error) {
-                          console.log(error);
-                          res.sendStatus(400);
-                      } else {
-                          res.sendStatus(204);
-                      }
-                  })
-              }
-  })});
+    let deleteSalesQuery = `DELETE FROM Sales WHERE salesId = ?`;
+
+    // Run the query
+    db.pool.query(deleteSalesQuery, [salesID], function(error, rows, fields) {
+        if (error) {
+            console.log(error);
+            res.sendStatus(400); // Bad request
+        } else {
+            res.sendStatus(204); // No Content
+        }
+    });
+});
 
 
 
-  // delete customeres 
+  // This works
   app.delete('/delete-customers-ajax', function(req, res, next) {
     let data = req.body;
-    let customersID = parseInt(data.id);
-    let deleteBsg_Cert_Customers = `DELETE FROM Customers WHERE customerID = ?`;
-    let deleteBsg_Customers = `DELETE FROM Customers WHERE customerID = ?`;
-
-    // Run the 1st query
-    db.pool.query(deleteBsg_Cert_Customers, [customersID], function(error, rows, fields) {
+    let customerID = parseInt(data.id);
+    
+    // Update Sales records with a placeholder customerID
+    let updateSalesQuery = `UPDATE Sales SET customerID = NULL WHERE customerID = ?`;
+    db.pool.query(updateSalesQuery, [customerID], function(error, rows, fields) {
         if (error) {
-            // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
             console.log(error);
-            res.sendStatus(400);
+            res.sendStatus(400); // Bad request
         } else {
-            // Run the second query
-            db.pool.query(deleteBsg_Customers, [customersID], function(error, rows, fields) {
+            // Once sales records are updated, delete the customer
+            let deleteCustomerQuery = `DELETE FROM Customers WHERE customerID = ?`;
+            db.pool.query(deleteCustomerQuery, [customerID], function(error, rows, fields) {
                 if (error) {
                     console.log(error);
-                    res.sendStatus(400);
+                    res.sendStatus(400); // Bad request
                 } else {
-                    res.sendStatus(204);
+                    res.sendStatus(204); // No Content
                 }
             });
         }
@@ -357,29 +341,19 @@ app.delete('/delete-sales-ajax/', function(req,res,next){
 
 
 
-  // delete shopping cart 
-  app.delete('/delete-shoppingcart-ajax', function(req, res, next) {
+// This works 
+app.delete('/delete-shoppingcart-ajax', function(req, res, next) {
     let data = req.body;
     let shoppingCartID = parseInt(data.id);
-    let deleteBsg_Cert_shoppingcart = `DELETE FROM Customers WHERE shoppingCartID = ?`;
-    let deleteBsg_shoppingcart = `DELETE FROM Customers WHERE shoppingCartID = ?`;
+    let deleteShoppingCartQuery = `DELETE FROM ShoppingCart WHERE shoppingCartId = ?`;
 
-    // Run the 1st query
-    db.pool.query(deleteBsg_Cert_shoppingcart, [shoppingCartID], function(error, rows, fields) {
+    // Run the query
+    db.pool.query(deleteShoppingCartQuery, [shoppingCartID], function(error, rows, fields) {
         if (error) {
-            // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
             console.log(error);
-            res.sendStatus(400);
+            res.sendStatus(400); // Bad request
         } else {
-            // Run the second query
-            db.pool.query(deleteBsg_shoppingcart, [shoppingCartID], function(error, rows, fields) {
-                if (error) {
-                    console.log(error);
-                    res.sendStatus(400);
-                } else {
-                    res.sendStatus(204);
-                }
-            });
+            res.sendStatus(204); // No Content
         }
     });
 });

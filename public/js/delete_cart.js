@@ -1,4 +1,4 @@
-function deleteInstrument(shoppingCartID) {
+function deleteShoppingCart(shoppingCartID) {
     // Put our data we want to send in a javascript object
     let data = {
         id: shoppingCartID
