@@ -1,130 +1,104 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="styles.css">
-        <title>Moonlight Melodies - Songs</title>
-    </head>
-    <body>
-        <header>
-        </header>
-        <h2>Songs Table</h2>
-        <table id="songs-table">
-            <thead>
-                <tr>
-                    <th>songID</th>
-                    <th>songName</th>
-                    <th>songArtist</th>
-                    <th>songGenre</th>
-                    <th>songLength</th>
-                    <th>songYear</th>
-                    <th>songPrice</th>
-                    <th>Delete</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr data-value>
-                    <td>1</td>
-                    <td>Moonlight Sonata</td>
-                    <td>Beethoven</td>
-                    <td>Classical</td>
-                    <td>5:30</td>
-                    <td>1801</td>
-                    <td>25.00</td>
-                    <td><button onclick="deleteSong(1)">Delete</button></td>
-                </tr>
-                <tr data-value>
-                    <td>2</td>
-                    <td>Nocturne in E-flat Major</td>
-                    <td>Chopin</td>
-                    <td>Classical</td>
-                    <td>4:15</td>
-                    <td>1830</td>
-                    <td>15.00</td>
-                    <td><button onclick="deleteSong(2)">Delete</button></td>
-                </tr>
-                <tr data-value>
-                    <td>3</td>
-                    <td>Clair de Lune</td>
-                    <td>Debussy</td>
-                    <td>Impressionist</td>
-                    <td>5:00</td>
-                    <td>1890</td>
-                    <td>30.00</td>
-                    <td><button onclick="deleteSong(3)">Delete</button></td>
-                </tr>
-                <tr data-value>
-                    <td>4</td>
-                    <td>Twilight Symphony</td>
-                    <td>Beethoven</td>
-                    <td>Classical</td>
-                    <td>3:45</td>
-                    <td>1804</td>
-                    <td>10.00</td>
-                    <td><button onclick="deleteSong(4)">Delete</button></td>
-                </tr>
-            </tbody>
-        </table>
-        <form id="add-song-form">
-            <h2>Add a Song</h2>
-            <label for="song-id">Song ID:</label>
-            <input type="text" id="song-id" name="song-id" required><br>
-            <label for="song-title">Title:</label>
-            <input type="text" id="song-title" name="song-title" required><br>
-            <label for="song-artist">Artist:</label>
-            <input type="text" id="song-artist" name="song-artist" required><br>
-            <label for="song-genre">Genre:</label>
-            <input type="text" id="song-genre" name="song-genre" required><br>
-            <label for="song-length">Length:</label>
-            <input type="text" id="song-length" name="song-length" required><br>
-            <label for="song-year">Year:</label>
-            <input type="text" id="song-year" name="song-year" required><br>
-            <label for="song-price">Song Price:</label>
-            <input type="text" id="song-price" name="song-price" required><br>
-            <button onclick="addSong()">Add a Song</button>
-        </form>
-        <form id="update-song-form">
-            <h2>Update a Song</h2>
-            <div>
-                <label for="songSelect">Select the song:</label>
-                <select id="songSelect" name="songSelect">
-                    <option value="" disabled selected>Select the song</option>
-                    <option value="Moonlight Sonata">Moonlight Sonata</option>
-                    <option value="Nocturne in E-flat Major">Nocturne in E-flat Major</option>
-                    <option value="Clair de Lune">Clair de Lune</option>
-                    <option value="Twilight Symphony">Twilight Symphony</option>
-                </select>
-            </div>
-            <div>
-                <label for="song-id">Song ID:</label>
-                <input type="text" id="song-id" name="song-id" required>
-            </div>
-            <div>
-                <label for="song-title">Title:</label>
-                <input type="text" id="song-title" name="song-title" required>
-            </div>
-            <div>
-                <label for="song-artist">Artist:</label>
-                <input type="text" id="song-artist" name="song-artist" required>
-            </div>
-            <div>
-                <label for="song-genre">Genre:</label>
-                <input type="text" id="song-genre" name="song-genre" required>
-            </div>
-            <div>
-                <label for="song-length">Length:</label>
-                <input type="text" id="song-length" name="song-length" required>
-            </div>
-            <div>
-                <label for="song-year">Year:</label>
-                <input type="text" id="song-year" name="song-year" required>
-            </div>
-            <div>
-                <label for="song-price">Song Price:</label>
-                <input type="text" id="song-price" name="song-price" required>
-            </div>
-            <button onclick="updatesong()">Update song</button>
-        </form>
-    </body>
-</html>
+<!-- index.hbs -->
+
+{{!-- Create a table --}}
+<table id="songs-table">
+
+    {{!-- Header section --}}
+    <thead>
+
+        {{!-- For just the first row, we print each key of the row object as a header cell so we
+        know what each column means when the page renders --}}
+        <tr>
+            {{#each data.[0]}}
+            <th>
+                {{@key}}
+            </th>
+            {{/each}}
+        </tr>
+    </thead>
+
+    {{!-- Body section --}}
+    <tbody>
+
+        {{!-- For each row, print the id, fname, lname, homeworld and age, in order --}}
+        {{#each data}}
+        <tr data-value={{this.songID}}>
+            <td>{{this.songID}}</td>
+            <td>{{this.songName}}</td>
+            <td>{{this.songArtist}}</td>
+            <td>{{this.songGenre}}</td>
+            <td>{{this.songLength}}</td>
+            <td>{{this.songYear}}</td>
+             <td><button onclick="deleteSong({{this.songID}})">Delete</button></td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+<script src="./js/delete_songs.js"></script>
+
+<!-- /views/index.hbs -->
+<h2>Adding Data using an HTML form</h2>
+<p>To add a new instrument, please enter their information below nad click `Submit`!</p>
+<form id="add-instrument-form" method="POST" action="/add-instrument-form">
+    <label for="input-id">ID: </label>
+    <input type="number" name="input-id" id="input-id">
+
+    <label for="input-name">Name: </label>
+    <input type="text" name="input-name" id="input-name">
+    
+    <label for="input-color">Color: </label>
+    <input type="text" name="input-color" id="input-color">
+
+    <label for="input-material">Material: </label>
+    <input type="text" name="input-material" id="input-material">
+
+    <label for="input-size">Size: </label>
+    <input type="text" name="input-size" id="input-size">
+
+    <label for="input-year">Year: </label>
+    <input type="number" name="input-year" id="input-year">
+
+    <label for="input-price">Price: </label>
+    <input type="number" name="input-price" id="input-price">
+
+    <input type="submit">
+</form>
+
+
+<h2>Updating Instrument Form</h2>
+<p>Select the instrument from the dropdown below and update its information:</p>
+
+<form id="update-instrument-form">
+
+    <label for="input-instrument">Select the Instrument ID: </label>
+    <select name="input-instrument" id="input-instrument-ajax">
+        <option value="0">Select an Instrument ID</option>
+        {{#each instrumentIDS}}
+        <option value="{{this.instrumentID}}">{{this.instrumentID}}</option>
+        {{/each}}
+    </select>
+
+
+    <label for="input-name">Name: </label>
+    <input type="text" name="input-name" id="input-name">
+    
+    <label for="input-color">Color: </label>
+    <input type="text" name="input-color" id="input-color">
+
+    <label for="input-material">Material: </label>
+    <input type="text" name="input-material" id="input-material">
+
+    <label for="input-size">Size: </label>
+    <input type="text" name="input-size" id="input-size">
+
+    <label for="input-year">Year: </label>
+    <input type="number" name="input-year" id="input-year">
+
+    <label for="input-price">Price: </label>
+    <input type="number" name="input-price" id="input-price">
+
+    <input type="submit">
+
+</form>
+
+<script src="./js/update_instrument.js"></script>
