@@ -1,112 +1,100 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset = "UTF-8">
-    <meta name = "viewport" content = "width=device-width, initial-scale=1.0">
-    <link rel = "stylesheet" href = "styles.css">
-    <title>Moonlight Melodies - Employees</title>
-  </head>
-  <body>
-    <header>
-    </header>
-      <h2>Employees Table</h2>
-      <table id="employees-table">
-        <thead>
-            <tr>
-                <th>employeeID</th>
-                <th>employeeFname</th>
-                <th>employeeLname</th>
-                <th>employeePhone</th>
-                <th>employeeEmail</th>
-                <th>Delete</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr data-value>
-                <td>1</td>
-                <td>Emily</td>
-                <td>Smith</td>
-                <td>971-456-2567</td>
-                <td>smithEm@gmail.com</td>
-                <td><button onclick="deleteEmployee(1)">Delete</button></td>
-            </tr>
-            <tr data-value>
-                <td>2</td>
-                <td>Preet</td>
-                <td>Patel</td>
-                <td>546-527-5782</td>
-                <td>patel256@gmail.com</td>
-                <td><button onclick="deleteEmployee(2)">Delete</button></td>
-            </tr>
-            <tr data-value>
-                <td>3</td>
-                <td>Ankith</td>
-                <td>Sridhar</td>
-                <td>832-536-1467</td>
-                <td>ankithS@gmail.com</td>
-                <td><button onclick="deleteEmployee(3)">Delete</button></td>
-            </tr>
-            <tr data-value>
-                <td>4</td>
-                <td>Kaveenaya</td>
-                <td>Omkumar</td>
-                <td>832-567-4674</td>
-                <td>kavi62@gmail.com</td>
-                <td><button onclick="deleteEmployee(4)">Delete</button></td>
-            </tr>
-        </tbody>
-      </table>
+<!-- index.hbs -->
 
-    <form id="add-employee">
-        <h2>Add an Employee</h2>
-        <div>
-            <label for="employeeFname">First Name:</label>
-            <input type="text" id="employeeFname" name="employeeFname" required>
-        </div>
-        <div>
-            <label for="employeeLname">Last Name:</label>
-            <input type="text" id="employeeLname" name="employeeLname" required>
-        </div>
-        <div>
-            <label for="employeePhone">Phone Number:</label>
-            <input type="text" id="employeePhone" name="employeePhone" required>
-        </div>
-        <div>
-            <label for="employeeEmail">Email:</label>
-            <input type="text" id="employeeEmail" name="employeeEmail" required>
-        </div>
-        <button onclick="addEmployee()">Add Employee</button>
-    </form>
+{{!-- Create a table --}}
+<table id="employees-table">
 
-    <form id="update-employee">
-        <h2>Update Employee</h2>
-        <div>
-            <label for="employeeSelect">Select the Employee:</label>
-            <select id="employeeSelect" name="employeeSelect">
-                <option value="" disabled selected>Select the Employee</option>
-                <option value="Emily Smith">Emily Smith</option>
-                <option value="Preet Patel">Preet Patel</option>
-                <option value="Ankith Sridhar">Ankith Sridhar</option>
-                <option value="Kaveenaya Omkumar">Kaveenaya Omkumar</option>
-            </select>
-        </div>
-        <div>
-            <label for="employeeFname">First Name:</label>
-            <input type="text" id="employeeFname" name="employeeFname" required>
-        </div>
-        <div>
-            <label for="employeeLname">Last Name:</label>
-            <input type="text" id="employeeLname" name="employeeLname" required>
-        </div>
-        <div>
-            <label for="employeePhone">Phone:</label>
-            <input type="text" id="employeePhone" name="employeePhone" required>
-        </div>
-        <div>
-            <label for="employeeEmail">Email:</label>
-            <input type="text" id="employeeEmail" name="employeeEmail" required>
-        </div>
-        <button onclick="updateEmployee()">Update Employee</button>
-    </form>
-  </body>
-</html>
+    {{!-- Header section --}}
+    <thead>
+
+        {{!-- For just the first row, we print each key of the row object as a header cell so we
+        know what each column means when the page renders --}}
+        <tr>
+            {{#each data.[0]}}
+            <th>
+                {{@key}}
+            </th>
+            {{/each}}
+        </tr>
+    </thead>
+
+    {{!-- Body section --}}
+    <tbody>
+
+        {{!-- For each row, print the id, fname, lname, homeworld and age, in order --}}
+        {{#each data}}
+        <tr data-value={{this.employeeID}}>
+            <td>{{this.employeeID}}</td>
+            <td>{{this.name}}</td>
+             <td><button onclick="deleteEmployee({{this.employeeID}})">Delete</button></td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+<script src="./js/delete_employee.js"></script>
+
+<!-- /views/index.hbs -->
+<h2>Adding Data using an HTML form</h2>
+<p>To add a new instrument, please enter their information below nad click `Submit`!</p>
+<form id="add-instrument-form" method="POST" action="/add-instrument-form">
+    <label for="input-id">ID: </label>
+    <input type="number" name="input-id" id="input-id">
+
+    <label for="input-name">Name: </label>
+    <input type="text" name="input-name" id="input-name">
+    
+    <label for="input-color">Color: </label>
+    <input type="text" name="input-color" id="input-color">
+
+    <label for="input-material">Material: </label>
+    <input type="text" name="input-material" id="input-material">
+
+    <label for="input-size">Size: </label>
+    <input type="text" name="input-size" id="input-size">
+
+    <label for="input-year">Year: </label>
+    <input type="number" name="input-year" id="input-year">
+
+    <label for="input-price">Price: </label>
+    <input type="number" name="input-price" id="input-price">
+
+    <input type="submit">
+</form>
+
+
+<h2>Updating Instrument Form</h2>
+<p>Select the instrument from the dropdown below and update its information:</p>
+
+<form id="update-instrument-form">
+
+    <label for="input-instrument">Select the Instrument ID: </label>
+    <select name="input-instrument" id="input-instrument-ajax">
+        <option value="0">Select an Instrument ID</option>
+        {{#each instrumentIDS}}
+        <option value="{{this.instrumentID}}">{{this.instrumentID}}</option>
+        {{/each}}
+    </select>
+
+
+    <label for="input-name">Name: </label>
+    <input type="text" name="input-name" id="input-name">
+    
+    <label for="input-color">Color: </label>
+    <input type="text" name="input-color" id="input-color">
+
+    <label for="input-material">Material: </label>
+    <input type="text" name="input-material" id="input-material">
+
+    <label for="input-size">Size: </label>
+    <input type="text" name="input-size" id="input-size">
+
+    <label for="input-year">Year: </label>
+    <input type="number" name="input-year" id="input-year">
+
+    <label for="input-price">Price: </label>
+    <input type="number" name="input-price" id="input-price">
+
+    <input type="submit">
+
+</form>
+
+<script src="./js/update_instrument.js"></script>

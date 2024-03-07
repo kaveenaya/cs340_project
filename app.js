@@ -46,8 +46,26 @@ app.put('/put-instrument-ajax', function(req, res) {
 
 // Remaining routes...
 app.get('/shopping_cart', function (req, res) {
+    let query1 = "SELECT * FROM ShoppingCart;"; // Define our query
+    let query2 = "SELECT * FROM ShoppingCart;"; // Define our query
 
-    res.render('shopping_cart');                  
+
+    db.pool.query(query1, function(error, rows, fields) { // Execute the query
+        if (error) {
+            console.error("Error fetching shopping cart:", error);
+            res.status(500).send("Internal Server Error"); // Send internal server error status and message
+        } else {
+            // Render the 'instruments.hbs' file and send the data to the template
+            let mainTable = rows;
+
+            db.pool.query(query2, (error, rows, fields) => {
+            
+                // Save the planets
+                let shoppingCartIDS = rows;
+                return res.render('shopping_cart', {data: mainTable, shoppingCartIDS: shoppingCartIDS});
+            })
+        }
+    });
 })
                                                        // received back from the query
 
@@ -57,13 +75,49 @@ app.get('/songs', function (req, res) {
 })
 
 app.get('/sales', function (req, res) {
+    let query1 = "SELECT * FROM Sales;"; // Define our query
+    let query2 = "SELECT * FROM Sales;"; // Define our query
 
-    res.render('sales');                  
+
+    db.pool.query(query1, function(error, rows, fields) { // Execute the query
+        if (error) {
+            console.error("Error fetching sales:", error);
+            res.status(500).send("Internal Server Error"); // Send internal server error status and message
+        } else {
+            // Render the 'instruments.hbs' file and send the data to the template
+            let mainTable = rows;
+
+            db.pool.query(query2, (error, rows, fields) => {
+            
+                // Save the planets
+                let saleIDS = rows;
+                return res.render('sales', {data: mainTable, saleIDS: saleIDS});
+            })
+        }
+    });
 })
 
 app.get('/employees', function (req, res) {
+    let query1 = "SELECT * FROM Employees;"; // Define our query
+    let query2 = "SELECT * FROM Employees;"; // Define our query
 
-    res.render('employees');                  
+
+    db.pool.query(query1, function(error, rows, fields) { // Execute the query
+        if (error) {
+            console.error("Error fetching employees:", error);
+            res.status(500).send("Internal Server Error"); // Send internal server error status and message
+        } else {
+            // Render the 'instruments.hbs' file and send the data to the template
+            let mainTable = rows;
+
+            db.pool.query(query2, (error, rows, fields) => {
+            
+                // Save the planets
+                let employeeIDS = rows;
+                return res.render('employees', {data: mainTable, employeeIDS: employeeIDS});
+            })
+        }
+    });
 })
 
 

@@ -1,89 +1,103 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="styles.css">
-  <title>Moonlight Melodies - Sales</title>
-</head>
-<body>
-  <header>
-</header>
-<h2>Sales Table </h2>
-  <table id="sales">
+<!-- index.hbs -->
+
+{{!-- Create a table --}}
+<table id="sales-table">
+
+    {{!-- Header section --}}
     <thead>
-      <tr>
-        <th>salesID</th>
-        <th>customerID</th>
-        <th>employeeID</th>
-        <th>saleAmount</th>
-        <th>saleDate</th>
-        <th>saleTime</th>
-        <th>Delete</th>
-      </tr>
+
+        {{!-- For just the first row, we print each key of the row object as a header cell so we
+        know what each column means when the page renders --}}
+        <tr>
+            {{#each data.[0]}}
+            <th>
+                {{@key}}
+            </th>
+            {{/each}}
+        </tr>
     </thead>
+
+    {{!-- Body section --}}
     <tbody>
-      <tr data-value>
-        <td>1</td>
-        <td>1</td>
-        <td>2</td>
-        <td>NULL</td>
-        <td>2023-02-07</td>
-        <td>2:15PM</td>
-        <td>
-          <button onclick="deleteSales(1)">Delete</button>
-        </td>
-      </tr>
-      <tr data-value>
-        <td>2</td>
-        <td>2</td>
-        <td>4</td>
-        <td>30.00</td>
-        <td>2023-02-08</td>
-        <td>12:43PM</td>
-        <td>
-          <button onclick="deleteSales(2)">Delete</button>
-        </td>
-      </tr>
-      <tr data-value>
-        <td>3</td>
-        <td>3</td>
-        <td>3</td>
-        <td>310.00</td>
-        <td>2023-02-07</td>
-        <td>9:32AM</td>
-        <td>
-          <button onclick="deleteSales(3)">Delete</button>
-        </td>
-      </tr>
+
+        {{!-- For each row, print the id, fname, lname, homeworld and age, in order --}}
+        {{#each data}}
+        <tr data-value={{this.salesID}}>
+            <td>{{this.salesID}}</td>
+            <td>{{this.customerID}}</td>
+            <td>{{this.employeeID}}</td>
+            <td>{{this.saleAmount}}</td>
+            <td>{{this.saleDate}}</td>
+             <td><button onclick="deleteSale({{this.salesID}})">Delete</button></td>
+        </tr>
+        {{/each}}
     </tbody>
-  </table>
+</table>
+<script src="./js/delete_sale.js"></script>
 
-<h2>Add Sale</h2>
-<form id="add-sale-form">
-  <label for="customerID">Customer ID:</label>
-  <select id="customerID" name="customerID">
-    <option value="123">1</option>
-    <option value="124">2</option>
-    <option value="125">3</option>
-    <option value="125">4</option>
-  </select><br>
+<!-- /views/index.hbs -->
+<h2>Adding Data using an HTML form</h2>
+<p>To add a new instrument, please enter their information below nad click `Submit`!</p>
+<form id="add-instrument-form" method="POST" action="/add-instrument-form">
+    <label for="input-id">ID: </label>
+    <input type="number" name="input-id" id="input-id">
 
-  <label for="employeeID">Employee ID:</label>
-  <select id="employeeID" name="employeeID">
-    <option value="233321">1</option>
-    <option value="233321">2</option>
-    <option value="234322">3</option>
-    <option value="235323">4</option>
-  </select><br>
+    <label for="input-name">Name: </label>
+    <input type="text" name="input-name" id="input-name">
+    
+    <label for="input-color">Color: </label>
+    <input type="text" name="input-color" id="input-color">
 
-  <label for="saleDate">Sale Date:</label>
-  <input type="date" id="saleDate" name="saleDate" required><br>
+    <label for="input-material">Material: </label>
+    <input type="text" name="input-material" id="input-material">
 
-  <label for="saleTime">Sale Time:</label>
-  <input type="time" id="saleTime" name="saleTime" required><br>
+    <label for="input-size">Size: </label>
+    <input type="text" name="input-size" id="input-size">
 
-  <button onclick="updateSale()">Add Sale</button>
+    <label for="input-year">Year: </label>
+    <input type="number" name="input-year" id="input-year">
+
+    <label for="input-price">Price: </label>
+    <input type="number" name="input-price" id="input-price">
+
+    <input type="submit">
 </form>
-</body>
-</html>
+
+
+<h2>Updating Instrument Form</h2>
+<p>Select the instrument from the dropdown below and update its information:</p>
+
+<form id="update-instrument-form">
+
+    <label for="input-instrument">Select the Instrument ID: </label>
+    <select name="input-instrument" id="input-instrument-ajax">
+        <option value="0">Select an Instrument ID</option>
+        {{#each instrumentIDS}}
+        <option value="{{this.instrumentID}}">{{this.instrumentID}}</option>
+        {{/each}}
+    </select>
+
+
+    <label for="input-name">Name: </label>
+    <input type="text" name="input-name" id="input-name">
+    
+    <label for="input-color">Color: </label>
+    <input type="text" name="input-color" id="input-color">
+
+    <label for="input-material">Material: </label>
+    <input type="text" name="input-material" id="input-material">
+
+    <label for="input-size">Size: </label>
+    <input type="text" name="input-size" id="input-size">
+
+    <label for="input-year">Year: </label>
+    <input type="number" name="input-year" id="input-year">
+
+    <label for="input-price">Price: </label>
+    <input type="number" name="input-price" id="input-price">
+
+    <input type="submit">
+
+</form>
+
+<script src="./js/update_instrument.js"></script>
