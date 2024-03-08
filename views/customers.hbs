@@ -36,28 +36,19 @@
 
 <!-- /views/index.hbs -->
 <h2>Adding Data using an HTML form</h2>
-<p>To add a new instrument, please enter their information below nad click `Submit`!</p>
-<form id="add-instrument-form" method="POST" action="/add-instrument-form">
+<p>To add a new customer, please enter their information below nad click `Submit`!</p>
+<form id="add-customer-form" method="POST" action="/add-customer-form">
     <label for="input-id">ID: </label>
     <input type="number" name="input-id" id="input-id">
 
     <label for="input-name">Name: </label>
     <input type="text" name="input-name" id="input-name">
     
-    <label for="input-color">Color: </label>
-    <input type="text" name="input-color" id="input-color">
+    <label for="input-phone">Phone Number: </label>
+    <input type="text" name="input-phone" id="input-phone">
 
-    <label for="input-material">Material: </label>
-    <input type="text" name="input-material" id="input-material">
-
-    <label for="input-size">Size: </label>
-    <input type="text" name="input-size" id="input-size">
-
-    <label for="input-year">Year: </label>
-    <input type="number" name="input-year" id="input-year">
-
-    <label for="input-price">Price: </label>
-    <input type="number" name="input-price" id="input-price">
+    <label for="input-date">Date of Purchase: </label>
+    <input type="text" name="input-date" id="input-date">
 
     <input type="submit">
 </form>

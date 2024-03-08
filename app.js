@@ -231,6 +231,125 @@ app.post('/add-instrument-form', function(req, res){
     })
 });
 
+app.post('/add-customer-form', function(req, res){
+    // Capture the incoming data and parse it back to a JS object
+    let data = req.body;
+
+    // Capture NULL values
+    let id = parseInt(data['input-id']);
+    if (isNaN(id)) {
+        id = 'NULL'
+    }
+
+    // Create the query and run it on the database
+    query1 = `INSERT INTO Customers (customerID, customerName, customerPhone, customerDateOfPurchase) VALUES ('${id}', '${data['input-name']}', '${data['input-phone']}', '${data['input-date']}')`;
+    db.pool.query(query1, function(error, rows, fields){
+        // Check to see if there was an error
+        if (error) {
+            // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+            console.log(error)
+            res.sendStatus(400);
+        } else {
+            res.redirect('/customers');
+        }
+    })
+});
+
+app.post('/add-sale-form', function(req, res){
+    // Capture the incoming data and parse it back to a JS object
+    let data = req.body;
+
+    // Capture NULL values
+    let saleId = parseInt(data['input-saleId']);
+    if (isNaN(saleId)) {
+        saleId = 'NULL'
+    }
+
+    // Create the query and run it on the database
+    query1 = `INSERT INTO Sales (salesID, customerID, employeeID, saleAmount, saleDate) VALUES ('${saleId}', '${data['input-customerId']}', '${data['input-employeeId']}', '${data['input-amount']}', '${data['input-data']}')`;
+    db.pool.query(query1, function(error, rows, fields){
+        // Check to see if there was an error
+        if (error) {
+            // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+            console.log(error)
+            res.sendStatus(400);
+        } else {
+            res.redirect('/sales');
+        }
+    })
+});
+
+app.post('/add-employee-form', function(req, res){
+    // Capture the incoming data and parse it back to a JS object
+    let data = req.body;
+
+    // Capture NULL values
+    let id = parseInt(data['input-id']);
+    if (isNaN(id)) {
+        id = 'NULL'
+    }
+
+    // Create the query and run it on the database
+    query1 = `INSERT INTO Employees (employeeID, name) VALUES ('${id}', '${data['input-name']}')`;
+    db.pool.query(query1, function(error, rows, fields){
+        // Check to see if there was an error
+        if (error) {
+            // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+            console.log(error)
+            res.sendStatus(400);
+        } else {
+            res.redirect('/employees');
+        }
+    })
+});
+
+app.post('/add-song-form', function(req, res){
+    // Capture the incoming data and parse it back to a JS object
+    let data = req.body;
+
+    // Capture NULL values
+    let id = parseInt(data['input-id']);
+    if (isNaN(id)) {
+        id = 'NULL'
+    }
+
+    // Create the query and run it on the database
+    query1 = `INSERT INTO Songs (songID, songName, songArtist, songGenre, songLength, songYear) VALUES ('${id}', '${data['input-name']}', '${data['input-artist']}', '${data['input-genre']}', '${data['input-length']}', '${data['input-year']}')`;
+    db.pool.query(query1, function(error, rows, fields){
+        // Check to see if there was an error
+        if (error) {
+            // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+            console.log(error)
+            res.sendStatus(400);
+        } else {
+            res.redirect('/songs');
+        }
+    })
+});
+
+app.post('/add-shoppingCart-form', function(req, res){
+    // Capture the incoming data and parse it back to a JS object
+    let data = req.body;
+
+    // Capture NULL values
+    let id = parseInt(data['input-cartId']);
+    if (isNaN(id)) {
+        id = 'NULL'
+    }
+
+    // Create the query and run it on the database
+    query1 = `INSERT INTO ShoppingCart (shoppingCartID, salesID, itemType, itemID, itemQuantity, itemPrice, itemTotalPrice) VALUES ('${id}', '${data['input-saleId']}', '${data['input-type']}', '${data['input-itemId']}', '${data['input-quantity']}', '${data['input-price']}', '${data['input-totalPrice']}')`;
+    db.pool.query(query1, function(error, rows, fields){
+        // Check to see if there was an error
+        if (error) {
+            // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+            console.log(error)
+            res.sendStatus(400);
+        } else {
+            res.redirect('/shopping_cart');
+        }
+    })
+});
 /*
     LISTENER
 */
