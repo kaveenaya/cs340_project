@@ -1,4 +1,4 @@
-function deleteInstrument(salesID) {
+function deleteSale(salesID) {
     // Put our data we want to send in a javascript object
     let data = {
         id: salesID
@@ -28,7 +28,7 @@ function deleteInstrument(salesID) {
 
 function deleteRow(salesID){
 
-    let table = document.getElementById("instruments-table");
+    let table = document.getElementById("sales");
     for (let i = 0, row; row = table.rows[i]; i++) {
        //iterate through rows
        //rows would be accessed using the "row" variable assigned in the for loop
