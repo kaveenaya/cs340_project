@@ -68,38 +68,38 @@
 
 <h2>Updating Instrument Form</h2>
 <p>Select the instrument from the dropdown below and update its information:</p>
+<fieldset>
+    <form id="update-instrument-form">
 
-<form id="update-instrument-form">
-
-    <label for="input-instrument">Select the Instrument ID: </label>
-    <select name="input-instrument" id="input-instrument-ajax">
-        <option value="0">Select an Instrument ID</option>
-        {{#each instrumentIDS}}
-        <option value="{{this.instrumentID}}">{{this.instrumentID}}</option>
-        {{/each}}
-    </select>
+        <label for="input-instrument">Select the Instrument ID: </label>
+        <select name="input-instrument" id="input-instrument-ajax">
+            <option value="0">Select an Instrument ID</option>
+            {{#each instrumentIDS}}
+            <option value="{{this.instrumentID}}">{{this.instrumentID}}</option>
+            {{/each}}
+        </select>
 
 
-    <label for="input-name">Name: </label>
-    <input type="text" name="input-name" id="input-name">
-    
-    <label for="input-color">Color: </label>
-    <input type="text" name="input-color" id="input-color">
+        <label for="input-name">Name: </label>
+        <input type="text" name="input-name" id="input-name">
+        
+        <label for="input-color">Color: </label>
+        <input type="text" name="input-color" id="input-color">
 
-    <label for="input-material">Material: </label>
-    <input type="text" name="input-material" id="input-material">
+        <label for="input-material">Material: </label>
+        <input type="text" name="input-material" id="input-material">
 
-    <label for="input-size">Size: </label>
-    <input type="text" name="input-size" id="input-size">
+        <label for="input-size">Size: </label>
+        <input type="text" name="input-size" id="input-size">
 
-    <label for="input-year">Year: </label>
-    <input type="number" name="input-year" id="input-year">
+        <label for="input-year">Year: </label>
+        <input type="number" name="input-year" id="input-year">
 
-    <label for="input-price">Price: </label>
-    <input type="number" name="input-price" id="input-price">
+        <label for="input-price">Price: </label>
+        <input type="number" name="input-price" id="input-price">
 
-    <input type="submit">
+        <input type="submit">
 
-</form>
-
+    </form>
+</fieldset>
 <script src="./js/update_instrument.js"></script>

@@ -30,7 +30,7 @@ updateInstrumentForm.addEventListener("submit", function (e) {
     
     // Setup our AJAX request
     var xhttp = new XMLHttpRequest();
-    xhttp.open("POST", "/update-instrument-ajax", true);
+    xhttp.open("PUT", "/update-instrument-ajax", true);
     xhttp.setRequestHeader("Content-type", "application/json");
 
     // Tell our AJAX request how to resolve
@@ -52,20 +52,43 @@ updateInstrumentForm.addEventListener("submit", function (e) {
 })
 
 
-function updateRow(data, personID){
+function updateRow(data, instrumentID){
     let parsedData = JSON.parse(data);
     
     // Get the table we want to update
     let table = document.getElementById("instruments-table");
 
     for (let i = 0, row; row = table.rows[i]; i++) {
-        if (row.cells[0].innerHTML == personID) {
-            row.cells[1].innerHTML = parsedData[0].instrumentName;
-            row.cells[2].innerHTML = parsedData[0].instrumentColor;
-            row.cells[3].innerHTML = parsedData[0].instrumentMaterial;
-            row.cells[4].innerHTML = parsedData[0].instrumentSize;
-            row.cells[5].innerHTML = parsedData[0].instrumentYear;
-            row.cells[6].innerHTML = parsedData[0].instrumentPrice;
+        //iterate through rows and update the one that matches the instrumentID
+        if(table.rows[i].getAttribute("data-value") == instrumentID){
+            let updateRowIndex = table.getElementsByTagName("tr")[i];
+
+            //get td of instrument name
+            let instrumentNameTD = updateRowIndex.getElementsByTagName("td")[1];
+
+            //get td of instrument color
+            let instrumentColorTD = updateRowIndex.getElementsByTagName("td")[2];
+
+            //get td of instrument Material
+            let instrumentMaterialTD = updateRowIndex.getElementsByTagName("td")[3];
+
+            //get td of instrument size
+            let instrumentSizeTD = updateRowIndex.getElementsByTagName("td")[4];
+
+            //get td of instrument year
+            let instrumentYearTD = updateRowIndex.getElementsByTagName("td")[5];
+
+            //get td of instrument price
+            let instrumentPriceTD = updateRowIndex.getElementsByTagName("td")[6];
+
+            //reassign the values of the row to the new values
+            instrumentNameTD.innerHTML = parsedData[0].instrumentName;
+            instrumentColorTD.innerHTML = parsedData[0].instrumentColor;
+            instrumentMaterialTD.innerHTML = parsedData[0].instrumentMaterial;
+            instrumentSizeTD.innerHTML = parsedData[0].instrumentSize;
+            instrumentYearTD.innerHTML = parsedData[0].instrumentYear;
+            instrumentPriceTD.innerHTML = parsedData[0].instrumentPrice;
+
         }
     }
 }

@@ -27,19 +27,33 @@ var db = require('./database/db-connector')
 
 // Define a route to handle the PUT request for updating a person's homeworld
 // Route to handle updating an instrument
-app.put('/put-instrument-ajax', function(req, res) {
+app.put('/update-instrument-ajax', function(req, res) {
     let data = req.body;
 
     let instrumentID = parseInt(data.instrumentID);
+    let instrumentName = data.instrumentName;
+    let instrumentColor = data.instrumentColor; 
+    let instrumentMaterial = data.instrumentMaterial;
+    let instrumentSize = data.instrumentSize;
+    let instrumentYear = data.instrumentYear;
+    let instrumentPrice = data.instrumentPrice;
 
-    let query = `UPDATE Instruments SET instrumentName = ?, instrumentColor = ?, instrumentMaterial = ?, instrumentSize = ?, instrumentYear = ?, instrumentPrice = ? WHERE instrumentID = ?;`;
+    let query = `UPDATE Instruments SET instrumentName = ?, instrumentColor = ?, instrumentMaterial = ?, instrumentSize = ?, instrumentYear = ?, instrumentPrice = ? WHERE Instruments.instrumentID = ?;`;
+    let showUpdate = `SELECT * FROM Instruments WHERE instrumentID = ?;`;
 
-    db.pool.query(query, [data.instrumentName, data.instrumentColor, data.instrumentMaterial, data.instrumentSize, data.instrumentYear, data.instrumentPrice, instrumentID], function(error, results) {
+    db.pool.query(query, [instrumentName, instrumentColor, instrumentMaterial, instrumentSize, instrumentYear, instrumentPrice, instrumentID], function(error, results) {
         if (error) {
             console.log(error);
-            res.sendStatus(400);
+            res.sendStatus(500).send("Internal Server Error");
         } else {
-            res.send(results);
+            db.pool.query(showUpdate, [instrumentID], function(error, results) {
+                if (error) {
+                    console.log(error);
+                    res.sendStatus(500).send("Internal Server Error");
+                } else {
+                    res.send(results);
+                }
+            })
         }
     });
 });
