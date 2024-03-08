@@ -39,28 +39,28 @@
 
 <!-- /views/index.hbs -->
 <h2>Adding Data using an HTML form</h2>
-<p>To add a new instrument, please enter their information below nad click `Submit`!</p>
-<form id="add-instrument-form" method="POST" action="/add-instrument-form">
-    <label for="input-id">ID: </label>
-    <input type="number" name="input-id" id="input-id">
+<p>To add a new shopping cart, please enter their information below nad click `Submit`!</p>
+<form id="add-shoppingCart-form" method="POST" action="/add-shoppingCart-form">
+    <label for="input-cartId">ID: </label>
+    <input type="number" name="input-cartId" id="input-cartId">
 
-    <label for="input-name">Name: </label>
-    <input type="text" name="input-name" id="input-name">
+    <label for="input-saleId">Sale ID: </label>
+    <input type="number" name="input-saleId" id="input-saleId">
     
-    <label for="input-color">Color: </label>
-    <input type="text" name="input-color" id="input-color">
+    <label for="input-type">Item Type: </label>
+    <input type="text" name="input-type" id="input-type">
 
-    <label for="input-material">Material: </label>
-    <input type="text" name="input-material" id="input-material">
+    <label for="input-itemId">Item ID: </label>
+    <input type="number" name="input-itemId" id="input-itemId">
 
-    <label for="input-size">Size: </label>
-    <input type="text" name="input-size" id="input-size">
+    <label for="input-quantity">Item Quantity: </label>
+    <input type="number" name="input-quantity" id="input-quantity">
 
-    <label for="input-year">Year: </label>
-    <input type="number" name="input-year" id="input-year">
-
-    <label for="input-price">Price: </label>
+    <label for="input-price">Item Price: </label>
     <input type="number" name="input-price" id="input-price">
+
+    <label for="input-totalPrice">Total Price: </label>
+    <input type="number" name="input-totalPrice" id="input-totalPrice">
 
     <input type="submit">
 </form>
