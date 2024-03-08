@@ -62,40 +62,38 @@
 </form>
 
 
-<h2>Updating Instrument Form</h2>
-<p>Select the instrument from the dropdown below and update its information:</p>
 
-<form id="update-instrument-form">
+<h2>Updating Song Form</h2>
+<p>Select the songID from the dropdown below and update its information:</p>
+<fieldset>
+    <form id="update-song-form">
 
-    <label for="input-instrument">Select the Instrument ID: </label>
-    <select name="input-instrument" id="input-instrument-ajax">
-        <option value="0">Select an Instrument ID</option>
-        {{#each instrumentIDS}}
-        <option value="{{this.instrumentID}}">{{this.instrumentID}}</option>
-        {{/each}}
-    </select>
+        <label for="update-song-id">Select the song ID: </label>
+        <select name="update-song-id" id="update-song-id">
+            {{#each songIDS}}
+            <option value="{{this.songID}}">{{this.songID}}</option>
+            {{/each}}
+        </select>
 
 
-    <label for="input-name">Name: </label>
-    <input type="text" name="input-name" id="input-name">
-    
-    <label for="input-color">Color: </label>
-    <input type="text" name="input-color" id="input-color">
+        <label for="update-name"> Song Name: </label>
+        <input type="text" name="update-song-name" id="update-song-name">
+        
+        <label for="update-artist"> Song Artist: </label>
+        <input type="text" name="update-song-artist" id="update-song-artist">
 
-    <label for="input-material">Material: </label>
-    <input type="text" name="input-material" id="input-material">
+        <label for="update-genre">Song Genre: </label>
+        <input type="text" name="update-song-genre" id="update-song-genre">
 
-    <label for="input-size">Size: </label>
-    <input type="text" name="input-size" id="input-size">
+        <label for="update-length">Song Length: </label>
+        <input type="text" name="update-song-length" id="update-song-length">
 
-    <label for="input-year">Year: </label>
-    <input type="number" name="input-year" id="input-year">
+        <label for="update-year">Song Year: </label>
+        <input type="number" name="update-song-year" id="update-song-year">
 
-    <label for="input-price">Price: </label>
-    <input type="number" name="input-price" id="input-price">
+        <input type="submit" onclick="return confirm('You are about to update the song. Are you Sure?')"/>
 
-    <input type="submit">
+    </form>
+</fieldset>
+<script src="./js/update_song.js"></script>
 
-</form>
-
-<script src="./js/update_instrument.js"></script>

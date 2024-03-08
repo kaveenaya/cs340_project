@@ -9,13 +9,13 @@ updateInstrumentForm.addEventListener("submit", function (e) {
     e.preventDefault();
 
     // Get form fields we need to get data from
-    let inputInstrumentID = document.getElementById("update-instrument");
-    let inputInstrumentName = document.getElementById("update-name");
-    let inputInstrumentColor = document.getElementById("update-color");
-    let inputInstrumentMaterial = document.getElementById("update-material");
-    let inputInstrumentSize = document.getElementById("update-size");
-    let inputInstrumentYear = document.getElementById("update-year");
-    let inputInstrumentPrice = document.getElementById("update-price");
+    let inputInstrumentID = document.getElementById("update-instrument-id");
+    let inputInstrumentName = document.getElementById("update-instrument-name");
+    let inputInstrumentColor = document.getElementById("update-instrument-color");
+    let inputInstrumentMaterial = document.getElementById("update-instrument-material");
+    let inputInstrumentSize = document.getElementById("update-instrument-size");
+    let inputInstrumentYear = document.getElementById("update-instrument-year");
+    let inputInstrumentPrice = document.getElementById("update-instrument-price");
 
     // Get the values from the form fields
     let instrumentIDValue = inputInstrumentID.value;
@@ -82,6 +82,15 @@ updateInstrumentForm.addEventListener("submit", function (e) {
 
             // Add the new data to the table
             updateRow(xhttp.response, instrumentIDValue);
+
+            // Clear the form
+            inputInstrumentID.value = "";
+            inputInstrumentName.value = "";
+            inputInstrumentColor.value = "";
+            inputInstrumentMaterial.value = "";
+            inputInstrumentSize.value = "";
+            inputInstrumentYear.value = "";
+            inputInstrumentPrice.value = "";
 
         }
         else if (xhttp.readyState == 4 && xhttp.status != 200) {

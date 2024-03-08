@@ -58,6 +58,158 @@ app.put('/update-instrument-ajax', function(req, res) {
     });
 });
 
+// Route to handle updating a song
+app.put('/update-song-ajax', function(req, res) {
+    let data = req.body;
+
+    let songID = parseInt(data.songID);
+    let songName = data.songName;
+    let songArtist = data.songArtist; 
+    let songGenre = data.songGenre;
+    let songLength = data.songLength;
+    let songYear = data.songYear;
+
+    let query = `UPDATE Songs SET songName = ?, songArtist = ?, songGenre = ?, songLength = ?, songYear = ? WHERE Songs.songID = ?;`;
+    let showUpdate = `SELECT * FROM Songs WHERE songID = ?;`;
+
+    db.pool.query(query, [songName, songArtist, songGenre, songLength, songYear, songID], function(error, results) {
+        if (error) {
+            console.log(error);
+            res.sendStatus(500).send("Internal Server Error");
+        } else {
+            db.pool.query(showUpdate, [songID], function(error, results) {
+                if (error) {
+                    console.log(error);
+                    res.sendStatus(500).send("Internal Server Error");
+                } else {
+                    res.send(results);
+                }
+            })
+        }
+    });
+});
+
+// Route to handle updating a sale
+app.put('/update-sale-ajax', function(req, res) {
+    let data = req.body;
+
+    let salesID = parseInt(data.salesID);
+    let customerID = data.customerID;
+    let employeeID = data.employeeID; 
+    let saleAmount = data.saleAmount;
+    let saleDate = data.saleDate;
+
+    let query = `UPDATE Sales SET customerID = ?, employeeID = ?, saleAmount = ?, saleDate = ? WHERE Sales.salesID = ?;`;
+    let showUpdate = `SELECT * FROM Sales WHERE salesID = ?;`;
+
+    db.pool.query(query, [customerID, employeeID, saleAmount, saleDate, salesID], function(error, results) {
+        if (error) {
+            console.log(error);
+            res.sendStatus(500).send("Internal Server Error");
+        } else {
+            db.pool.query(showUpdate, [salesID], function(error, results) {
+                if (error) {
+                    console.log(error);
+                    res.sendStatus(500).send("Internal Server Error");
+                } else {
+                    res.send(results);
+                }
+            })
+        }
+    });
+});
+
+// Route to handle updating a customer
+app.put('/update-customer-ajax', function(req, res) {
+    let data = req.body;
+    console.log("Request Data:", data);
+
+    let customerID = parseInt(data.customerID);
+    let customerName = data.customerName;
+    let customerPhone = data.customerPhone; 
+    let customerDateOfPurchase = data.customerDateOfPurchase;
+
+    let query = `UPDATE Customers SET customerName = ?, customerPhone = ?, customerDateOfPurchase = ? WHERE Customers.customerID = ?;`;
+    let showUpdate = `SELECT * FROM Customers WHERE customerID = ?;`;
+
+    db.pool.query(query, [customerName, customerPhone, customerDateOfPurchase, customerID], function(error, results) {
+        console.log("Response Data:", results); // Debugging: Log the data to be sent back
+        if (error) {
+            console.log(error);
+            res.sendStatus(500).send("Internal Server Error");
+        } else {
+            db.pool.query(showUpdate, [customerID], function(error, results) {
+                if (error) {
+                    console.log(error);
+                    res.sendStatus(500).send("Internal Server Error");
+                } else {
+                    res.send(results);
+                }
+            })
+        }
+    });
+});
+
+// Route to handle updating a shopping cart
+app.put('/update-shoppingCart-ajax', function(req, res) {
+    let data = req.body;
+
+    let shoppingCartID = parseInt(data.shoppingCartID);
+    let salesID = data.salesID;
+    let itemType = data.itemType; 
+    let itemID = data.itemID;
+    let itemQuantity = data.itemQuantity;
+    let itemPrice = data.itemPrice;
+    let itemTotalPrice = data.itemTotalPrice;
+    
+    let query = `UPDATE ShoppingCart SET salesID = ?, itemType = ?, itemID = ?, itemQuantity = ?, itemPrice = ?, itemTotalPrice = ? WHERE ShoppingCart.shoppingCartID = ?;`;
+    let showUpdate = `SELECT * FROM ShoppingCart WHERE shoppingCartID = ?;`;
+
+    db.pool.query(query, [salesID, itemType, itemID, itemQuantity, itemPrice, itemTotalPrice, shoppingCartID], function(error, results) {
+        if (error) {
+            console.log(error);
+            res.sendStatus(500).send("Internal Server Error");
+        } else {
+            db.pool.query(showUpdate, [shoppingCartID], function(error, results) {
+                if (error) {
+                    console.log(error);
+                    res.sendStatus(500).send("Internal Server Error");
+                } else {
+                    res.send(results);
+                }
+            })
+        }
+    });
+});
+
+// Route to handle updating an employee
+app.put('/update-employee-ajax', function(req, res) {
+    let data = req.body;
+
+    let employeeID = parseInt(data.employeeID);
+    let name = data.name;
+
+    let query = `UPDATE Employees SET name = ? WHERE Employees.employeeID = ?;`;
+    let showUpdate = `SELECT * FROM Employees WHERE employeeID = ?;`;
+
+    db.pool.query(query, [name, employeeID], function(error, results) {
+        if (error) {
+            console.log(error);
+            res.sendStatus(500).send("Internal Server Error");
+        } else {
+            db.pool.query(showUpdate, [employeeID], function(error, results) {
+                if (error) {
+                    console.log(error);
+                    res.sendStatus(500).send("Internal Server Error");
+                } else {
+                    res.send(results);
+                }
+            })
+        }
+    });
+});
+
+
 // Remaining routes...
 app.get('/shopping_cart', function (req, res) {
     let query1 = "SELECT * FROM ShoppingCart;"; // Define our query
@@ -81,7 +233,7 @@ app.get('/shopping_cart', function (req, res) {
         }
     });
 })
-                                                       // received back from the query
+// received back from the query
 
 app.get('/songs', function (req, res) {
     let query1 = "SELECT * FROM Songs;"; // Define our query

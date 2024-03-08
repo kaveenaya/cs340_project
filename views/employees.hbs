@@ -46,40 +46,25 @@
 </form>
 
 
-<h2>Updating Instrument Form</h2>
-<p>Select the instrument from the dropdown below and update its information:</p>
+<h2>Updating Employee Form</h2>
+<p>Select the employeeID from the dropdown below and update its information:</p>
+<fieldset>
+    <form id="update-employee-form">
 
-<form id="update-instrument-form">
-
-    <label for="input-instrument">Select the Instrument ID: </label>
-    <select name="input-instrument" id="input-instrument-ajax">
-        <option value="0">Select an Instrument ID</option>
-        {{#each instrumentIDS}}
-        <option value="{{this.instrumentID}}">{{this.instrumentID}}</option>
-        {{/each}}
-    </select>
+        <label for="update-employee-id">Select the employee ID: </label>
+        <select name="update-employee-id" id="update-employee-id">
+            {{#each employeeIDS}}
+            <option value="{{this.employeeID}}">{{this.employeeID}}</option>
+            {{/each}}
+        </select>
 
 
-    <label for="input-name">Name: </label>
-    <input type="text" name="input-name" id="input-name">
+        <label for="update-employee-name"> employee Name: </label>
+        <input type="text" name="update-employee-name" id="update-employee-name">
     
-    <label for="input-color">Color: </label>
-    <input type="text" name="input-color" id="input-color">
 
-    <label for="input-material">Material: </label>
-    <input type="text" name="input-material" id="input-material">
+        <input type="submit" onclick="return confirm('You are about to update the employee. Are you Sure?')"/>
 
-    <label for="input-size">Size: </label>
-    <input type="text" name="input-size" id="input-size">
-
-    <label for="input-year">Year: </label>
-    <input type="number" name="input-year" id="input-year">
-
-    <label for="input-price">Price: </label>
-    <input type="number" name="input-price" id="input-price">
-
-    <input type="submit">
-
-</form>
-
-<script src="./js/update_instrument.js"></script>
+    </form>
+</fieldset>
+<script src="./js/update_employee.js"></script>

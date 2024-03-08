@@ -54,40 +54,30 @@
 </form>
 
 
-<h2>Updating Instrument Form</h2>
-<p>Select the instrument from the dropdown below and update its information:</p>
+<h2>Updating Customers Form</h2>
+<p>Select the customerID from the dropdown below and update its information:</p>
+<fieldset>
+    <form id="update-customer-form">
 
-<form id="update-instrument-form">
-
-    <label for="input-instrument">Select the Instrument ID: </label>
-    <select name="input-instrument" id="input-instrument-ajax">
-        <option value="0">Select an Instrument ID</option>
-        {{#each instrumentIDS}}
-        <option value="{{this.instrumentID}}">{{this.instrumentID}}</option>
-        {{/each}}
-    </select>
+        <label for="update-customer-id">Select the customer ID: </label>
+        <select name="update-customer-id" id="update-customer-id">
+            {{#each customerIDS}}
+            <option value="{{this.customerID}}">{{this.customerID}}</option>
+            {{/each}}
+        </select>
 
 
-    <label for="input-name">Name: </label>
-    <input type="text" name="input-name" id="input-name">
-    
-    <label for="input-color">Color: </label>
-    <input type="text" name="input-color" id="input-color">
+        <label for="update-customer-name"> customer Name: </label>
+        <input type="text" name="update-customer-name" id="update-customer-name">
+        
+        <label for="update-customer-phone"> customer phone: </label>
+        <input type="text" name="update-customer-phone" id="update-customer-phone">
 
-    <label for="input-material">Material: </label>
-    <input type="text" name="input-material" id="input-material">
+        <label for="update-customer-DOP">Customer Date of Purchase (YYYY-MM-DD): </label>
+        <input type="text" name="update-customer-DOP" id="update-customer-DOP">
 
-    <label for="input-size">Size: </label>
-    <input type="text" name="input-size" id="input-size">
+        <input type="submit" onclick="return confirm('You are about to update the customer. Are you Sure?')"/>
 
-    <label for="input-year">Year: </label>
-    <input type="number" name="input-year" id="input-year">
-
-    <label for="input-price">Price: </label>
-    <input type="number" name="input-price" id="input-price">
-
-    <input type="submit">
-
-</form>
-
-<script src="./js/update_instrument.js"></script>
+    </form>
+</fieldset>
+<script src="./js/update_customer.js"></script>
