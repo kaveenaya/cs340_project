@@ -71,34 +71,33 @@
 <fieldset>
     <form id="update-instrument-form">
 
-        <label for="input-instrument">Select the Instrument ID: </label>
-        <select name="input-instrument" id="input-instrument-ajax">
-            <option value="0">Select an Instrument ID</option>
+        <label for="update-instrument">Select the Instrument ID: </label>
+        <select name="update-instrument" id="update-instrument">
             {{#each instrumentIDS}}
             <option value="{{this.instrumentID}}">{{this.instrumentID}}</option>
             {{/each}}
         </select>
 
 
-        <label for="input-name">Name: </label>
-        <input type="text" name="input-name" id="input-name">
+        <label for="update-name"> Instrument Name: </label>
+        <input type="text" name="update-name" id="update-name">
         
-        <label for="input-color">Color: </label>
-        <input type="text" name="input-color" id="input-color">
+        <label for="update-color"> Instrument Color: </label>
+        <input type="text" name="update-color" id="update-color">
 
-        <label for="input-material">Material: </label>
-        <input type="text" name="input-material" id="input-material">
+        <label for="update-material">Instrument Material: </label>
+        <input type="text" name="update-material" id="update-material">
 
-        <label for="input-size">Size: </label>
-        <input type="text" name="input-size" id="input-size">
+        <label for="update-size">Instrument Size: </label>
+        <input type="text" name="update-size" id="update-size">
 
-        <label for="input-year">Year: </label>
-        <input type="number" name="input-year" id="input-year">
+        <label for="update-year">Instrument Year: </label>
+        <input type="number" name="update-year" id="update-year">
 
-        <label for="input-price">Price: </label>
-        <input type="number" name="input-price" id="input-price">
+        <label for="update-price">Instrument Price: </label>
+        <input type="number" name="update-price" id="update-price">
 
-        <input type="submit">
+        <input type="submit" onclick="return confirm('You are about to update the instrument. Are you Sure?')"/>
 
     </form>
 </fieldset>

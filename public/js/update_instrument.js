@@ -9,10 +9,22 @@ updateInstrumentForm.addEventListener("submit", function (e) {
     e.preventDefault();
 
     // Get form fields we need to get data from
-    let inputInstrumentID = document.getElementById("input-instrument-ajax");
+    let inputInstrumentID = document.getElementById("update-instrument");
+    let inputInstrumentName = document.getElementById("update-name");
+    let inputInstrumentColor = document.getElementById("update-color");
+    let inputInstrumentMaterial = document.getElementById("update-material");
+    let inputInstrumentSize = document.getElementById("update-size");
+    let inputInstrumentYear = document.getElementById("update-year");
+    let inputInstrumentPrice = document.getElementById("update-price");
 
     // Get the values from the form fields
     let instrumentIDValue = inputInstrumentID.value;
+    let instrumentNameValue = inputInstrumentName.value;
+    let instrumentColorValue = inputInstrumentColor.value;
+    let instrumentMaterialValue = inputInstrumentMaterial.value;
+    let instrumentSizeValue = inputInstrumentSize.value;
+    let instrumentYearValue = inputInstrumentYear.value;
+    let instrumentPriceValue = inputInstrumentPrice.value;
     
     // currently the database table for bsg_people does not allow updating values to NULL
     // so we must abort if being bassed NULL for homeworld
@@ -21,11 +33,42 @@ updateInstrumentForm.addEventListener("submit", function (e) {
     {
         return;
     }
+    if (instrumentNameValue == "") 
+    {
+        return;
+    }
+    if (instrumentColorValue == "")
+    {
+        return;
+    }
+    if (instrumentMaterialValue == "")
+    {
+        return;
+    }
+    if (instrumentSizeValue == "")
+    {
+        return;
+    }
+    if (instrumentYearValue == "")
+    {
+        return;
+    }
+    if (instrumentPriceValue == "")
+    {
+        return;
+    }
 
 
     // Put our data we want to send in a javascript object
     let data = {
-        instrumentID: instrumentIDValue
+        instrumentID: instrumentIDValue,
+        instrumentName: instrumentNameValue,
+        instrumentColor: instrumentColorValue,
+        instrumentMaterial: instrumentMaterialValue,
+        instrumentSize: instrumentSizeValue,
+        instrumentYear: instrumentYearValue,
+        instrumentPrice: instrumentPriceValue
+
     }
     
     // Setup our AJAX request
