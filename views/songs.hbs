@@ -29,6 +29,7 @@
             <td>{{this.songGenre}}</td>
             <td>{{this.songLength}}</td>
             <td>{{this.songYear}}</td>
+            <td>{{this.songPrice}}</td>
              <td><button onclick="deleteSong({{this.songID}})">Delete</button></td>
         </tr>
         {{/each}}
@@ -90,6 +91,9 @@
 
         <label for="update-year">Song Year: </label>
         <input type="number" name="update-song-year" id="update-song-year">
+
+        <label for="update-price">Song Price: </label>
+        <input type="number" name="update-song-price" id="update-song-price">
 
         <input type="submit" onclick="return confirm('You are about to update the song. Are you Sure?')"/>
 

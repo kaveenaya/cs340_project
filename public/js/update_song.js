@@ -15,6 +15,7 @@ updatesongForm.addEventListener("submit", function (e) {
     let inputsongGenre = document.getElementById("update-song-genre");
     let inputsongLength = document.getElementById("update-song-length");
     let inputsongYear = document.getElementById("update-song-year");
+    let inputsongPrice = document.getElementById("update-song-price");
 
 
     // Get the values from the form fields
@@ -24,6 +25,7 @@ updatesongForm.addEventListener("submit", function (e) {
     let songGenreValue = inputsongGenre.value;
     let songLengthValue = inputsongLength.value;
     let songYearValue = inputsongYear.value;
+    let songPriceValue = inputsongPrice.value;
     
     // currently the database table for bsg_people does not allow updating values to NULL
     // so we must abort if being bassed NULL for homeworld
@@ -52,6 +54,10 @@ updatesongForm.addEventListener("submit", function (e) {
     {
         return;
     }
+    if (songPriceValue == "")
+    {
+        return;
+    }
 
     // Put our data we want to send in a javascript object
     let data = {
@@ -60,7 +66,8 @@ updatesongForm.addEventListener("submit", function (e) {
         songArtist: songArtistValue,
         songGenre: songGenreValue,
         songLength: songLengthValue,
-        songYear: songYearValue
+        songYear: songYearValue,
+        songPrice: songPriceValue
 
     }
     
@@ -83,6 +90,7 @@ updatesongForm.addEventListener("submit", function (e) {
             inputsongGenre.value = "";
             inputsongLength.value = "";
             inputsongYear.value = "";
+            inputsongPrice.value = "";
 
         }
         else if (xhttp.readyState == 4 && xhttp.status != 200) {
@@ -117,6 +125,9 @@ function updateRow(data, songID){
             let songLengthTD = updateRowIndex.getElementsByTagName("td")[4];
             //get td of song year
             let songYearTD = updateRowIndex.getElementsByTagName("td")[5];
+            //get td of song price
+            let songPriceTD = updateRowIndex.getElementsByTagName("td")[6];
+
 
             //reassign the values of the row to the new values
             songNameTD.innerHTML = parsedData[0].songName;
@@ -124,6 +135,7 @@ function updateRow(data, songID){
             songGenreTD.innerHTML = parsedData[0].songGenre;
             songLengthTD.innerHTML = parsedData[0].songLength;
             songYearTD.innerHTML = parsedData[0].songYear;
+            songPriceTD.innerHTML = parsedData[0].songPrice;
 
         }
     }
