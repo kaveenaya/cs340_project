@@ -1,101 +1,148 @@
--- DML for for Customers Table
+-- Customers
 
--- Create
-INSERT INTO Customers (customerName, customerPhone, customerDateOfPurchase)
-VALUES ('customerName_value', 'customerPhone_value', 'customerDateOfPurchase_value');
-
--- Read
+-- Get all customer information
 SELECT * FROM Customers;
 
--- Update
+-- Add a customer
+INSERT INTO Customers (customerFname, customerLname, customerPhone, customerEmail)
+VALUES (:customerFname, :customerLname, :customerPhone, :customerEmail);
+
+-- Update a customer's information
 UPDATE Customers
-SET customerName = 'new_customerName_value', customerPhone = 'new_customerPhone_value', customerDateOfPurchase = 'new_customerDateOfPurchase_value'
-WHERE customerID = customerID_value;
+SET customerFname = :customerFname,
+    customerLname = :customerLname,
+    customerPhone = :customerPhone,
+    customerEmail = :customerEmail
+WHERE customerID = :customerID;
 
--- Delete
-DELETE FROM Customers WHERE customerID = customerID_value;
+-- Delete a customer
+DELETE FROM  Customers WHERE customerID = :customerID;
 
--- DML for Employees Table
 
--- Create
-INSERT INTO Employees (name)
-VALUES ('name_value');
+-- Employees
 
--- Read
+-- Get all employees information
 SELECT * FROM Employees;
 
--- Update
-UPDATE Employees SET name = 'new_name_value' WHERE employeeID = employeeID_value;
+-- Add a employee
+INSERT INTO Employees (employeeFname, employeeLname, employeePhone, employeeEmail)
+VALUES (:employeeFname, :employeeLname, :employeePhone, :employeeEmail);
 
--- Delete
-DELETE FROM Employees WHERE employeeID = employeeID_value;
+-- Update a employee's information
+UPDATE Employees
+SET employeeFname = :employeeFname,
+    employeeLname = :employeeLname,
+    employeePhone = :employeePhone,
+    employeeEmail = :employeeEmail
+WHERE employeeID = :employeeID;
 
--- DML for Sales Table
+-- Remove a employee
+DELETE FROM Employees
+WHERE employeeID =  :employeeID;
 
--- Create
-INSERT INTO Sales (customerID, employeeID, saleAmount, saleDate)
-VALUES (customerID_value, employeeID_value, saleAmount_value, 'saleDate_value');
 
--- Read
+-- Sales
+
+-- Get all sales information
 SELECT * FROM Sales;
 
--- Update
+-- Add a sale
+INSERT INTO Sales (customer, employee, saleAmount, saleDate, saleTime)
+VALUES (:customer, :employee, :saleAmount, :saleDate, :saleTime);
+
+-- Update a sale's information
 UPDATE Sales
-SET customerID = customerID_value, employeeID = employeeID_value, saleAmount = saleAmount_value, saleDate = 'new_saleDate_value'
-WHERE salesID = salesID_value;
+SET customer = :customer,
+    employee = :employee,
+    saleAmount = :saleAmount,
+    saleDate = :saleDate,
+    saleTime = :saleTime
+WHERE salesID = :saleID;
 
--- Delete
-DELETE FROM Sales WHERE salesID = salesID_value;
+-- Remove a sale
+DELETE FROM Sales
+WHERE salesID = :salesID;
 
--- DML for ShoppingCart Table
+-- Join customer and employee tables to display their ids
+SELECT Sales.salesID, Customers.customerID, Employees.employeeID, Sales.saleAmount, Sales.saleDate, Sales.saleTime
+FROM Sales
+INNER JOIN Customers ON Sales.customer = Customers.customerID
+INNER JOIN Employees ON Sales.employee = Employees.employeeID;
 
--- Create
-INSERT INTO ShoppingCart (salesID, ItemType, itemQuantity, itemPrice, ItemTotalPrice)
-VALUES (salesID_value, 'ItemType_value', itemQuantity_value, itemPrice_value, ItemTotalPrice_value);
 
--- Read
-SELECT s.shoppingCartId, sa.ItemType AS item_name, s.itemQuantity, s.itemPrice, s.ItemTotalPrice
-FROM ShoppingCart s
-JOIN Sales sa ON s.salesID = sa.salesID;
+-- Shopping Cart
 
--- Update
+-- Gett all shopping cart information
+SELECT * FROM ShoppingCart;
+
+-- Add a shopping cart
+INSERT INTO ShoppingCart(sale, song, instrument, itemQuantity, itemTotalPrice)
+VALUES (:sale, :song, :instrument, :itemQuantity, :itemTotalPrice);
+
+-- Update a shopping cart's information
 UPDATE ShoppingCart
-SET salesID = salesID_value, ItemType = 'new_ItemType_value', itemQuantity = new_itemQuantity_value, itemPrice = new_itemPrice_value, ItemTotalPrice = new_ItemTotalPrice_value
-WHERE shoppingCartId = shoppingCartId_value;
+SET sale = :sale,
+    song = :song,
+    instrument = :instrument,
+    itemQuantity = :itemQuantity,
+    itemTotalPrice = :itemTotalPrice
+WHERE shoppingCartID = :shoppingCartID;
 
--- Delete
-DELETE FROM ShoppingCart WHERE shoppingCartId = shoppingCartId_value;
+-- Remove a shopping cart
+DELETE FROM ShoppingCart
+WHERE shoppingCartID = :shoppingCartID;
 
--- DML for Instrument Table
+-- Join sales, songs, and instruments tables to display their ids
+SELECT ShoppingCart.shoppingCartID, Sales.salesID, Songs.songID, Instruments.instrumentID, ShoppingCart.itemQuantity, ShoppingCart.itemTotalPrice
+FROM ShoppingCart
+INNER JOIN Sales on ShoppingCart.sale = Sales.salesID
+INNER JOIN Songs on ShoppingCart.song = Songs.songID
+INNER JOIN Instruments on ShoppingCart.instrument = Instruments.instrumentID;
 
--- Create
-INSERT INTO Instruments (instrumentName, instrumentColor, instrumentMaterial, instrumentSize, instrumentYear, instrumentPrice)
-VALUES ('instrumentName_value', 'instrumentColor_value', 'instrumentMaterial_value', instrumentSize_value, instrumentYear_value, instrumentPrice_value);
 
--- Read
+-- Instruments
+
+-- Get all instruments information
 SELECT * FROM Instruments;
 
--- Update
-UPDATEInstruments 
-SET instrumentName = 'new_instrumentName_value', instrumentColor = 'new_instrumentColor_value', instrumentMaterial = 'new_instrumentMaterial_value', instrumentSize = new_instrumentSize_value, instrumentYear = new_instrumentYear_value, instrumentPrice = new_instrumentPrice_value
-WHERE instrumentID = instrumentID_value;
+-- Add a instrument
+INSERT INTO Instruments (instrumentName, instrumentColor, instrumentMaterial, instrumentSize, instrumentYear, instrumentPrice)
+VALUES (:instrumentName, :instrumentColor, :instrumentMaterial, :instrumentSize, :instrumentYear, :instrumentPrice)
 
--- Delete
-DELETE FROM Instruments WHERE instrumentID = instrumentID_value;
+-- Update a instrument's information
+UPDATE Instruments
+SET instrumentName = :instrumentName,
+    instrumentColor = :instrumentColor,
+    instrumentMaterial = :instrumentMaterial,
+    instrumentSize = :instrumentSize,
+    instrumentYear = :instrumentYear,
+    instrumentPrice = :instrumentPrice
+WHERE instrumentID = :instrumentID;
 
--- DML for Songs Table
+-- Remove a instrument
+DELETE FROM Instruments 
+WHERE instrumentID = :instrumentID;
 
--- Create
-INSERT INTO Songs (albumID, songName, songArtist, songGenre, songLength, songYear)
-VALUES (albumID_value, 'songName_value', 'songArtist_value', 'songGenre_value', 'songLength_value', songYear_value);
 
--- Read
+-- Songs
+
+-- Get all songs information
 SELECT * FROM Songs;
 
--- Update
-UPDATE Songs
-SET albumID = albumID_value, songName = 'new_songName_value', songArtist = 'new_songArtist_value', songGenre = 'new_songGenre_value', songLength = 'new_songLength_value', songYear = new_songYear_value
-WHERE songID = songID_value;
+-- Add a song
+INSERT INTO Songs (songName, songArtist, songGenre, songLength, songYear, songPrice)
+VALUES (:songName, :songArtist, :songGenre, :songLength,  :songYear, :songPrice);
 
--- Delete
-DELETE FROM Songs WHERE songID = songID_value;
+-- Update a song's information
+UPDATE Songs
+SET songName = :songName,
+    songArtist = :songArtist,
+    songGenre = :songGenre,
+    songLength = :songLength,
+    songYear = :songYear,
+    songPrice = :songPrice
+WHERE songID = :songID;
+
+-- Remove a song
+DELETE FROM Songs
+WHERE songID = :songID;
