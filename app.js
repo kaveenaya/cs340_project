@@ -401,14 +401,9 @@ app.post('/add-customer-form', function(req, res){
     // Capture the incoming data and parse it back to a JS object
     let data = req.body;
 
-    // Capture NULL values
-    let id = parseInt(data['input-id']);
-    if (isNaN(id)) {
-        id = 'NULL'
-    }
 
     // Create the query and run it on the database
-    query1 = `INSERT INTO Customers (customerID, customerName, customerPhone, customerDateOfPurchase) VALUES ('${id}', '${data['input-name']}', '${data['input-phone']}', '${data['input-date']}')`;
+    query1 = `INSERT INTO Customers (customerFname, customerLname, customerPhone, customerEmail) VALUES ('${data['input-fname']}', '${data['input-lname']}', '${data['input-phone']}', '${data['input-email']}')`;
     db.pool.query(query1, function(error, rows, fields){
         // Check to see if there was an error
         if (error) {
@@ -449,14 +444,8 @@ app.post('/add-employee-form', function(req, res){
     // Capture the incoming data and parse it back to a JS object
     let data = req.body;
 
-    // Capture NULL values
-    let id = parseInt(data['input-id']);
-    if (isNaN(id)) {
-        id = 'NULL'
-    }
-
     // Create the query and run it on the database
-    query1 = `INSERT INTO Employees (employeeID, name) VALUES ('${id}', '${data['input-name']}')`;
+    query1 = `INSERT INTO Employees (employeeFname, employeeLname, employeePhone, employeeEmail) VALUES ('${data['input-fname']}', '${data['input-lname']}', '${data['input-phone']}', '${data['input-email']}')`;
     db.pool.query(query1, function(error, rows, fields){
         // Check to see if there was an error
         if (error) {

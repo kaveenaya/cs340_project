@@ -8,24 +8,24 @@ addCustomerForm.addEventListener("submit", function (e) {
     e.preventDefault();
 
     // Get form fields we need to get data from
-    let inputCustomerID = document.getElementById("input-id");
-    let inputCustomerName = document.getElementById("input-name");
+    let inputCustomerFName = document.getElementById("input-fname");
+    let inputCustomerLName = document.getElementById("input-lname");
     let inputCustomerPhone = document.getElementById("input-phone");
-    let inputCustomerDate = document.getElementById("input-date");
+    let inputCustomerEmail = document.getElementById("input-email");
 
     // Get the values from the form fields
-    let customerIDValue = inputCustomerID.value;
-    let customerNameValue = inputCustomerName.value;
+    let customerFNameValue = inputCustomerFName.value;
+    let customerLNameValue = inputCustomerLName.value;
     let customerPhoneValue = inputCustomerPhone.value;
-    let customerDateValue = inputCustomerDate.value;
+    let customerEmailValue = inputCustomerEmail.value;
 
 
     // Put our data we want to send in a javascript object
     let data = {
-        customerID: customerIDValue,
-        customerName: customerNameValue,
+        customerFName: customerFNameValue,
+        customerLName: customerLNameValue,
         customerPhone: customerPhoneValue,
-        customerDateOfPurchase: customerDateValue
+        customerEmail: customerEmailValue
     }
     
     // Setup our AJAX request
@@ -41,10 +41,10 @@ addCustomerForm.addEventListener("submit", function (e) {
             addRowToTable(xhttp.response);
 
             // Clear the input fields for another transaction
-            inputCustomerID.value = '';
-            inputCustomerName.value = '';
+            inputCustomerFName.value = '';
+            inputCustomerLName.value = '';
             inputCustomerPhone.value = '';
-            inputCustomerDate.value = '';
+            inputCustomerEmail.value = '';
         }
         else if (xhttp.readyState == 4 && xhttp.status != 200) {
             console.log("There was an error with the input.")
@@ -74,40 +74,46 @@ addRowToTable = (data) => {
 
     // Create a row and 4 cells
     let row = document.createElement("TR");
-    let customerNameCell = document.createElement("TD");
+    let customerIDCell = document.createElement("TD");
+    let customerFNameCell = document.createElement("TD");
+    let customerLNameCell = document.createElement("TD");
     let customerPhoneCell = document.createElement("TD");
-    let customerDateCell = document.createElement("TD");
+    let customerEmailCell = document.createElement("TD");
     let deleteCell = document.createElement("TD");
 
     // Fill the cells with correct data
   
     // Fill the cells with correct data
-    customerNameCell.innerText = newRow.customerName;
+    customerIDCell.innerText = newRow.customerID;
+    customerFNameCell.innerText = newRow.customerFName;
+    customerLNameCell.innerText = newRow.customerLName;
     customerPhoneCell.innerText = newRow.customerPhone;
-    customerDateCell.innerText = newRow.customerDateOfPurchase;
+    customerEmailCell.innerText = newRow.customerEmail;
 
     deleteCell = document.createElement("button");
     deleteCell.innerHTML = "Delete";
     deleteCell.onclick = function(){
-        deleteCustomer(newRow.id);
+        deleteCustomer(newRow.customerID);
     };
 
 
       // Add the cells to the row 
-      row.appendChild(customerNameCell);
+      row.appendChild(customerIDCell);
+      row.appendChild(customerFNameCell);
+      row.appendChild(customerLNameCell);
       row.appendChild(customerPhoneCell);
-      row.appendChild(customerDateCell);
+      row.appendChild(customerEmailCell);
       row.appendChild(deleteCell);
 
     // Add a row attribute so the deleteRow function can find a newly added row
-    row.setAttribute('data-value', newRow.id);
+    row.setAttribute('data-value', newRow.customerID);
 
     // Add the row to the table
     currentTable.appendChild(row);
 
     let selectID = document.getElementById("input-customer-ajax");
     let option = document.createElement("option");
-    option.text = newRow.customerName;
+    //option.text = newRow.customerName;
     option.value = newRow.customerID;
     selectID.add(option);
 }

@@ -8,18 +8,24 @@ addEmployeeForm.addEventListener("submit", function (e) {
     e.preventDefault();
 
     // Get form fields we need to get data from
-    let inputEmployeeID = document.getElementById("input-id");
-    let inputEmployeeName = document.getElementById("input-name");
+    let inputEmployeeFName = document.getElementById("input-fname");
+    let inputEmployeeLName = document.getElementById("input-lname");
+    let inputEmployeePhone = document.getElementById("input-phone");
+    let inputEmployeeEmail = document.getElementById("input-email");
 
     // Get the values from the form fields
-    let employeeIDValue = inputEmployeeID.value;
-    let employeeNameValue = inputEmployeeName.value;
+    let employeeFNameValue = inputEmployeeFName.value;
+    let employeeLNameValue = inputEmployeeLName.value;
+    let employeePhoneValue = inputEmployeePhone.value;
+    let employeeEmailValue = inputEmployeeEmail.value;
 
 
     // Put our data we want to send in a javascript object
     let data = {
-        employeeID: employeeIDValue,
-        name: employeeNameValue
+        employeeFName: employeeFNameValue,
+        employeeLName: employeeLNameValue,
+        employeePhone: employeePhoneValue,
+        employeeEmail: employeeEmailValue
     }
     
     // Setup our AJAX request
@@ -35,8 +41,10 @@ addEmployeeForm.addEventListener("submit", function (e) {
             addRowToTable(xhttp.response);
 
             // Clear the input fields for another transaction
-            inputEmployeeID.value = '';
-            inputEmployeeName.value = '';
+            inputEmployeeFName.value = '';
+            inputEmployeeLName.value = '';
+            inputEmployeePhone.value = '';
+            inputEmployeeEmail.value = '';
         }
         else if (xhttp.readyState == 4 && xhttp.status != 200) {
             console.log("There was an error with the input.")
@@ -66,34 +74,46 @@ addRowToTable = (data) => {
 
     // Create a row and 4 cells
     let row = document.createElement("TR");
-    let employeeNameCell = document.createElement("TD");
+    let employeeIDCell = document.createElement("TD");
+    let employeeFNameCell = document.createElement("TD");
+    let employeeLNameCell = document.createElement("TD");
+    let employeePhoneCell = document.createElement("TD");
+    let employeeEmailCell = document.createElement("TD");
     let deleteCell = document.createElement("TD");
 
     // Fill the cells with correct data
   
     // Fill the cells with correct data
-    employeeNameCell.innerText = newRow.name;
+    employeeIDCell.innerText = newRow.employeeID;
+    employeeFNameCell.innerText = newRow.employeeFName;
+    employeeLNameCell.innerText = newRow.employeeLName;
+    employeePhoneCell.innerText = newRow.employeePhone;
+    employeeEmailCell.innerText = newRow.employeeEmail;
 
     deleteCell = document.createElement("button");
     deleteCell.innerHTML = "Delete";
     deleteCell.onclick = function(){
-        deleteEmployee(newRow.id);
+        deleteCustomer(newRow.employeeID);
     };
 
 
       // Add the cells to the row 
-      row.appendChild(employeeNameCell);
+      row.appendChild(employeeIDCell);
+      row.appendChild(employeeFNameCell);
+      row.appendChild(employeeLNameCell);
+      row.appendChild(employeePhoneCell);
+      row.appendChild(employeeEmailCell);
       row.appendChild(deleteCell);
 
     // Add a row attribute so the deleteRow function can find a newly added row
-    row.setAttribute('data-value', newRow.id);
+    row.setAttribute('data-value', newRow.employeeID);
 
     // Add the row to the table
     currentTable.appendChild(row);
 
     let selectID = document.getElementById("input-employee-ajax");
     let option = document.createElement("option");
-    option.text = newRow.name;
+    //option.text = newRow.employeeName;
     option.value = newRow.employeeID;
     selectID.add(option);
 }
