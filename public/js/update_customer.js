@@ -10,16 +10,18 @@ updatecustomerForm.addEventListener("submit", function (e) {
 
     // Get form fields we need to get data from
     let inputcustomerID = document.getElementById("update-customer-id");
-    let inputcustomerName = document.getElementById("update-customer-name");
+    let inputcustomerFName = document.getElementById("update-customer-fname");
+    let inputcustomerLName = document.getElementById("update-customer-lname");
     let inputcustomerphone = document.getElementById("update-customer-phone");
-    let inputcustomerDOP = document.getElementById("update-customer-DOP");
+    let inputcustomeremail = document.getElementById("update-customer-email");
 
 
     // Get the values from the form fields
     let customerIDValue = inputcustomerID.value;
-    let customerNameValue = inputcustomerName.value;
+    let customerFNameValue = inputcustomerFName.value;
+    let customerLNameValue = inputcustomerLName.value;
     let customerphoneValue = inputcustomerphone.value;
-    let customerDOPValue = inputcustomerDOP.value;
+    let customeremailValue = inputcustomeremail.value;
 
     // currently the database table for bsg_people does not allow updating values to NULL
     // so we must abort if being bassed NULL for homeworld
@@ -28,7 +30,11 @@ updatecustomerForm.addEventListener("submit", function (e) {
     {
         return;
     }
-    if (customerNameValue == "")
+    if (customerFNameValue == "")
+    {
+        return;
+    }
+    if (customerLNameValue == "")
     {
         return;
     }
@@ -36,7 +42,7 @@ updatecustomerForm.addEventListener("submit", function (e) {
     {
         return;
     }
-    if (customerDOPValue == "")
+    if (customeremailValue == "")
     {
         return;
     }
@@ -45,10 +51,10 @@ updatecustomerForm.addEventListener("submit", function (e) {
     // Put our data we want to send in a javascript object
     let data = {
         customerID: customerIDValue,
-        customerName: customerNameValue,
+        customerFname: customerFNameValue,
+        customerLname: customerLNameValue,
         customerPhone: customerphoneValue,
-        customerDateOfPurchase: customerDOPValue,
-
+        customerEmail: customeremailValue
     }
     
     // Setup our AJAX request
@@ -65,9 +71,10 @@ updatecustomerForm.addEventListener("submit", function (e) {
 
             // Clear the form
             inputcustomerID.value = "";
-            inputcustomerName.value = "";
+            inputcustomerFName.value = "";
+            inputcustomerLName.value = "";
             inputcustomerphone.value = "";
-            inputcustomerDOP.value = "";
+            inputcustomeremail.value = "";
 
         }
         else if (xhttp.readyState == 4 && xhttp.status != 200) {
@@ -96,17 +103,21 @@ function updateRow(data, customerID){
         if(table.rows[i].getAttribute("data-value") == customerID){
             let updateRowIndex = table.getElementsByTagName("tr")[i];
 
-            //get td of customer name
-            let customerNameTD = updateRowIndex.getElementsByTagName("td")[1];
+            //get td of customer first name'
+            let customerFNameTD = updateRowIndex.getElementsByTagName("td")[1];
+            //get td of customer last name
+            let customerLNameTD = updateRowIndex.getElementsByTagName("td")[2];
             //get td of customer phone 
-            let customerphoneTD = updateRowIndex.getElementsByTagName("td")[2];
-            //get td of customer DOP
-            let customerDOPTD = updateRowIndex.getElementsByTagName("td")[3];
+            let customerphoneTD = updateRowIndex.getElementsByTagName("td")[3];
+            // get the td of customer email
+            let customeremailTD = updateRowIndex.getElementsByTagName("td")[4];
 
             //reassign the values of the row to the new values
-            customerNameTD.innerHTML = parsedData[0].customerName;
+            customerFNameTD.innerHTML = parsedData[0].customerFname;
+            customerLNameTD.innerHTML = parsedData[0].customerLname;
             customerphoneTD.innerHTML = parsedData[0].customerPhone;
-            customerDOPTD.innerHTML = parsedData[0].customerDateOfPurchase;
+            customeremailTD.innerHTML = parsedData[0].customerEmail;
+
 
         }
     }

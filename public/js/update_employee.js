@@ -10,12 +10,18 @@ updateemployeeForm.addEventListener("submit", function (e) {
 
     // Get form fields we need to get data from
     let inputemployeeID = document.getElementById("update-employee-id");
-    let inputemployeeName = document.getElementById("update-employee-name");
+    let inputemployeeFName = document.getElementById("update-employee-fname");
+    let inputemployeeLName = document.getElementById("update-employee-lname");
+    let inputemployeePhone = document.getElementById("update-employee-phone");
+    let inputemployeeEmail = document.getElementById("update-employee-email");
 
 
     // Get the values from the form fields
     let employeeIDValue = inputemployeeID.value;
-    let employeeNameValue = inputemployeeName.value;
+    let employeeFNameValue = inputemployeeFName.value;
+    let employeeLNameValue = inputemployeeLName.value;
+    let employeePhoneValue = inputemployeePhone.value;
+    let employeeEmailValue = inputemployeeEmail.value;
 
     // currently the database table for bsg_people does not allow updating values to NULL
     // so we must abort if being bassed NULL for homeworld
@@ -24,15 +30,29 @@ updateemployeeForm.addEventListener("submit", function (e) {
     {
         return;
     }
-    if (employeeNameValue == "")
+    if (employeeFNameValue == "")
     {
         return;
     }
-
+    if (employeeLNameValue == "")
+    {
+        return;
+    }
+    if (employeePhoneValue == "")
+    {
+        return;
+    }
+    if (employeeEmailValue == "")
+    {
+        return;
+    }
     // Put our data we want to send in a javascript object
     let data = {
         employeeID: employeeIDValue,
-        name: employeeNameValue
+        employeeFName: employeeFNameValue,
+        employeeLName: employeeLNameValue,
+        employeePhone: employeePhoneValue,
+        employeeEmail: employeeEmailValue
 
     }
     
@@ -50,8 +70,10 @@ updateemployeeForm.addEventListener("submit", function (e) {
 
             // Clear the form
             inputemployeeID.value = "";
-            inputemployeeName.value = "";
-
+            inputemployeeFName.value = "";
+            inputemployeeLName.value = "";
+            inputemployeePhone.value = "";
+            inputemployeeEmail.value = "";
         }
         else if (xhttp.readyState == 4 && xhttp.status != 200) {
             console.log("There was an error with the input.")
@@ -80,11 +102,16 @@ function updateRow(data, employeeID){
             let updateRowIndex = table.getElementsByTagName("tr")[i];
 
             //get td of employee name
-            let employeeNameTD = updateRowIndex.getElementsByTagName("td")[1];
+            let employeeFNameTD = updateRowIndex.getElementsByTagName("td")[1];
+            let employeeLNameTD = updateRowIndex.getElementsByTagName("td")[2];
+            let employeePhoneTD = updateRowIndex.getElementsByTagName("td")[3];
+            let employeeEmailTD = updateRowIndex.getElementsByTagName("td")[4];
 
             //reassign the values of the row to the new values
-            employeeNameTD.innerHTML = parsedData[0].name;
-
+            employeeFNameTD.innerHTML = parsedData[0].employeeFname;
+            employeeLNameTD.innerHTML = parsedData[0].employeeLname;
+            employeePhoneTD.innerHTML = parsedData[0].employeePhone;
+            employeeEmailTD.innerHTML = parsedData[0].employeeEmail;
         }
     }
 }
