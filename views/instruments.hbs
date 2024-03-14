@@ -15,18 +15,18 @@
 <table id="instruments-table">
 
     {{!-- Header section --}}
-    <thead>
-
-        {{!-- For just the first row, we print each key of the row object as a header cell so we
-        know what each column means when the page renders --}}
-        <tr>
-            {{#each data.[0]}}
-            <th>
-                {{@key}}
-            </th>
-            {{/each}}
-        </tr>
-    </thead>
+<thead>
+    <tr>
+        <th>Instrument ID</th>
+        <th>Instrument Name</th>
+        <th>Instrument Color</th>
+        <th>Instrument Material</th>
+        <th>Instrument Size</th>
+        <th>Instrument Year</th>
+        <th>Instrument Price</th>
+        <th>Delete</th>
+    </tr>
+</thead>
 
     {{!-- Body section --}}
     <tbody>
@@ -41,6 +41,7 @@
             <td>{{this.instrumentSize}}</td>
             <td>{{this.instrumentYear}}</td>
             <td>{{this.instrumentPrice}}</td>
+            
              <td><button onclick="deleteInstrument({{this.instrumentID}})">Delete</button></td>
         </tr>
         {{/each}}

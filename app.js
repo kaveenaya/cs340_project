@@ -351,7 +351,8 @@ app.get('/customers', function (req, res) {
 // app.js
 
 app.get('/', function(req, res) {
-    res.render('home'); // Note the call to render() and not send(). Using render() ensures the templating engine will process this file, before sending the finished HTML to the client.
+    res.render('home', { layout: 'main' }); 
+    // Note the call to render() and not send(). Using render() ensures the templating engine will process this file, before sending the finished HTML to the client.
 });
 
 // Define a route to handle the GET request for the '/instruments' endpoint
