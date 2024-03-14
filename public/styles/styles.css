@@ -16,11 +16,13 @@ header {
 
 h1 {
     margin: 0;
+    text-align: center;
 }
 
 nav {
     background: #0a9396;
     padding: 10px 0;
+    text-align: center;
 }
 
 nav a {
@@ -29,6 +31,12 @@ nav a {
     padding: 0 15px;
     font-weight: bold;
 }
+
+p {
+    margin: 0;
+    padding: 10px;
+    text-align: center;
+}   
 
 nav a:hover {
     background: #94d2bd;
@@ -46,7 +54,7 @@ table, th, td {
 
 th {
     background-color: #94d2bd;
-    color: white;
+    color: black;
     padding: 10px;
 }
 
