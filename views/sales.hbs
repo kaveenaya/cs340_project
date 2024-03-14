@@ -16,9 +16,9 @@
         <th>Sales ID</th>
         <th>Customer ID</th>
         <th>Employee ID</th>
-        <th>Sale Amount</th>
         <th>Sale Date</th>
         <th>Sale Time</th>
+        <th>Sale Amount</th>
         <th>Delete</th>
     </tr>
 </thead>
@@ -32,9 +32,9 @@
             <td>{{this.salesID}}</td>
             <td>{{this.customerID}}</td>
             <td>{{this.employeeID}}</td>
-            <td>{{this.saleAmount}}</td>
             <td>{{this.saleDate}}</td>
             <td>{{this.saleTime}}</td>
+            <td>{{this.saleAmount}}</td>
             <td><button onclick="deleteSale('{{this.salesID}}')">Delete</button></td>
 
         </tr>
@@ -62,9 +62,6 @@
         <option value="{{this.employeeID}}">{{this.employeeID}}</option>
         {{/each}}
     </select>
-
-    <label for="input-amount">Sale Amount: </label>
-    <input type="number" name="input-amount" id="input-amount">
 
     <label for="input-date">Sale Date: </label>
     <input type="date" name="input-date" id="input-date">

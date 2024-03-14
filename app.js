@@ -427,7 +427,7 @@ app.post('/add-sale-form', function(req, res){
     let data = req.body;
 
     // Create the query and run it on the database
-    query1 = `INSERT INTO Sales (customerID, employeeID, saleAmount, saleDate, saleTime) VALUES ('${data['input-customerid']}', '${data['input-employeeid']}', '${data['input-amount']}', '${data['input-date']}', '${data['input-time']}')`;
+    query1 = `INSERT INTO Sales (customerID, employeeID, saleDate, saleTime) VALUES ('${data['input-customerid']}', '${data['input-employeeid']}', '${data['input-date']}', '${data['input-time']}')`;
     db.pool.query(query1, function(error, rows, fields){
         // Check to see if there was an error
         if (error) {

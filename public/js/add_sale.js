@@ -10,7 +10,6 @@ addSaleForm.addEventListener("submit", function (e) {
     // Get form fields we need to get data from
     let inputCustomerID = document.getElementById("input-customerid");
     let inputEmployeeID = document.getElementById("input-employeeid");
-    let inputSaleAmount = document.getElementById("input-amount");
     let inputSaleDate = document.getElementById("input-date");
     let inputSaleTime = document.getElementById("input-time");
 
@@ -18,17 +17,14 @@ addSaleForm.addEventListener("submit", function (e) {
     // Get the values from the form fields
     let customerIDValue = inputCustomerID.value;
     let employeeIDValue = inputEmployeeID.value;
-    let saleAmountValue = inputSaleAmount.value;
     let saleDateValue = inputSaleDate.value;
     let saleTimeValue = inputSaleTime.value;
-
 
     // Put our data we want to send in a javascript object
     let data = {
         salesID: saleIDValue,
         customerID: customerIDValue,
         employeeID: employeeIDValue,
-        saleAmount: saleAmountValue,
         saleDate: saleDateValue,
         saleTime: saleTimeValue
     }
@@ -48,7 +44,6 @@ addSaleForm.addEventListener("submit", function (e) {
             // Clear the input fields for another transaction
             inputCustomerID.value = '';
             inputEmployeeID.value = '';
-            inputSaleAmount.value = '';
             inputSaleDate.value = '';
             inputSaleTime.value = '';
         }
@@ -83,9 +78,9 @@ addRowToTable = (data) => {
     let salesIDCell = document.createElement("TD");
     let customerIDCell = document.createElement("TD");
     let employeeIDCell = document.createElement("TD");
-    let saleAmountCell = document.createElement("TD");
     let saleDateCell = document.createElement("TD");
     let saleTimeCell = document.createElement("TD");
+    let saleAmountCell = document.createElement("TD");
     let deleteCell = document.createElement("TD");
 
     // Fill the cells with correct data
@@ -94,9 +89,9 @@ addRowToTable = (data) => {
     salesIDCell.innerText = newRow.salesID;
     customerIDCell.innerText = newRow.customerID;
     employeeIDCell.innerText = newRow.employeeID;
-    saleAmountCell.innerText = newRow.saleAmount;
     saleDateCell.innerText = newRow.saleDate;
     saleTimeCell.innerText = newRow.saleTime;
+    saleAmountCell.innerText = newRow.saleAmount;
 
     deleteCell = document.createElement("button");
     deleteCell.innerHTML = "Delete";
@@ -109,9 +104,9 @@ addRowToTable = (data) => {
       row.appendChild(salesIDCell);
       row.appendChild(customerIDCell);
       row.appendChild(employeeIDCell);
-      row.appendChild(saleAmountCell);
       row.appendChild(saleDateCell);
       row.appendChild(saleTimeCell);
+      row.appendChild(saleAmountCell);
       row.appendChild(deleteCell);
 
     // Add a row attribute so the deleteRow function can find a newly added row
