@@ -24,7 +24,10 @@
         {{#each data}}
         <tr data-value={{this.employeeID}}>
             <td>{{this.employeeID}}</td>
-            <td>{{this.name}}</td>
+            <td>{{this.employeeFname}}</td>
+            <td>{{this.employeeLname}}</td>
+            <td>{{this.employeePhone}}</td>
+            <td>{{this.employeeEmail}}</td>
              <td><button onclick="deleteEmployee({{this.employeeID}})">Delete</button></td>
         </tr>
         {{/each}}
@@ -36,11 +39,17 @@
 <h2>Adding Data using an HTML form</h2>
 <p>To add a new employee, please enter their information below nad click `Submit`!</p>
 <form id="add-employee-form" method="POST" action="/add-employee-form">
-    <label for="input-id">ID: </label>
-    <input type="number" name="input-id" id="input-id">
+    <label for="input-fname">Employee First Name: </label>
+    <input type="text" name="input-fname" id="input-fname">
 
-    <label for="input-name">Name: </label>
-    <input type="text" name="input-name" id="input-name">
+    <label for="input-lname">Employee Last Name: </label>
+    <input type="text" name="input-lname" id="input-lname">
+
+    <label for="input-phone">Employee Phone: </label>
+    <input type="text" name="input-phone" id="input-phone">
+
+    <label for="input-email">Employee Email: </label>
+    <input type="text" name="input-email" id="input-email">
 
     <input type="submit">
 </form>
@@ -59,8 +68,17 @@
         </select>
 
 
-        <label for="update-employee-name"> employee Name: </label>
-        <input type="text" name="update-employee-name" id="update-employee-name">
+        <label for="update-employee-fname">Employee First Name: </label>
+        <input type="text" name="update-employee-fname" id="update-employee-fname">
+
+        <label for="update-employee-lname">Employee Last Name: </label>
+        <input type="text" name="update-employee-lname" id="update-employee-lname">
+
+        <label for="update-employee-phone">Employee Phone Number: </label>
+        <input type="text" name="update-employee-phone" id="update-employee-phone">
+
+        <label for="update-employee-email">Employee Email: </label>
+        <input type="text" name="update-employee-email" id="update-employee-email">
     
 
         <input type="submit" onclick="return confirm('You are about to update the employee. Are you Sure?')"/>
