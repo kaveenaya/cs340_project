@@ -61,6 +61,7 @@
     <label for="input-songid">Select the Song ID: </label>
     <select name="input-songid" id="input-songid-ajax">
         <option value="">Select an Song ID</option>
+        <option value="">Null</option>
         {{#each songIDS}}
         <option value="{{this.songID}}">{{this.songID}}</option>
         {{/each}}
@@ -69,6 +70,7 @@
     <label for="input-instrumentid">Select the Instrument ID: </label>
     <select name="input-instrumentid" id="input-instrumentid-ajax">
         <option value="">Select an Instrument ID</option>
+        <option value="">Null</option>
         {{#each instrumentIDS}}
         <option value="{{this.instrumentID}}">{{this.instrumentID}}</option>
         {{/each}}
