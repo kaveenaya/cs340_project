@@ -8,29 +8,29 @@ addSongForm.addEventListener("submit", function (e) {
     e.preventDefault();
 
     // Get form fields we need to get data from
-    let inputSongID = document.getElementById("input-id");
     let inputSongName = document.getElementById("input-name");
     let inputSongArtist = document.getElementById("input-artist");
     let inputSongGenre = document.getElementById("input-genre");
     let inputSongLength = document.getElementById("input-length");
     let inputSongYear = document.getElementById("input-year");
+    let inputSongPrice = document.getElementById("input-price");
 
     // Get the values from the form fields
-    let songIDValue = inputSongID.value;
     let songNameValue = inputSongName.value;
     let songArtistValue = inputSongArtist.value;
     let songGenreValue = inputSongGenre.value;
     let songLengthValue = inputSongLength.value;
     let songYearValue = inputSongYear.value;
+    let songPriceValue = inputSongPrice.value;
 
     // Put our data we want to send in a javascript object
     let data = {
-        songID: songIDValue,
         songName: songNameValue,
         songArtist: songArtistValue,
         songGenre: songGenreValue,
         songLength: songLengthValue,
         songYear: songYearValue,
+        songPrice: songPriceValue,
     }
     
     // Setup our AJAX request
@@ -46,12 +46,12 @@ addSongForm.addEventListener("submit", function (e) {
             addRowToTable(xhttp.response);
 
             // Clear the input fields for another transaction
-            inputSongID.value = '';
             inputSongName.value = '';
             inputSongArtist.value = '';
             inputSongGenre.value = '';
             inputSongLength.value = '';
             inputSongYear.value = '';
+            inputSongPrice.value = '';
         }
         else if (xhttp.readyState == 4 && xhttp.status != 200) {
             console.log("There was an error with the input.")
@@ -80,39 +80,45 @@ addRowToTable = (data) => {
 
     // Create a row and 4 cells
     let row = document.createElement("TR");
+    let songIDCell = document.createElement("TD");
     let songNameCell = document.createElement("TD");
     let songArtistCell = document.createElement("TD");
     let songGenreCell = document.createElement("TD");
     let songLengthCell = document.createElement("TD");
     let songYearCell = document.createElement("TD");
+    let songPriceCell = document.createElement("TD");
     let deleteCell = document.createElement("TD");
 
     // Fill the cells with correct data
   
     // Fill the cells with correct data
+    songIDCell.innerText = newRow.songName;
     songNameCell.innerText = newRow.songName;
     songArtistCell.innerText = newRow.songArtist;
     songGenreCell.innerText = newRow.songGenre;
     songLengthCell.innerText = newRow.songLength;
     songYearCell.innerText = newRow.songYear;
+    songPriceCell.innerText = newRow.songYear;
 
     deleteCell = document.createElement("button");
     deleteCell.innerHTML = "Delete";
     deleteCell.onclick = function(){
-        deleteSong(newRow.id);
+        deleteSong(newRow.songID);
     };
 
 
       // Add the cells to the row 
+      row.appendChild(songIDCell);
       row.appendChild(songNameCell);
       row.appendChild(songArtistCell);
       row.appendChild(songGenreCell);
       row.appendChild(songLengthCell);
       row.appendChild(songYearCell);
+      row.appendChild(songPriceCell);
       row.appendChild(deleteCell);
 
     // Add a row attribute so the deleteRow function can find a newly added row
-    row.setAttribute('data-value', newRow.id);
+    row.setAttribute('data-value', newRow.songID);
 
     // Add the row to the table
     currentTable.appendChild(row);

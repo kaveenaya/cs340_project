@@ -461,14 +461,9 @@ app.post('/add-song-form', function(req, res){
     // Capture the incoming data and parse it back to a JS object
     let data = req.body;
 
-    // Capture NULL values
-    let id = parseInt(data['input-id']);
-    if (isNaN(id)) {
-        id = 'NULL'
-    }
 
     // Create the query and run it on the database
-    query1 = `INSERT INTO Songs (songID, songName, songArtist, songGenre, songLength, songYear) VALUES ('${id}', '${data['input-name']}', '${data['input-artist']}', '${data['input-genre']}', '${data['input-length']}', '${data['input-year']}')`;
+    query1 = `INSERT INTO Songs (songName, songArtist, songGenre, songLength, songYear, songPrice) VALUES ('${data['input-name']}', '${data['input-artist']}', '${data['input-genre']}', '${data['input-length']}', '${data['input-year']}', '${data['input-price']}')`;
     db.pool.query(query1, function(error, rows, fields){
         // Check to see if there was an error
         if (error) {
