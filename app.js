@@ -283,6 +283,7 @@ app.get('/sales', function (req, res) {
             console.error("Error fetching sales:", error);
             res.status(500).send("Internal Server Error"); // Send internal server error status and message
         } else {
+
             // Render the 'instruments.hbs' file and send the data to the template
             let mainTable = rows;
 
@@ -484,7 +485,7 @@ app.post('/add-shoppingCart-form', function(req, res){
    
 
     // Create the query and run it on the database
-    query1 = `INSERT INTO ShoppingCart (salesID, songID, instrumentID, itemQuantity, itemTotalPrice) VALUES ('${data['input-saleid']}', '${data['input-songid']}', '${data['input-instrumentid']}', '${data['input-quantity']}','${data['input-totalPrice']}')`;
+    query1 = `INSERT INTO ShoppingCart (salesID, songID, instrumentID, itemQuantity) VALUES ('${data['input-saleid']}', '${data['input-songid']}', '${data['input-instrumentid']}', '${data['input-quantity']}')`;
     db.pool.query(query1, function(error, rows, fields){
         // Check to see if there was an error
         if (error) {

@@ -88,7 +88,7 @@ addRowToTable = (data) => {
     // Fill the cells with correct data
     salesIDCell.innerText = newRow.salesID;
     customerIDCell.innerText = newRow.customerID;
-    employeeIDCell.innerText = newRow.employeeID;
+    employeeIDCell.innerText = formatDate(newRow.employeeID);
     saleDateCell.innerText = newRow.saleDate;
     saleTimeCell.innerText = newRow.saleTime;
     saleAmountCell.innerText = newRow.saleAmount;
