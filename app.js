@@ -564,10 +564,9 @@ app.delete('/delete-song-ajax', function(req, res, next) {
 
 
 //For sales
-app.delete('/delete-sales-ajax/', function(req, res, next) {
-    let data = req.body;
-    let salesID = parseInt(data.id);
-    let deleteSalesQuery = `DELETE FROM Sales WHERE salesId = ?`;
+app.delete('/delete-sales-ajax/:salesID', function(req, res, next) {
+    let salesID = parseInt(req.params.salesID);
+    let deleteSalesQuery = `DELETE FROM Sales WHERE salesID = ?`;
 
     // Run the query
     db.pool.query(deleteSalesQuery, [salesID], function(error, rows, fields) {
@@ -579,6 +578,7 @@ app.delete('/delete-sales-ajax/', function(req, res, next) {
         }
     });
 });
+
 
 
 
