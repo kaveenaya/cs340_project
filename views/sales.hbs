@@ -47,20 +47,30 @@
 <h2>Adding Data using an HTML form</h2>
 <p>To add a new sale, please enter their information below nad click `Submit`!</p>
 <form id="add-sale-form" method="POST" action="/add-sale-form">
-    <label for="input-saleId">Sale ID: </label>
-    <input type="number" name="input-saleId" id="input-saleId">
-
-    <label for="input-customerId">Customer ID: </label>
-    <input type="number" name="input-customerID" id="input-customerID">
+    <label for="input-customerid">Select the Customer ID: </label>
+    <select name="input-customerid" id="input-customerid-ajax">
+        <option value="">Select an Customer ID</option>
+        {{#each customerIDS}}
+        <option value="{{this.customerID}}">{{this.customerID}}</option>
+        {{/each}}
+    </select>
     
-    <label for="input-employeeId">Employee ID: </label>
-    <input type="number" name="input-employeeId" id="input-employeeId">
+    <label for="input-employeeid">Select the Employee ID: </label>
+    <select name="input-employeeid" id="input-employeeid-ajax">
+        <option value="">Select an Employee ID</option>
+        {{#each employeeIDS}}
+        <option value="{{this.employeeID}}">{{this.employeeID}}</option>
+        {{/each}}
+    </select>
 
     <label for="input-amount">Sale Amount: </label>
     <input type="number" name="input-amount" id="input-amount">
 
     <label for="input-date">Sale Date: </label>
-    <input type="text" name="input-date" id="input-date">
+    <input type="date" name="input-date" id="input-date">
+
+    <label for="input-time">Sale Time: </label>
+    <input type="time" name="input-time" id="input-time">
 
     <input type="submit">
 </form>

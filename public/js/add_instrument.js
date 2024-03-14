@@ -8,7 +8,6 @@ addInstrumentForm.addEventListener("submit", function (e) {
     e.preventDefault();
 
     // Get form fields we need to get data from
-    let inputInstrumentID = document.getElementById("input-id");
     let inputInstrumentName = document.getElementById("input-name");
     let inputInstrumentColor = document.getElementById("input-color");
     let inputInstrumentMaterial = document.getElementById("input-material");
@@ -17,7 +16,6 @@ addInstrumentForm.addEventListener("submit", function (e) {
     let inputInstrumentPrice = document.getElementById("input-price");
 
     // Get the values from the form fields
-    let instrumentIDValue = inputInstrumentID.value;
     let instrumentNameValue = inputInstrumentName.value;
     let instrumentColorValue = inputInstrumentColor.value;
     let instrumentMaterialValue = inputInstrumentMaterial.value;
@@ -27,7 +25,6 @@ addInstrumentForm.addEventListener("submit", function (e) {
 
     // Put our data we want to send in a javascript object
     let data = {
-        instrumentID: instrumentIDValue,
         instrumentName: instrumentNameValue,
         instrumentColor: instrumentColorValue,
         instrumentMaterial: instrumentMaterialValue,
@@ -49,7 +46,6 @@ addInstrumentForm.addEventListener("submit", function (e) {
             addRowToTable(xhttp.response);
 
             // Clear the input fields for another transaction
-            inputInstrumentID.value = '';
             inputInstrumentName.value = '';
             inputInstrumentColor.value = '';
             inputInstrumentMaterial.value = '';
@@ -84,6 +80,7 @@ addRowToTable = (data) => {
 
     // Create a row and 4 cells
     let row = document.createElement("TR");
+    let instrumentIDCell = document.createElement("TD");
     let instrumentNameCell = document.createElement("TD");
     let instrumentColorCell = document.createElement("TD");
     let instrumentMaterialCell = document.createElement("TD");
@@ -95,6 +92,7 @@ addRowToTable = (data) => {
     // Fill the cells with correct data
   
     // Fill the cells with correct data
+    instrumentIDCell.innerText = newRow.instrumentID;
     instrumentNameCell.innerText = newRow.instrumentName;
     instrumentColorCell.innerText = newRow.instrumentColor;
     instrumentMaterialCell.innerText = newRow.instrumentMaterial;
@@ -105,11 +103,12 @@ addRowToTable = (data) => {
     deleteCell = document.createElement("button");
     deleteCell.innerHTML = "Delete";
     deleteCell.onclick = function(){
-        deleteInstrument(newRow.id);
+        deleteInstrument(newRow.instrumentID);
     };
 
 
       // Add the cells to the row 
+      row.appendChild(instrumentIDCell);
       row.appendChild(instrumentNameCell);
       row.appendChild(instrumentColorCell);
       row.appendChild(instrumentMaterialCell);
@@ -119,7 +118,7 @@ addRowToTable = (data) => {
       row.appendChild(deleteCell);
 
     // Add a row attribute so the deleteRow function can find a newly added row
-    row.setAttribute('data-value', newRow.id);
+    row.setAttribute('data-value', newRow.instrumentID);
 
     // Add the row to the table
     currentTable.appendChild(row);

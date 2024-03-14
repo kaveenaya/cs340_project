@@ -8,18 +8,19 @@ addSaleForm.addEventListener("submit", function (e) {
     e.preventDefault();
 
     // Get form fields we need to get data from
-    let inputSalesID = document.getElementById("input-saleId");
-    let inputCustomerID = document.getElementById("input-customerId");
-    let inputEmployeeID = document.getElementById("input-employeeId");
+    let inputCustomerID = document.getElementById("input-customerid");
+    let inputEmployeeID = document.getElementById("input-employeeid");
     let inputSaleAmount = document.getElementById("input-amount");
     let inputSaleDate = document.getElementById("input-date");
+    let inputSaleTime = document.getElementById("input-time");
+
 
     // Get the values from the form fields
-    let saleIDValue = inputSalesID.value;
     let customerIDValue = inputCustomerID.value;
     let employeeIDValue = inputEmployeeID.value;
     let saleAmountValue = inputSaleAmount.value;
     let saleDateValue = inputSaleDate.value;
+    let saleTimeValue = inputSaleTime.value;
 
 
     // Put our data we want to send in a javascript object
@@ -28,7 +29,8 @@ addSaleForm.addEventListener("submit", function (e) {
         customerID: customerIDValue,
         employeeID: employeeIDValue,
         saleAmount: saleAmountValue,
-        saleDate: saleDateValue
+        saleDate: saleDateValue,
+        saleTime: saleTimeValue
     }
     
     // Setup our AJAX request
@@ -44,11 +46,11 @@ addSaleForm.addEventListener("submit", function (e) {
             addRowToTable(xhttp.response);
 
             // Clear the input fields for another transaction
-            inputSalesID.value = '';
             inputCustomerID.value = '';
             inputEmployeeID.value = '';
             inputSaleAmount.value = '';
             inputSaleDate.value = '';
+            inputSaleTime.value = '';
         }
         else if (xhttp.readyState == 4 && xhttp.status != 200) {
             console.log("There was an error with the input.")
@@ -78,43 +80,49 @@ addRowToTable = (data) => {
 
     // Create a row and 4 cells
     let row = document.createElement("TR");
+    let salesIDCell = document.createElement("TD");
     let customerIDCell = document.createElement("TD");
     let employeeIDCell = document.createElement("TD");
     let saleAmountCell = document.createElement("TD");
     let saleDateCell = document.createElement("TD");
+    let saleTimeCell = document.createElement("TD");
     let deleteCell = document.createElement("TD");
 
     // Fill the cells with correct data
   
     // Fill the cells with correct data
+    salesIDCell.innerText = newRow.salesID;
     customerIDCell.innerText = newRow.customerID;
     employeeIDCell.innerText = newRow.employeeID;
     saleAmountCell.innerText = newRow.saleAmount;
     saleDateCell.innerText = newRow.saleDate;
+    saleTimeCell.innerText = newRow.saleTime;
 
     deleteCell = document.createElement("button");
     deleteCell.innerHTML = "Delete";
     deleteCell.onclick = function(){
-        deleteSale(newRow.id);
+        deleteSale(newRow.salesID);
     };
 
 
       // Add the cells to the row 
+      row.appendChild(salesIDCell);
       row.appendChild(customerIDCell);
       row.appendChild(employeeIDCell);
       row.appendChild(saleAmountCell);
       row.appendChild(saleDateCell);
+      row.appendChild(saleTimeCell);
       row.appendChild(deleteCell);
 
     // Add a row attribute so the deleteRow function can find a newly added row
-    row.setAttribute('data-value', newRow.id);
+    row.setAttribute('data-value', newRow.salesID);
 
     // Add the row to the table
     currentTable.appendChild(row);
 
     let selectID = document.getElementById("input-sale-ajax");
     let option = document.createElement("option");
-    option.text = newRow.customerID;
+    //option.text = newRow.customerID;
     option.value = newRow.salesID;
     selectID.add(option);
 }

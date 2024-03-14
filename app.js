@@ -260,7 +260,8 @@ app.get('/songs', function (req, res) {
 
 app.get('/sales', function (req, res) {
     let query1 = "SELECT * FROM Sales;"; // Define our query
-    let query2 = "SELECT * FROM Sales;"; // Define our query
+    let query2 = "SELECT * FROM Customers;"; // Define our query
+    let query3 = "SELECT * FROM Employees;"; // Define our query
 
 
     db.pool.query(query1, function(error, rows, fields) { // Execute the query
@@ -274,8 +275,13 @@ app.get('/sales', function (req, res) {
             db.pool.query(query2, (error, rows, fields) => {
             
                 // Save the planets
-                let saleIDS = rows;
-                return res.render('sales', {data: mainTable, saleIDS: saleIDS});
+                let customerIDS = rows; 
+
+                db.pool.query(query3, (error, rows, fields) => {
+                    let employeeIDS = rows;
+
+                    return res.render('sales', {data: mainTable, customerIDS: customerIDS, employeeIDS: employeeIDS});
+                })
             })
         }
     });
@@ -367,24 +373,9 @@ app.post('/add-instrument-form', function(req, res){
     // Capture the incoming data and parse it back to a JS object
     let data = req.body;
 
-    // Capture NULL values
-    let id = parseInt(data['input-id']);
-    if (isNaN(id)) {
-        id = 'NULL'
-    }
-
-    let year = parseInt(data['input-year']);
-    if (isNaN(year)) {
-        year = 'NULL'
-    }
-
-    let price = parseInt(data['input-price']);
-    if (isNaN(price)) {
-        price = 'NULL'
-    }
 
     // Create the query and run it on the database
-    query1 = `INSERT INTO Instruments (instrumentID, instrumentName, instrumentColor, instrumentMaterial, instrumentSize, instrumentYear, instrumentPrice) VALUES ('${id}', '${data['input-name']}', '${data['input-color']}', '${data['input-material']}', '${data['input-size']}', '${year}', '${price}')`;
+    query1 = `INSERT INTO Instruments (instrumentName, instrumentColor, instrumentMaterial, instrumentSize, instrumentYear, instrumentPrice) VALUES ('${data['input-name']}', '${data['input-color']}', '${data['input-material']}', '${data['input-size']}', '${data['input-year']}', '${data['input-price']}')`;
     db.pool.query(query1, function(error, rows, fields){
         // Check to see if there was an error
         if (error) {
@@ -420,14 +411,8 @@ app.post('/add-sale-form', function(req, res){
     // Capture the incoming data and parse it back to a JS object
     let data = req.body;
 
-    // Capture NULL values
-    let saleId = parseInt(data['input-saleId']);
-    if (isNaN(saleId)) {
-        saleId = 'NULL'
-    }
-
     // Create the query and run it on the database
-    query1 = `INSERT INTO Sales (salesID, customerID, employeeID, saleAmount, saleDate) VALUES ('${saleId}', '${data['input-customerId']}', '${data['input-employeeId']}', '${data['input-amount']}', '${data['input-data']}')`;
+    query1 = `INSERT INTO Sales (customerID, employeeID, saleAmount, saleDate, saleTime) VALUES ('${data['input-customerid']}', '${data['input-employeeid']}', '${data['input-amount']}', '${data['input-date']}', '${data['input-time']}')`;
     db.pool.query(query1, function(error, rows, fields){
         // Check to see if there was an error
         if (error) {
