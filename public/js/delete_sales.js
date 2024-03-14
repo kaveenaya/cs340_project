@@ -1,40 +1,28 @@
-function deleteSale(salesID) {
-    // Put our data we want to send in a javascript object
-    let data = {
-        id: salesID
-    };
 
-    // Setup our AJAX request
-    var xhttp = new XMLHttpRequest();
-    xhttp.open("DELETE", "/delete-sales-ajax", true);
-    xhttp.setRequestHeader("Content-type", "application/json");
+    function deleteSale(salesID) {
+        // Setup our AJAX request
+        var xhttp = new XMLHttpRequest();
+        xhttp.open("DELETE", `/delete-sales-ajax/${salesID}`, true);
 
-    // Tell our AJAX request how to resolve
-    xhttp.onreadystatechange = () => {
-        if (xhttp.readyState == 4 && xhttp.status == 204) {
-
-            // Add the new data to the table
-            deleteRow(salesID);
-
+        xhttp.onreadystatechange = () => {
+            if (xhttp.readyState == 4) {
+                if (xhttp.status == 204) {
+                    deleteRow(salesID);
+                } else {
+                    console.log("There was an error with the input.");
+                }
+            }
         }
-        else if (xhttp.readyState == 4 && xhttp.status != 204) {
-            console.log("There was an error with the input.")
+        xhttp.send();
+    }
+
+    function deleteRow(salesID) {
+        let table = document.getElementById("sales-table");
+        for (let i = 0; i < table.rows.length; i++) {
+            if (table.rows[i].getAttribute("data-value") == salesID) {
+                table.deleteRow(i);
+                break;
+            }
         }
     }
-    // Send the request and wait for the response
-    xhttp.send(JSON.stringify(data));
-}
 
-
-function deleteRow(salesID){
-
-    let table = document.getElementById("sales");
-    for (let i = 0, row; row = table.rows[i]; i++) {
-       //iterate through rows
-       //rows would be accessed using the "row" variable assigned in the for loop
-       if (table.rows[i].getAttribute("data-value") == salesID) {
-            table.deleteRow(i);
-            break;
-       }
-    }
-}
