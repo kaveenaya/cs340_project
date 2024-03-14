@@ -63,13 +63,13 @@
 
 <h2>Updating Employees</h2>
 <p>Select the employeeID from the dropdown below and update its information:</p>
-<fieldset>
+
     <form id="update-employee-form">
 
-        <label for="update-employee-id">Select the employee ID: </label>
+        <label for="update-employee-id">Select the employee: </label>
         <select name="update-employee-id" id="update-employee-id">
             {{#each employeeIDS}}
-            <option value="{{this.employeeID}}">{{this.employeeID}}</option>
+            <option value="{{this.employeeID}}">{{this.employeeFname}} {{this.employeeLname}}</option>
             {{/each}}
         </select>
 
@@ -90,7 +90,7 @@
         <input type="submit" onclick="return confirm('You are about to update the employee. Are you Sure?')"/>
 
     </form>
-</fieldset>
+
 <script src="./js/update_employee.js"></script>
 </form>
 </body>

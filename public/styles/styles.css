@@ -29,7 +29,7 @@ nav {
 nav a {
     color: #fff;
     text-decoration: none;
-    padding: 0 15px;
+    padding: 10px 15px;
     font-weight: bold;
 }
 
@@ -40,7 +40,7 @@ p {
 }   
 
 nav a:hover {
-    background: #94d2bd;
+    background: #000000;
 }
 
 table {

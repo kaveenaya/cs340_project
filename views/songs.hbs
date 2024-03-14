@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="/styles/styles.css">
   <title>Moonlight Melodies - Sales</title>
 </head>
 <body>
@@ -76,13 +76,13 @@
 
 <h2>Updating Song</h2>
 <p>Select the songID from the dropdown below and update its information:</p>
-<fieldset>
+
     <form id="update-song-form">
 
-        <label for="update-song-id">Select the song ID: </label>
+        <label for="update-song-id">Select the song: </label>
         <select name="update-song-id" id="update-song-id">
             {{#each songIDS}}
-            <option value="{{this.songID}}">{{this.songID}}</option>
+            <option value="{{this.songID}}">{{this.songName}}</option>
             {{/each}}
         </select>
 
@@ -108,7 +108,7 @@
         <input type="submit" onclick="return confirm('You are about to update the song. Are you Sure?')"/>
 
     </form>
-</fieldset>
+
 <script src="./js/update_song.js"></script>
 
 </form>

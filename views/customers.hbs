@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="/styles/styles.css">
   <title>Moonlight Melodies - Sales</title>
 </head>
 <body>
@@ -66,13 +66,13 @@
 
 <h2>Updating Customers</h2>
 <p>Select the customerID from the dropdown below and update its information:</p>
-<fieldset>
+
     <form id="update-customer-form">
 
-        <label for="update-customer-id">Select the customer ID: </label>
+        <label for="update-customer-id">Select the customer: </label>
         <select name="update-customer-id" id="update-customer-id">
             {{#each customerIDS}}
-            <option value="{{this.customerID}}">{{this.customerID}}</option>
+            <option value="{{this.customerID}}">{{this.customerFname}} {{this.customerLname}}</option>
             {{/each}}
         </select>
 
@@ -92,7 +92,7 @@
         <input type="submit" onclick="return confirm('You are about to update the customer. Are you Sure?')"/>
 
     </form>
-</fieldset>
+
 <script src="./js/update_customer.js"></script>
 </form>
 </body>
