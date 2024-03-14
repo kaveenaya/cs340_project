@@ -217,7 +217,9 @@ app.put('/update-employee-ajax', function(req, res) {
 // Remaining routes...
 app.get('/shopping_cart', function (req, res) {
     let query1 = "SELECT * FROM ShoppingCart;"; // Define our query
-    let query2 = "SELECT * FROM ShoppingCart;"; // Define our query
+    let query2 = "SELECT * FROM Sales;"; // Define our query
+    let query3 = "SELECT * FROM Songs;"; // Define our query
+    let query4 = "SELECT * FROM Instruments;"; // Define our query
 
 
     db.pool.query(query1, function(error, rows, fields) { // Execute the query
@@ -230,10 +232,18 @@ app.get('/shopping_cart', function (req, res) {
 
             db.pool.query(query2, (error, rows, fields) => {
             
-                // Save the planets
-                let shoppingCartIDS = rows;
-                return res.render('shopping_cart', {data: mainTable, shoppingCartIDS: shoppingCartIDS});
-            })
+                let saleIDS = rows;
+
+                db.pool.query(query3, (error, rows, fields) => {
+                    let songIDS = rows;
+
+                    db.pool.query(query4, (error, rows, fields) => {
+                        let instrumentIDS = rows;
+
+                        return res.render('shopping_cart', {data: mainTable, saleIDS: saleIDS, songIDS: songIDS, instrumentIDS: instrumentIDS});
+                    })
+                })
+            });
         }
     });
 })
@@ -475,14 +485,10 @@ app.post('/add-shoppingCart-form', function(req, res){
     // Capture the incoming data and parse it back to a JS object
     let data = req.body;
 
-    // Capture NULL values
-    let id = parseInt(data['input-cartId']);
-    if (isNaN(id)) {
-        id = 'NULL'
-    }
+   
 
     // Create the query and run it on the database
-    query1 = `INSERT INTO ShoppingCart (shoppingCartID, salesID, itemType, itemID, itemQuantity, itemPrice, itemTotalPrice) VALUES ('${id}', '${data['input-saleId']}', '${data['input-type']}', '${data['input-itemId']}', '${data['input-quantity']}', '${data['input-price']}', '${data['input-totalPrice']}')`;
+    query1 = `INSERT INTO ShoppingCart (salesID, songID, instrumentID, itemQuantity, itemTotalPrice) VALUES ('${data['input-saleid']}', '${data['input-songid']}', '${data['input-instrumentid']}', '${data['input-quantity']}','${data['input-totalPrice']}')`;
     db.pool.query(query1, function(error, rows, fields){
         // Check to see if there was an error
         if (error) {

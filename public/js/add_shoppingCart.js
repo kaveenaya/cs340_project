@@ -8,32 +8,26 @@ addShoppingCartForm.addEventListener("submit", function (e) {
     e.preventDefault();
 
     // Get form fields we need to get data from
-    let inputShoppingCartId = document.getElementById("input-cartId");
-    let inputSaleId = document.getElementById("input-saleId");
-    let inputType = document.getElementById("input-type");
-    let inputItemId = document.getElementById("input-itemId");
+    let inputSaleID = document.getElementById("input-saleid");
+    let inputSongID = document.getElementById("input-songid");
+    let inputInstrumentID = document.getElementById("input-instrumentid");
     let inputQuantity = document.getElementById("input-quantity");
-    let inputPrice = document.getElementById("input-price");
     let inputTotalPrice = document.getElementById("input-totalPrice");
 
     // Get the values from the form fields
-    let cartIDValue = inputShoppingCartId.value;
-    let cartSaleIDValue = inputSaleId.value;
-    let cartTypeValue = inputType.value;
-    let cartItemIDValue = inputItemId.value;
+    let cartSaleIDValue = inputSaleID.value;
+    let cartSongIDValue = inputSongID.value;
+    let cartInstrumentIDValue = inputInstrumentID.value;
     let cartQuantityValue = inputQuantity.value;
-    let cartPriceValue = inputPrice.value;
     let cartTotalPriceValue = inputTotalPrice.value;
 
     // Put our data we want to send in a javascript object
     let data = {
-        shoppingCartID: cartIDValue,
         salesID: cartSaleIDValue,
-        itemType: cartTypeValue,
-        itemID: cartItemIDValue,
+        songID: cartSongIDValue,
+        instrumentID: cartInstrumentIDValue,
         itemQuantity: cartQuantityValue,
-        itemPrice: cartPriceValue,
-        itemTotalPrice: cartTotalPriceValue,
+        itemTotalPrice: cartTotalPriceValue
     }
     
     // Setup our AJAX request
@@ -49,12 +43,10 @@ addShoppingCartForm.addEventListener("submit", function (e) {
             addRowToTable(xhttp.response);
 
             // Clear the input fields for another transaction
-            inputShoppingCartId.value = '';
-            inputSaleId.value = '';
-            inputType.value = '';
-            inputItemId.value = '';
+            inputSaleID.value = '';
+            inputSongID.value = '';
+            inputInstrumentID.value = '';
             inputQuantity.value = '';
-            inputPrice.value = '';
             inputTotalPrice.value = '';
         }
         else if (xhttp.readyState == 4 && xhttp.status != 200) {
@@ -84,42 +76,42 @@ addRowToTable = (data) => {
 
     // Create a row and 4 cells
     let row = document.createElement("TR");
+    let cartIDCell = document.createElement("TD");
     let saleIDCell = document.createElement("TD");
-    let cartTypeCell = document.createElement("TD");
-    let itemIdCell = document.createElement("TD");
+    let songIDCell = document.createElement("TD");
+    let instrumentIDCell = document.createElement("TD");
     let quantityCell = document.createElement("TD");
-    let cartPriceCell = document.createElement("TD");
     let totalPriceCell = document.createElement("TD");
     let deleteCell = document.createElement("TD");
 
     // Fill the cells with correct data
   
     // Fill the cells with correct data
+    cartIDCell.innerText = newRow.shoppingCartID;
     saleIDCell.innerText = newRow.salesID;
-    cartTypeCell.innerText = newRow.itemType;
-    itemIdCell.innerText = newRow.itemID;
+    songIDCell.innerText = newRow.songID;
+    instrumentIDCell.innerText = newRow.instrumentID;
     quantityCell.innerText = newRow.itemQuantity;
-    cartPriceCell.innerText = newRow.itemPrice;
     totalPriceCell.innerText = newRow.itemTotalPrice;
 
     deleteCell = document.createElement("button");
     deleteCell.innerHTML = "Delete";
     deleteCell.onclick = function(){
-        deleteShoppingCart(newRow.id);
+        deleteShoppingCart(newRow.shoppingCartID);
     };
 
 
       // Add the cells to the row 
+      row.appendChild(cartIDCell);
       row.appendChild(saleIDCell);
-      row.appendChild(cartTypeCell);
-      row.appendChild(itemIdCell);
+      row.appendChild(songIDCell);
+      row.appendChild(instrumentIDCell);
       row.appendChild(quantityCell);
-      row.appendChild(cartPriceCell);
       row.appendChild(totalPriceCell);
       row.appendChild(deleteCell);
 
     // Add a row attribute so the deleteRow function can find a newly added row
-    row.setAttribute('data-value', newRow.id);
+    row.setAttribute('data-value', newRow.shoppingCartID);
 
     // Add the row to the table
     currentTable.appendChild(row);
