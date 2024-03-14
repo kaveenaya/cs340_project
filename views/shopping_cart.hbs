@@ -15,18 +15,17 @@
 <table id="shoppingCart-table">
 
     {{!-- Header section --}}
-    <thead>
-
-        {{!-- For just the first row, we print each key of the row object as a header cell so we
-        know what each column means when the page renders --}}
-        <tr>
-            {{#each data.[0]}}
-            <th>
-                {{@key}}
-            </th>
-            {{/each}}
-        </tr>
-    </thead>
+<thead>
+    <tr>
+        <th>Shopping Cart ID</th>
+        <th>Sales ID</th>
+        <th>Song ID</th>
+        <th>Instrument ID</th>
+        <th>Item Quantity</th>
+        <th>Item Total Price</th>
+        <th>Delete</th>
+    </tr>
+</thead>
 
     {{!-- Body section --}}
     <tbody>

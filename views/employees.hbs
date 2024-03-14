@@ -13,20 +13,16 @@
 {{!-- Create a table --}}
 <table id="employees-table">
 
-    {{!-- Header section --}}
-    <thead>
-
-        {{!-- For just the first row, we print each key of the row object as a header cell so we
-        know what each column means when the page renders --}}
-        <tr>
-            {{#each data.[0]}}
-            <th>
-                {{@key}}
-            </th>
-            {{/each}}
-        </tr>
-    </thead>
-
+<thead>
+    <tr>
+        <th>Employee ID</th>
+        <th>Employee First Name</th>
+        <th>Employee Last Name</th>
+        <th>Employee Phone</th>
+        <th>Employee Email</th>
+        <th>Delete</th>
+    </tr>
+</thead>
     {{!-- Body section --}}
     <tbody>
 
