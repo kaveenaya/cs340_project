@@ -53,7 +53,6 @@
     <label for="input-saleid">Select the Sale ID: </label>
     <select name="input-saleid" id="input-saleid-ajax">
         <option value="">Select an Sale ID</option>
-        <option value="">0</option>
         {{#each saleIDS}}
         <option value="{{this.salesID}}">{{this.salesID}}</option>
         {{/each}}
@@ -62,7 +61,6 @@
     <label for="input-songid">Select the Song ID: </label>
     <select name="input-songid" id="input-songid-ajax">
         <option value="">Select an Song ID</option>
-        <option value="">0</option>
         {{#each songIDS}}
         <option value="{{this.songID}}">{{this.songID}}</option>
         {{/each}}
@@ -78,6 +76,9 @@
 
     <label for="input-quantity">Item Quantity: </label>
     <input type="number" name="input-quantity" id="input-quantity">
+
+    <label for="input-totalprice">Total Price: </label>
+    <input type="number" name="input-totalprice" id="input-totalprice">
 
 
     <input type="submit">

@@ -10,6 +10,7 @@ addSaleForm.addEventListener("submit", function (e) {
     // Get form fields we need to get data from
     let inputCustomerID = document.getElementById("input-customerid");
     let inputEmployeeID = document.getElementById("input-employeeid");
+    let inputSaleAmount = document.getElementById("input-amount");
     let inputSaleDate = document.getElementById("input-date");
     let inputSaleTime = document.getElementById("input-time");
 
@@ -17,6 +18,7 @@ addSaleForm.addEventListener("submit", function (e) {
     // Get the values from the form fields
     let customerIDValue = inputCustomerID.value;
     let employeeIDValue = inputEmployeeID.value;
+    let saleAmountValue = inputSaleAmount.value;
     let saleDateValue = inputSaleDate.value;
     let saleTimeValue = inputSaleTime.value;
 
@@ -25,6 +27,7 @@ addSaleForm.addEventListener("submit", function (e) {
         salesID: saleIDValue,
         customerID: customerIDValue,
         employeeID: employeeIDValue,
+        saleAmount: saleAmountValue,
         saleDate: saleDateValue,
         saleTime: saleTimeValue
     }
@@ -44,6 +47,7 @@ addSaleForm.addEventListener("submit", function (e) {
             // Clear the input fields for another transaction
             inputCustomerID.value = '';
             inputEmployeeID.value = '';
+            inputSaleAmount.value = '';
             inputSaleDate.value = '';
             inputSaleTime.value = '';
         }

@@ -12,12 +12,14 @@ addShoppingCartForm.addEventListener("submit", function (e) {
     let inputSongID = document.getElementById("input-songid");
     let inputInstrumentID = document.getElementById("input-instrumentid");
     let inputQuantity = document.getElementById("input-quantity");
+    let inputTotalPrice = document.getElementById("input-totalprice");
 
     // Get the values from the form fields
     let cartSaleIDValue = inputSaleID.value;
     let cartSongIDValue = inputSongID.value;
     let cartInstrumentIDValue = inputInstrumentID.value;
     let cartQuantityValue = inputQuantity.value;
+    let cartTotalPriceValue = inputTotalPrice.value;
 
     // Put our data we want to send in a javascript object
     let data = {
@@ -25,6 +27,7 @@ addShoppingCartForm.addEventListener("submit", function (e) {
         songID: cartSongIDValue,
         instrumentID: cartInstrumentIDValue,
         itemQuantity: cartQuantityValue,
+        inputTotalPrice: cartTotalPriceValue
     }
     
     // Setup our AJAX request
@@ -44,6 +47,7 @@ addShoppingCartForm.addEventListener("submit", function (e) {
             inputSongID.value = '';
             inputInstrumentID.value = '';
             inputQuantity.value = '';
+            inputTotalPrice.value = '';
         }
         else if (xhttp.readyState == 4 && xhttp.status != 200) {
             console.log("There was an error with the input.")
