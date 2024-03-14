@@ -187,12 +187,15 @@ app.put('/update-employee-ajax', function(req, res) {
     let data = req.body;
 
     let employeeID = parseInt(data.employeeID);
-    let name = data.name;
+    let employeeFName = data.employeeFName;
+    let employeeLName = data.employeeLName;
+    let employeePhone = data.employeePhone;
+    let employeeEmail = data.employeeEmail;
 
-    let query = `UPDATE Employees SET name = ? WHERE Employees.employeeID = ?;`;
+    let query = `UPDATE Employees SET employeeFname = ?, employeeLname = ?, employeePhone = ?, employeeEmail = ? WHERE Employees.employeeID = ?;`;
     let showUpdate = `SELECT * FROM Employees WHERE employeeID = ?;`;
 
-    db.pool.query(query, [name, employeeID], function(error, results) {
+    db.pool.query(query, [employeeFName, employeeLName, employeePhone, employeeEmail, employeeID], function(error, results) {
         if (error) {
             console.log(error);
             res.sendStatus(500).send("Internal Server Error");
