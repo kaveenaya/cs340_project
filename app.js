@@ -125,14 +125,15 @@ app.put('/update-customer-ajax', function(req, res) {
     console.log("Request Data:", data);
 
     let customerID = parseInt(data.customerID);
-    let customerName = data.customerName;
+    let customerFName = data.customerFname;
+    let customerLName = data.customerLname;
     let customerPhone = data.customerPhone; 
-    let customerDateOfPurchase = data.customerDateOfPurchase;
+    let customerEmail = data.customerEmail;
 
-    let query = `UPDATE Customers SET customerName = ?, customerPhone = ?, customerDateOfPurchase = ? WHERE Customers.customerID = ?;`;
+    let query = `UPDATE Customers SET customerFname = ?, customerLname = ?, customerPhone = ?, customerEmail = ? WHERE Customers.customerID = ?;`;
     let showUpdate = `SELECT * FROM Customers WHERE customerID = ?;`;
 
-    db.pool.query(query, [customerName, customerPhone, customerDateOfPurchase, customerID], function(error, results) {
+    db.pool.query(query, [customerFName, customerLName, customerPhone, customerEmail, customerID], function(error, results) {
         console.log("Response Data:", results); // Debugging: Log the data to be sent back
         if (error) {
             console.log(error);
