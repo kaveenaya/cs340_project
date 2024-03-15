@@ -14,8 +14,8 @@
 <thead>
     <tr>
         <th>Sales ID</th>
-        <th>Customer ID</th>
-        <th>Employee ID</th>
+        <th>Customer</th>
+        <th>Employee</th>
         <th>Sale Amount</th>
         <th>Sale Date</th>
         <th>Sale Time</th>
@@ -47,19 +47,19 @@
 <h2>Add Sales</h2>
 <p>To add a new sale, please enter their information below and click `Submit`!</p>
 <form id="add-sale-form" method="POST" action="/add-sale-form">
-    <label for="input-customerid">Select the Customer ID: </label>
+    <label for="input-customerid">Select the Customer: </label>
     <select name="input-customerid" id="input-customerid-ajax">
-        <option value="">Select an Customer ID</option>
+        <option value="">Select an Customer</option>
         {{#each customerIDS}}
-        <option value="{{this.customerID}}">{{this.customerID}}</option>
+        <option value="{{this.customerID}}">{{this.customerFname}} {{this.customerLname}}</option>
         {{/each}}
     </select>
     
-    <label for="input-employeeid">Select the Employee ID: </label>
+    <label for="input-employeeid">Select the Employee: </label>
     <select name="input-employeeid" id="input-employeeid-ajax">
-        <option value="">Select an Employee ID</option>
+        <option value="">Select an Employee</option>
         {{#each employeeIDS}}
-        <option value="{{this.employeeID}}">{{this.employeeID}}</option>
+        <option value="{{this.employeeID}}">{{this.employeeFname}} {{this.employeeLname}}</option>
         {{/each}}
     </select>
 

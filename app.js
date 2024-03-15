@@ -491,7 +491,7 @@ app.post('/add-shoppingCart-form', function(req, res){
 
 
     // Create the query and run it on the database
-    query1 = `INSERT INTO ShoppingCart (salesID, songID, instrumentID, itemQuantity, itemTotalPrice) VALUES ('${data['input-saleid']}', '${data['input-songid']}', '${data['input-instrumentid']}', '${data['input-quantity']}', '${data['input-totalprice']}')`;
+    query1 = `INSERT INTO ShoppingCart (salesID, songID, instrumentID, songQuantity, instrumentQuantity, itemTotalPrice) VALUES ('${data['input-saleid']}', '${data['input-songid']}', '${data['input-instrumentid']}', '${data['input-squantity']}', '${data['input-iquantity']}', '${data['input-totalprice']}')`;
     db.pool.query(query1, function(error, rows, fields){
         // Check to see if there was an error
         if (error) {

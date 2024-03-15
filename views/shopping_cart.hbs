@@ -21,7 +21,8 @@
         <th>Sales ID</th>
         <th>Song ID</th>
         <th>Instrument ID</th>
-        <th>Item Quantity</th>
+        <th>Song Quantity</th>
+        <th>Instrument Quantity</th>
         <th>Item Total Price</th>
         <th>Delete</th>
     </tr>
@@ -37,7 +38,8 @@
             <td>{{this.salesID}}</td>
             <td>{{this.songID}}</td>
             <td>{{this.instrumentID}}</td>
-            <td>{{this.itemQuantity}}</td>
+            <td>{{this.songQuantity}}</td>
+            <td>{{this.instrumentQuantity}}</td>
             <td>{{this.itemTotalPrice}}</td>
              <td><button onclick="deleteShoppingCart({{this.shoppingCartID}})">Delete</button></td>
         </tr>
@@ -63,7 +65,7 @@
         <option value="">Select an Song ID</option>
         <option value="">Null</option>
         {{#each songIDS}}
-        <option value="{{this.songID}}">{{this.songID}}</option>
+        <option value="{{this.songID}}">{{this.songName}}</option>
         {{/each}}
     </select>
 
@@ -72,12 +74,15 @@
         <option value="">Select an Instrument ID</option>
         <option value="">Null</option>
         {{#each instrumentIDS}}
-        <option value="{{this.instrumentID}}">{{this.instrumentID}}</option>
+        <option value="{{this.instrumentID}}">{{this.instrumentName}}</option>
         {{/each}}
     </select>
 
-    <label for="input-quantity">Item Quantity: </label>
-    <input type="number" name="input-quantity" id="input-quantity">
+    <label for="input-squantity">Song Quantity: </label>
+    <input type="number" name="input-squantity" id="input-squantity">
+
+    <label for="input-iquantity">Instrument Quantity: </label>
+    <input type="number" name="input-iquantity" id="input-iquantity">
 
     <label for="input-totalprice">Total Price: </label>
     <input type="number" name="input-totalprice" id="input-totalprice">

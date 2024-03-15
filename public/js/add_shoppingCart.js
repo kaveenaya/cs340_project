@@ -11,14 +11,16 @@ addShoppingCartForm.addEventListener("submit", function (e) {
     let inputSaleID = document.getElementById("input-saleid");
     let inputSongID = document.getElementById("input-songid");
     let inputInstrumentID = document.getElementById("input-instrumentid");
-    let inputQuantity = document.getElementById("input-quantity");
+    let inputSQuantity = document.getElementById("input-squantity");
+    let inputIQuantity = document.getElementById("input-iquantity");
     let inputTotalPrice = document.getElementById("input-totalprice");
 
     // Get the values from the form fields
     let cartSaleIDValue = inputSaleID.value;
     let cartSongIDValue = inputSongID.value;
     let cartInstrumentIDValue = inputInstrumentID.value;
-    let cartQuantityValue = inputQuantity.value;
+    let cartSQuantityValue = inputSQuantity.value;
+    let cartIQuantityValue = inputIQuantity.value;
     let cartTotalPriceValue = inputTotalPrice.value;
 
     // Put our data we want to send in a javascript object
@@ -26,7 +28,8 @@ addShoppingCartForm.addEventListener("submit", function (e) {
         salesID: cartSaleIDValue,
         songID: cartSongIDValue,
         instrumentID: cartInstrumentIDValue,
-        itemQuantity: cartQuantityValue,
+        songQuantity: cartSQuantityValue,
+        instrumentQuantity: cartIQuantityValue,
         inputTotalPrice: cartTotalPriceValue
     }
     
@@ -46,7 +49,8 @@ addShoppingCartForm.addEventListener("submit", function (e) {
             inputSaleID.value = '';
             inputSongID.value = '';
             inputInstrumentID.value = '';
-            inputQuantity.value = '';
+            inputSQuantity.value = '';
+            inputIQuantity.value = '';
             inputTotalPrice.value = '';
         }
         else if (xhttp.readyState == 4 && xhttp.status != 200) {
@@ -80,7 +84,8 @@ addRowToTable = (data) => {
     let saleIDCell = document.createElement("TD");
     let songIDCell = document.createElement("TD");
     let instrumentIDCell = document.createElement("TD");
-    let quantityCell = document.createElement("TD");
+    let squantityCell = document.createElement("TD");
+    let iquantityCell = document.createElement("TD");
     let totalPriceCell = document.createElement("TD");
     let deleteCell = document.createElement("TD");
 
@@ -91,7 +96,8 @@ addRowToTable = (data) => {
     saleIDCell.innerText = newRow.salesID;
     songIDCell.innerText = newRow.songID;
     instrumentIDCell.innerText = newRow.instrumentID;
-    quantityCell.innerText = newRow.itemQuantity;
+    squantityCell.innerText = newRow.songQuantity;
+    iquantityCell.innerText = newRow.instrumentQuantity;
     totalPriceCell.innerText = newRow.itemTotalPrice;
 
     deleteCell = document.createElement("button");
@@ -106,7 +112,8 @@ addRowToTable = (data) => {
       row.appendChild(saleIDCell);
       row.appendChild(songIDCell);
       row.appendChild(instrumentIDCell);
-      row.appendChild(quantityCell);
+      row.appendChild(squantityCell);
+      row.appendChild(iquantityCell);
       row.appendChild(totalPriceCell);
       row.appendChild(deleteCell);
 
