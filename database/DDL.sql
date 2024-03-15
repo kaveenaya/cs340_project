@@ -56,7 +56,8 @@ CREATE OR REPLACE TABLE ShoppingCart (
     salesID INT,
     songID INT,
     instrumentID INT,
-    itemQuantity INT,
+    songQuantity INT,
+    instrumentQuantity INT,
     itemTotalPrice DECIMAL(10, 2),
     FOREIGN KEY (salesID) REFERENCES Sales(salesID) ON DELETE CASCADE ON UPDATE CASCADE,
     FOREIGN KEY (songID) REFERENCES Songs(songID) ON DELETE CASCADE ON UPDATE CASCADE,
@@ -104,11 +105,11 @@ VALUES
 (3, 3, 300.00, '2023-02-07', '14:00:00');
 
 -- Insert data into ShoppingCart table
-INSERT INTO ShoppingCart (salesID, songID, instrumentID, itemQuantity, itemTotalPrice)
+INSERT INTO ShoppingCart (salesID, songID, instrumentID, songQuantity, instrumentQuantity, itemTotalPrice)
 VALUES
-(1, 1, 1, 2, 5.99 * 2),
-(2, 2, 2, 3, 4.99 * 3),
-(3, 3, 3, 5, 6.99 * 5);
+(1, 1, 1, 1, 1, 5.99 * 2),
+(2, 2, 2, 1, 1, 4.99 * 3),
+(3, 3, 3, 1, 1, 6.99 * 5);
 
 -- Query data
 
