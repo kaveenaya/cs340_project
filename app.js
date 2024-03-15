@@ -253,6 +253,7 @@ app.get('/shopping_cart', function (req, res) {
     let query2 = "SELECT * FROM Sales;"; // Define our query
     let query3 = "SELECT * FROM Songs;"; // Define our query
     let query4 = "SELECT * FROM Instruments;"; // Define our query
+    let query5 = "SELECT * FROM ShoppingCart;"; // Define our query
 
 
     db.pool.query(query1, function(error, rows, fields) { // Execute the query
@@ -273,7 +274,10 @@ app.get('/shopping_cart', function (req, res) {
                     db.pool.query(query4, (error, rows, fields) => {
                         let instrumentIDS = rows;
 
-                        return res.render('shopping_cart', {data: mainTable, saleIDS: saleIDS, songIDS: songIDS, instrumentIDS: instrumentIDS});
+                        db.pool.query(query5, (error, rows, fields) => {
+                            let shoppingCartIDS = rows;
+                            return res.render('shopping_cart', {data: mainTable, saleIDS: saleIDS, songIDS: songIDS, instrumentIDS: instrumentIDS, shoppingCartIDS: shoppingCartIDS});
+                        })
                     })
                 })
             });
