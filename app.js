@@ -151,38 +151,6 @@ app.put('/update-customer-ajax', function(req, res) {
     });
 });
 
-// Route to handle updating a shopping cart
-app.put('/update-shoppingCart-ajax', function(req, res) {
-    let data = req.body;
-
-    let shoppingCartID = parseInt(data.shoppingCartID);
-    let salesID = data.salesID;
-    let itemType = data.itemType; 
-    let itemID = data.itemID;
-    let itemQuantity = data.itemQuantity;
-    let itemPrice = data.itemPrice;
-    let itemTotalPrice = data.itemTotalPrice;
-    
-    let query = `UPDATE ShoppingCart SET salesID = ?, itemType = ?, itemID = ?, itemQuantity = ?, itemPrice = ?, itemTotalPrice = ? WHERE ShoppingCart.shoppingCartID = ?;`;
-    let showUpdate = `SELECT * FROM ShoppingCart WHERE shoppingCartID = ?;`;
-
-    db.pool.query(query, [salesID, itemType, itemID, itemQuantity, itemPrice, itemTotalPrice, shoppingCartID], function(error, results) {
-        if (error) {
-            console.log(error);
-            res.sendStatus(500).send("Internal Server Error");
-        } else {
-            db.pool.query(showUpdate, [shoppingCartID], function(error, results) {
-                if (error) {
-                    console.log(error);
-                    res.sendStatus(500).send("Internal Server Error");
-                } else {
-                    res.send(results);
-                }
-            })
-        }
-    });
-});
-
 // Route to handle updating an employee
 app.put('/update-employee-ajax', function(req, res) {
     let data = req.body;
@@ -218,9 +186,10 @@ app.put('/update-employee-ajax', function(req, res) {
 app.put('/update-shopping-cart-ajax', function(req, res) {
     let data = req.body;
 
+    console.log("Request Data:", data);
     let shoppingCartID = parseInt(data.shoppingCartID);
-    let salesID = data.salesID;
-    let songID = data.songID;
+    let salesID = parseInt(data.salesID);
+    let songID = parseInt(data.songID);
     let instrumentID = data.instrumentID;
     let songQuantity = data.songQuantity;
     let instrumentQuantity = data.instrumentQuantity;
@@ -229,12 +198,13 @@ app.put('/update-shopping-cart-ajax', function(req, res) {
     let query = `UPDATE ShoppingCart SET salesID = ?, songID = ?, instrumentID = ?, songQuantity = ?, instrumentQuantity = ?, itemTotalPrice = ? WHERE ShoppingCart.shoppingCartID = ?;`;
     let showUpdate = `SELECT * FROM ShoppingCart WHERE shoppingCartID = ?;`;
 
-    db.pool.query(query, [shoppingCartID, salesID, songID, instrumentID, songQuantity, instrumentQuantity, itemTotalPrice], function(error, results) {
+    db.pool.query(query, [salesID, songID, instrumentID, songQuantity, instrumentQuantity, itemTotalPrice, shoppingCartID], function(error, results) {
+        console.log("Response Data:", results); // Debugging: Log the data to be sent back
         if (error) {
             console.log(error);
             res.sendStatus(500).send("Internal Server Error");
         } else {
-            db.pool.query(showUpdate, [employeeID], function(error, results) {
+            db.pool.query(showUpdate, [shoppingCartID], function(error, results) {
                 if (error) {
                     console.log(error);
                     res.sendStatus(500).send("Internal Server Error");
