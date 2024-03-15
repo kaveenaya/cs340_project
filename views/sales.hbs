@@ -75,5 +75,53 @@
     <input type="submit">
 </form>
 
+
+<h2>Updating Sales Form</h2>
+<p>Select the Sales ID from the dropdown below and update its information:</p>
+
+
+    <form id="update-sale-form">
+
+        <label for="update-sale-id">Select the Sale ID: </label>
+        <select name="update-sale-id" id="update-sale-id">
+        <option value="">Select a Sale ID</option>
+            {{#each saleIDS}}
+            <option value="{{this.salesID}}">{{this.salesID}} </option>
+            {{/each}}
+        </select>
+
+        <label for="update-sale-customer-id">Update the Customer: </label>
+        <select name="update-sale-customer-id" id="update-sale-customer-id">
+        <option value="">Select a customer</option>
+            {{#each customerIDS}}
+            <option value="{{this.customerID}}">{{this.customerID}}. {{this.customerFname}} {{this.customerLname}} </option>
+            {{/each}}
+        </select>
+
+        <label for="update-sale-employee-id">Update the Employee: </label>
+        <select name="update-sale-employee-id" id="update-sale-employee-id">
+        <option value="">Select a employee</option>
+            {{#each employeeIDS}}
+            <option value="{{this.employeeID}}">{{this.employeeID}}. {{this.employeeFname}} {{this.employeeLname}} </option>
+            {{/each}}
+        </select>
+
+        <label for="update-sale-amount">Update the Sale Amount: </label>
+        <input type="text" name="update-sale-amount" id="update-sale-amount">
+
+        <label for="update-sale-date">Update the Sale Date: </label>
+        <input type="date" name="update-sale-date" id="update-sale-date">
+
+        <label for="update-sale-time">Update the Time: </label>
+        <input type="time" name="update-sale-time" id="update-sale-time">
+    
+
+        <input type="submit" onclick="return confirm('You are about to update the sale. Are you Sure?')"/>
+
+    </form>
+
+<script src="./js/update_sales.js"></script>
+</form>
+
 </body>
 </html>
