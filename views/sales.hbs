@@ -44,7 +44,7 @@
 <script src="./js/delete_sales.js"></script>
 
 <!-- /views/index.hbs -->
-<h2>Add Sales</h2>
+<h2>Adding Sales</h2>
 <p>To add a new sale, please enter their information below and click `Submit`!</p>
 <form id="add-sale-form" method="POST" action="/add-sale-form">
     <label for="input-customerid">Select the Customer: </label>
@@ -76,41 +76,5 @@
     <input type="submit">
 </form>
 
-
-<h2>Updating instruments</h2>
-<p>Select the instrument from the dropdown below and update its information:</p>
-
-<form id="update-instrument-form">
-
-    <label for="input-instrument">Select the Instrument ID: </label>
-    <select name="input-instrument" id="input-instrument-ajax">
-        <option value="0">Select an Instrument ID</option>
-        {{#each instrumentIDS}}
-        <option value="{{this.instrumentID}}">{{this.instrumentID}}</option>
-        {{/each}}
-    </select>
-
-
-    <label for="input-name">Name: </label>
-    <input type="text" name="input-name" id="input-name">
-    
-    <label for="input-color">Color: </label>
-    <input type="text" name="input-color" id="input-color">
-
-    <label for="input-material">Material: </label>
-    <input type="text" name="input-material" id="input-material">
-
-    <label for="input-size">Size: </label>
-    <input type="text" name="input-size" id="input-size">
-
-    <label for="input-year">Year: </label>
-    <input type="number" name="input-year" id="input-year">
-
-    <label for="input-price">Price: </label>
-    <input type="number" name="input-price" id="input-price">
-
-    <input type="submit">
-
-</form>
 </body>
 </html>

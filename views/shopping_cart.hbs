@@ -49,7 +49,7 @@
 <script src="./js/delete_cart.js"></script>
 
 <!-- /views/index.hbs -->
-<h2>Adding Data using an HTML form</h2>
+<h2>Adding a Shopping Cart for the Specific Customer</h2>
 <p>To add a new shopping cart, please enter their information below and click `Submit`!</p>
 <form id="add-shoppingCart-form" method="POST" action="/add-shoppingCart-form">
     <label for="input-saleid">Select the Sale ID: </label>
@@ -91,43 +91,61 @@
 </form>
 
 
-<h2>Updating Instrument Form</h2>
-<p>Select the instrument from the dropdown below and update its information:</p>
-
-<form id="update-instrument-form">
-
-    <label for="input-instrument">Select the Instrument ID: </label>
-    <select name="input-instrument" id="input-instrument-ajax">
-        <option value="0">Select an Instrument ID</option>
-        {{#each instrumentIDS}}
-        <option value="{{this.instrumentID}}">{{this.instrumentID}}</option>
-        {{/each}}
-    </select>
+<h2>Updating Shopping Cart Form</h2>
+<p>Select the Shopping Cart ID from the dropdown below and update its information:</p>
 
 
-    <label for="input-name">Name: </label>
-    <input type="text" name="input-name" id="input-name">
+    <form id="update-shoppingcart-form">
+
+        <label for="update-shoppingcart-id">Select the Shopping Cart ID: </label>
+        <select name="update-shoppingcart-id" id="update-shoppingcart-id">
+        <option value="">Select a Shopping Cart ID</option>
+            {{#each shoppingCartIDS}}
+            <option value="{{this.shoppingCartID}}">{{this.shoppingCartID}} </option>
+            {{/each}}
+        </select>
+
+
+        <label for="update-shoppingcart-sales-id">Update the Sales ID: </label>
+        <select name="update-shoppingcart-sales-id" id="update-shoppingcart-sales-id">
+        <option value="">Select a Sale ID</option>
+            {{#each salesIDS}}
+            <option value="{{this.salesID}}">{{this.salesID}} </option>
+            {{/each}}
+        </select>
+
+        <label for="update-shoppingcart-song-id">Update the Song ID: </label>
+        <select name="update-shoppingcart-song-id" id="update-shoppingcart-song-id">
+        <option value="">Select a Song ID</option>
+            {{#each songIDS}}
+            <option value="{{this.songID}}">{{this.songID}} </option>
+            {{/each}}
+        </select>
+
+        <label for="update-shoppingcart-instrument-id">Update the Instrument ID: </label>
+        <select name="update-shoppingcart-instrument-id" id="update-shoppingcart-instrument-id">
+        <option value="">Select an Instrument ID</option>
+            {{#each instrumentIDS}}
+            <option value="{{this.instrumentID}}">{{this.instrumentID}} </option>
+            {{/each}}
+        </select>
+
+        <label for="update-shoppingcart-song-quantity">Update the Song Quantity: </label>
+        <input type="text" name="update-shoppingcart-song-quantity" id="update-shoppingcart-song-quantity">
+
+        <label for="update-shoppingcart-instrument-quantity">Update the Instrument Quantity: </label>
+        <input type="text" name="update-shoppingcart-instrument-quantity" id="update-shoppingcart-instrument-quantity">
+
+        <label for="update-shoppingcart-item-total-price">Update the Item Total Price: </label>
+        <input type="text" name="update-shoppingcart-item-total-price" id="update-shoppingcart-item-total-price">
     
-    <label for="input-color">Color: </label>
-    <input type="text" name="input-color" id="input-color">
 
-    <label for="input-material">Material: </label>
-    <input type="text" name="input-material" id="input-material">
+        <input type="submit" onclick="return confirm('You are about to update the shoppingcart. Are you Sure?')"/>
 
-    <label for="input-size">Size: </label>
-    <input type="text" name="input-size" id="input-size">
+    </form>
 
-    <label for="input-year">Year: </label>
-    <input type="number" name="input-year" id="input-year">
-
-    <label for="input-price">Price: </label>
-    <input type="number" name="input-price" id="input-price">
-
-    <input type="submit">
-
+<script src="./js/update_shoppingCart.js"></script>
 </form>
 
-<script src="./js/update_instrument.js"></script>
-</form>
 </body>
 </html>

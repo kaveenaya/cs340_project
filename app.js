@@ -213,6 +213,39 @@ app.put('/update-employee-ajax', function(req, res) {
     });
 });
 
+//route to handle updating a shopping cart
+
+app.put('/update-shopping-cart-ajax', function(req, res) {
+    let data = req.body;
+
+    let shoppingCartID = parseInt(data.shoppingCartID);
+    let salesID = data.salesID;
+    let songID = data.songID;
+    let instrumentID = data.instrumentID;
+    let songQuantity = data.songQuantity;
+    let instrumentQuantity = data.instrumentQuantity;
+    let itemTotalPrice = data.itemTotalPrice;
+
+    let query = `UPDATE ShoppingCart SET salesID = ?, songID = ?, instrumentID = ?, songQuantity = ?, instrumentQuantity = ?, itemTotalPrice = ? WHERE ShoppingCart.shoppingCartID = ?;`;
+    let showUpdate = `SELECT * FROM ShoppingCart WHERE shoppingCartID = ?;`;
+
+    db.pool.query(query, [shoppingCartID, salesID, songID, instrumentID, songQuantity, instrumentQuantity, itemTotalPrice], function(error, results) {
+        if (error) {
+            console.log(error);
+            res.sendStatus(500).send("Internal Server Error");
+        } else {
+            db.pool.query(showUpdate, [employeeID], function(error, results) {
+                if (error) {
+                    console.log(error);
+                    res.sendStatus(500).send("Internal Server Error");
+                } else {
+                    res.send(results);
+                }
+            })
+        }
+    });
+});
+
 
 // Remaining routes...
 app.get('/shopping_cart', function (req, res) {
