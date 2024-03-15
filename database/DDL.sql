@@ -59,9 +59,9 @@ CREATE OR REPLACE TABLE ShoppingCart (
     songQuantity INT,
     instrumentQuantity INT,
     itemTotalPrice DECIMAL(10, 2),
-    FOREIGN KEY (salesID) REFERENCES Sales(salesID) ON DELETE CASCADE ON UPDATE CASCADE,
-    FOREIGN KEY (songID) REFERENCES Songs(songID) ON DELETE CASCADE ON UPDATE CASCADE,
-    FOREIGN KEY (instrumentID) REFERENCES Instruments(instrumentID) ON DELETE SET NULL ON UPDATE CASCADE
+    FOREIGN KEY (salesID) REFERENCES Sales(salesID),
+    FOREIGN KEY (songID) REFERENCES Songs(songID),
+    FOREIGN KEY (instrumentID) REFERENCES Instruments(instrumentID)
 );
 
 
