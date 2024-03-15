@@ -1,5 +1,4 @@
 -- Customers
-
 -- Get all customer information
 SELECT * FROM Customers;
 

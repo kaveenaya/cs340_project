@@ -112,7 +112,6 @@ VALUES
 (3, 3, 3, 1, 1, 6.99 * 5);
 
 -- Query data
-
 SELECT * FROM Customers;
 SELECT * FROM Employees;
 SELECT * FROM Songs;
