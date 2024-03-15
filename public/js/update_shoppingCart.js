@@ -48,7 +48,7 @@ updateInstrumentForm.addEventListener("submit", function (e) {
         if (xhttp.readyState == 4 && xhttp.status == 200) {
 
             // Add the new data to the table
-            updateRow(xhttp.response, instrumentIDValue);
+            updateRow(xhttp.response, shoppingCartIDValue);
 
             // Clear the form
             inputshoppingCartID.value = '';
@@ -65,6 +65,8 @@ updateInstrumentForm.addEventListener("submit", function (e) {
         }
     }
 
+    console.log("Data to be sent:", JSON.stringify(data));
+
     // Send the request and wait for the response
     xhttp.send(JSON.stringify(data));
 
@@ -72,6 +74,8 @@ updateInstrumentForm.addEventListener("submit", function (e) {
 
 
 function updateRow(data, shoppingCartID){
+    console.log("Data received for updateRow:", data);
+
     let parsedData = JSON.parse(data);
     
     // Get the table we want to update
