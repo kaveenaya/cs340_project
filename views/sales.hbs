@@ -58,7 +58,6 @@
     <label for="input-employeeid">Select the Employee: </label>
     <select name="input-employeeid" id="input-employeeid-ajax">
         <option value="">Select an Employee</option>
-        <option value="">No Employee</option>
         {{#each employeeIDS}}
         <option value="{{this.employeeID}}">{{this.employeeID}}. {{this.employeeFname}} {{this.employeeLname}}</option>
         {{/each}}
