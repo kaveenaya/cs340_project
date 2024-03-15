@@ -1,5 +1,6 @@
 // Citation for file update_shoppingCart.js
 // Date: 02/23/2024
+// The ciation scope was for the whole module
 // The code was adapted from the github starter code 
 // Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main
 

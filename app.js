@@ -1,32 +1,39 @@
-/*
-    SETUP for a simple web app
-*/
-// Express
-var express = require('express');   // We are using the express library for the web server
-var app     = express();            // We need to instantiate an express object to interact with the server in our code
-// app.js - SETUP section
+//Citation for file app.js
+// Date: 02/23/2024
+// The ciation scope was for the whole module
+// The code was adapted from the github starter code 
+// Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main
 
+
+// Express
+ // We are using the express library for the web server
+var express = require('express');  
+// We need to instantiate an express object to interact with the server in our code
+var app = express(); 
+// app.js - SETUP section
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 app.use(express.static('public'))
-
-PORT        = 4161;                 // Set a port number at the top so it's easy to change in the future
+ // Set a port number at the top so it's easy to change in the future
+PORT = 4161;                
 
 
 // app.js
-
 const { engine } = require('express-handlebars');
-var exphbs = require('express-handlebars');     // Import express-handlebars
-app.engine('.hbs', engine({extname: ".hbs"}));  // Create an instance of the handlebars engine to process templates
-app.set('view engine', '.hbs');                 // Tell express to use the handlebars engine whenever it encounters a *.hbs file.
+ // Import express-handlebars
+var exphbs = require('express-handlebars');  
+// Create an instance of the handlebars engine to process templates  
+app.engine('.hbs', engine({extname: ".hbs"}));  
+// Tell express to use the handlebars engine whenever it encounters a *.hbs file.
+app.set('view engine', '.hbs');                 
 // Database
 var db = require('./database/db-connector')
-/*
-    ROUTES
-*/
 
-// Define a route to handle the PUT request for updating a person's homeworld
-// Route to handle updating an instrument
+/**
+ * This function handles the HTTP PUT request to update instrument information asynchronously via AJAX.
+ * param {object} req - The request object containing the data to be updated.
+ * param {object} res - The response object used to send the updated instrument information or error messages.
+ */
 app.put('/update-instrument-ajax', function(req, res) {
     let data = req.body;
 
@@ -58,6 +65,12 @@ app.put('/update-instrument-ajax', function(req, res) {
     });
 });
 
+
+/**
+ * This function handles the HTTP PUT request to update song information asynchronously via AJAX.
+ * param {object} req - The request object containing the data to be updated.
+ * param {object} res - The response object used to send the updated song information or error messages.
+ */
 // Route to handle updating a song
 app.put('/update-song-ajax', function(req, res) {
     let data = req.body;
@@ -89,6 +102,11 @@ app.put('/update-song-ajax', function(req, res) {
     });
 });
 
+/**
+ * This function handles theHTTP PUT request to update sale information asynchronously via AJAX.
+ * param {object} req - The request object containing the data to be updated.
+ * param {object} res - The response object used to send the updated sale information or error messages.
+ */
 // Route to handle updating a sale
 app.put('/update-sale-ajax', function(req, res) {
     let data = req.body;
@@ -120,6 +138,11 @@ app.put('/update-sale-ajax', function(req, res) {
     });
 });
 
+/**
+ * This function handles the HTTP PUT request to update customer information asynchronously via AJAX.
+ * param {object} req - The request object containing the data to be updated.
+ * param {object} res - The response object used to send the updated customer information or error messages.
+ */
 // Route to handle updating a customer
 app.put('/update-customer-ajax', function(req, res) {
     let data = req.body;
@@ -152,6 +175,11 @@ app.put('/update-customer-ajax', function(req, res) {
     });
 });
 
+/**
+ * This function handles the HTTP PUT request to update employee information asynchronously via AJAX.
+ * param {object} req - The request object containing the data to be updated.
+ * param {object} res - The response object used to send the updated employee information or error messages.
+ */
 // Route to handle updating an employee
 app.put('/update-employee-ajax', function(req, res) {
     let data = req.body;
@@ -182,8 +210,12 @@ app.put('/update-employee-ajax', function(req, res) {
     });
 });
 
+/**
+ * This function handles the HTTP PUT request to update shopping cart information asynchronously via AJAX.
+ * param {object} req - The request object containing the data to be updated.
+ * param {object} res - The response object used to send the updated shopping cart information or error messages.
+ */
 //route to handle updating a shopping cart
-
 app.put('/update-shopping-cart-ajax', function(req, res) {
     let data = req.body;
     console.log("Request Data:", data);
@@ -220,7 +252,11 @@ app.put('/update-shopping-cart-ajax', function(req, res) {
 
 
 
-
+/**
+ * This function handles the HTTP GET request to fetch data for rendering the shopping cart page.
+ * param {object} req - The request object.
+ * param {object} res - The response object used to render the shopping cart page or send error messages.
+ */
 // Remaining routes...
 app.get('/shopping_cart', function (req, res) {
     let query1 = "SELECT * FROM ShoppingCart;"; // Define our query
@@ -258,8 +294,13 @@ app.get('/shopping_cart', function (req, res) {
         }
     });
 })
-// received back from the query
 
+
+/**
+ * This function handles the HTTP GET request to fetch data for rendering the songs page.
+ * param {object} req - The request object.
+ * param {object} res - The response object used to render the songs page or send error messages.
+ */
 app.get('/songs', function (req, res) {
     let query1 = "SELECT * FROM Songs;"; // Define our query
     let query2 = "SELECT * FROM Songs;"; // Define our query
@@ -283,6 +324,11 @@ app.get('/songs', function (req, res) {
     });
 })
 
+/**
+ * This function handles the HTTP GET request to fetch data for rendering the sales page.
+ * param {object} req - The request object.
+ * param {object} res - The response object used to render the sales page or send error messages.
+ */
 app.get('/sales', function (req, res) {
     let query1 = "SELECT * FROM Sales;"; // Define our query
     let query2 = "SELECT * FROM Customers;"; // Define our query
@@ -317,6 +363,11 @@ app.get('/sales', function (req, res) {
     });
 })
 
+/**
+ * This function handles the HTTP GET request to fetch data for rendering the employees page.
+ * param {object} req - The request object.
+ * param {object} res - The response object used to render the employees page or send error messages.
+ */
 app.get('/employees', function (req, res) {
     let query1 = "SELECT * FROM Employees;"; // Define our query
     let query2 = "SELECT * FROM Employees;"; // Define our query
@@ -340,7 +391,11 @@ app.get('/employees', function (req, res) {
     });
 })
 
-
+/**
+ * This function handles the HTTP GET request to fetch data for rendering the customers page.
+ * param {object} req - The request object.
+ * param {object} res - The response object used to render the customers page or send error messages.
+ */
 app.get('/customers', function (req, res) {
     let query1 = "SELECT * FROM Customers;"; // Define our query
     let query2 = "SELECT * FROM Customers;"; // Define our query
@@ -364,13 +419,21 @@ app.get('/customers', function (req, res) {
     });
 })
 
-// app.js
-
+/**
+ * This function handles the HTTP GET request to render the home page.
+ * param {object} req - The request object.
+ * param {object} res - The response object used to render the home page.
+ */
 app.get('/', function(req, res) {
     res.render('home', { layout: 'main' }); 
     // Note the call to render() and not send(). Using render() ensures the templating engine will process this file, before sending the finished HTML to the client.
 });
 
+/**
+ * This function handles the HTTP GET request to fetch data for rendering the instruments page.
+ * param {object} req - The request object.
+ * param {object} res - The response object used to render the instruments page or send error messages.
+ */
 // Define a route to handle the GET request for the '/instruments' endpoint
 app.get('/instruments', function(req, res) {
     let query1 = "SELECT * FROM Instruments;"; // Define our query
@@ -399,7 +462,11 @@ app.get('/instruments', function(req, res) {
 
 
 
-
+/**
+ * This function handles the HTTP POST request to add instrument data submitted via a form.
+ * param {object} req - The request object containing the form data.
+ * param {object} res - The response object used to send HTTP responses.
+ */
 app.post('/add-instrument-form', function(req, res){
     // Capture the incoming data and parse it back to a JS object
     let data = req.body;
@@ -419,6 +486,12 @@ app.post('/add-instrument-form', function(req, res){
     })
 });
 
+
+/**
+ * This function handles the HTTP POST request to add customer data submitted via a form.
+ * param {object} req - The request object containing the form data.
+ * param {object} res - The response object used to send HTTP responses.
+ */
 app.post('/add-customer-form', function(req, res){
     // Capture the incoming data and parse it back to a JS object
     let data = req.body;
@@ -438,6 +511,11 @@ app.post('/add-customer-form', function(req, res){
     })
 });
 
+/**
+ * This function handles the HTTP POST request to add sale data submitted via a form.
+ * param {object} req - The request object containing the form data.
+ * param {object} res - The response object used to send HTTP responses.
+ */
 app.post('/add-sale-form', function(req, res){
     // Capture the incoming data and parse it back to a JS object
     let data = req.body;
@@ -456,6 +534,11 @@ app.post('/add-sale-form', function(req, res){
     })
 });
 
+/**
+ * This function handles the HTTP POST request to add employee data submitted via a form.
+ * param {object} req - The request object containing the form data.
+ * param {object} res - The response object used to send HTTP responses.
+ */
 app.post('/add-employee-form', function(req, res){
     // Capture the incoming data and parse it back to a JS object
     let data = req.body;
@@ -474,6 +557,11 @@ app.post('/add-employee-form', function(req, res){
     })
 });
 
+/**
+ * This function handles the HTTP POST request to add song data submitted via a form.
+ * param {object} req - The request object containing the form data.
+ * param {object} res - The response object used to send HTTP responses.
+ */
 app.post('/add-song-form', function(req, res){
     // Capture the incoming data and parse it back to a JS object
     let data = req.body;
@@ -493,6 +581,11 @@ app.post('/add-song-form', function(req, res){
     })
 });
 
+/**
+ * This function handles the HTTP POST request to add shopping cart data submitted via a form.
+ * param {object} req - The request object containing the form data.
+ * param {object} res - The response object used to send HTTP responses.
+ */
 app.post('/add-shoppingCart-form', function(req, res){
     let data = req.body;
 
@@ -515,6 +608,8 @@ app.post('/add-shoppingCart-form', function(req, res){
         }
     });
 });
+
+
 /*
     LISTENER
 */
@@ -522,6 +617,12 @@ app.listen(PORT, function() {
     console.log('Express started on http://localhost:' + PORT + '; press Ctrl-C to terminate.')
 });
 
+/**
+ * This function handles the HTTP DELETE request to delete an instrument.
+ * param {object} req - The request object containing the ID of the instrument to delete.
+ * param {object} res - The response object used to send HTTP responses.
+ * param {function} next 
+ */
 ///delete function for instrumnet
 app.delete('/delete-instrument-ajax', function(req, res, next) {
     let data = req.body;
@@ -549,7 +650,12 @@ app.delete('/delete-instrument-ajax', function(req, res, next) {
     });
 });
 
-
+/**
+ * This function handles the HTTP DELETE request to delete a song.
+ * param {object} req - The request object containing the ID of the song to delete.
+ * param {object} res - The response object used to send HTTP responses.
+ * param {function} next 
+ */
 ///delete function songs
 app.delete('/delete-song-ajax', function(req, res, next) {
     let data = req.body;
@@ -577,7 +683,12 @@ app.delete('/delete-song-ajax', function(req, res, next) {
     });
 });
 
-
+/**
+ * This function handles the HTTP DELETE request to delete a sale.
+ * param {object} req - The request object containing the ID of the sale to delete.
+ * param {object} res - The response object used to send HTTP responses.
+ * param {function} next 
+ */
 //For sales
 app.delete('/delete-sales-ajax/:salesID', function(req, res, next) {
     let salesID = parseInt(req.params.salesID);
@@ -594,9 +705,12 @@ app.delete('/delete-sales-ajax/:salesID', function(req, res, next) {
     });
 });
 
-
-
-
+/**
+ * This function handles the HTTP DELETE request to delete a customer.
+ * param {object} req - The request object containing the ID of the customer to delete.
+ * param {object} res - The response object used to send HTTP responses.
+ * param {function} next 
+ */
 // For customers
   app.delete('/delete-customers-ajax', function(req, res, next) {
     let data = req.body;
@@ -624,7 +738,12 @@ app.delete('/delete-sales-ajax/:salesID', function(req, res, next) {
 });
 
 
-
+/**
+ * This function handles the HTTP DELETE request to delete a shopping cart.
+ * param {object} req - The request object containing the ID of the shopping cart to delete.
+ * param {object} res - The response object used to send HTTP responses.
+ * param {function} next 
+ */
 // For shoppingcart
 app.delete('/delete-shoppingcart-ajax', function(req, res, next) {
     let data = req.body;
@@ -642,7 +761,12 @@ app.delete('/delete-shoppingcart-ajax', function(req, res, next) {
     });
 });
 
-
+/**
+ * This function handles the HTTP DELETE request to delete an employee.
+ * param {object} req - The request object containing the ID of the employee to delete.
+ * param {object} res - The response object used to send HTTP responses.
+ * param {function} next 
+ */
 // For Employees
 app.delete('/delete-employee-ajax/', function(req, res, next) {
     let data = req.body;
