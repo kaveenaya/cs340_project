@@ -285,26 +285,25 @@ app.get('/sales', function (req, res) {
     let query3 = "SELECT * FROM Employees;"; // Define our query
 
 
-    db.pool.query(query1, function(error, rows, fields) { // Execute the query
+    db.pool.query(query1, function(error, rows, fields) {
         if (error) {
             console.error("Error fetching sales:", error);
-            res.status(500).send("Internal Server Error"); // Send internal server error status and message
+            res.status(500).send("Internal Server Error");
         } else {
-
-            // Render the 'instruments.hbs' file and send the data to the template
-            let mainTable = rows;
-
-            db.pool.query(query2, (error, rows, fields) => {
-            
-                // Save the planets
-                let customerIDS = rows; 
-
-                db.pool.query(query3, (error, rows, fields) => {
-                    let employeeIDS = rows;
-
-                    return res.render('sales', {data: mainTable, customerIDS: customerIDS, employeeIDS: employeeIDS});
-                })
-            })
+            let salesData = rows;
+            // Assuming query2 gets customerIDs and query3 gets employeeIDs
+            db.pool.query(query2, (error, customerRows, fields) => {
+                // handle error...
+                db.pool.query(query3, (error, employeeRows, fields) => {
+                    // handle error...
+                    res.render('sales', {
+                        data: salesData,
+                        customerIDS: customerRows,
+                        employeeIDS: employeeRows,
+                        saleIDS: salesData // This is the new addition
+                    });
+                });
+            });
         }
     });
 })
