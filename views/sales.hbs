@@ -51,15 +51,16 @@
     <select name="input-customerid" id="input-customerid-ajax">
         <option value="">Select an Customer</option>
         {{#each customerIDS}}
-        <option value="{{this.customerID}}">{{this.customerFname}} {{this.customerLname}}</option>
+        <option value="{{this.customerID}}">{{this.customerID}}. {{this.customerFname}} {{this.customerLname}}</option>
         {{/each}}
     </select>
     
     <label for="input-employeeid">Select the Employee: </label>
     <select name="input-employeeid" id="input-employeeid-ajax">
         <option value="">Select an Employee</option>
+        <option value="">No Employee</option>
         {{#each employeeIDS}}
-        <option value="{{this.employeeID}}">{{this.employeeFname}} {{this.employeeLname}}</option>
+        <option value="{{this.employeeID}}">{{this.employeeID}}. {{this.employeeFname}} {{this.employeeLname}}</option>
         {{/each}}
     </select>
 

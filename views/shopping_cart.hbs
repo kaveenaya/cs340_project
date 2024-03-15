@@ -60,21 +60,20 @@
         {{/each}}
     </select>
 
-    <label for="input-songid">Select the Song ID: </label>
+    <label for="input-songid">Select the Song: </label>
     <select name="input-songid" id="input-songid-ajax">
-        <option value="">Select an Song ID</option>
-        <option value="">Null</option>
+        <option value="">Select an Song</option>
         {{#each songIDS}}
-        <option value="{{this.songID}}">{{this.songID}}</option>
+        <option value="{{this.songID}}">{{this.songID}}. {{this.songName}}</option>
         {{/each}}
     </select>
 
-    <label for="input-instrumentid">Select the Instrument ID: </label>
+    <label for="input-instrumentid">Select the Instrument: </label>
     <select name="input-instrumentid" id="input-instrumentid-ajax">
-        <option value="">Select an Instrument ID</option>
+        <option value="">Select an Instrument</option>
         <option value="">Null</option>
         {{#each instrumentIDS}}
-        <option value="{{this.instrumentID}}">{{this.instrumentID}}</option>
+        <option value="{{this.instrumentID}}">{{this.instrumentID}}. {{this.instrumentName}}</option>
         {{/each}}
     </select>
 
