@@ -71,22 +71,22 @@ WHERE salesID = 'salesID_value';
 SELECT * FROM ShoppingCart;
 
 -- Add a shopping cart
-INSERT INTO ShoppingCart (salesID, songID, instrumentID, itemQuantity, itemTotalPrice)
-VALUES ('salesID_value', 'songID_value', 'instrumentID_value', 'itemQuantity_value', 'itemTotalPrice_value');
+INSERT INTO ShoppingCart (salesID, songID, instrumentID,songQuantity,instrumentQuantity, itemTotalPrice)
+VALUES ('salesID_value', 'songID_value', 'instrumentID_value', 'songQuantity_value','instrumentQuantity_value', 'itemTotalPrice_value');
 
 -- Update a shopping cart's information
 UPDATE ShoppingCart
 SET salesID = 'new_salesID_value',
     songID = 'new_songID_value',
     instrumentID = 'new_instrumentID_value',
-    itemQuantity = 'new_itemQuantity_value',
+    songQuantity = 'new_songQuantity_value'
+    instrumentQuantity = 'new_instrumentQuantity_value',
     itemTotalPrice = 'new_itemTotalPrice_value'
 WHERE shoppingCartID = 'shoppingCartID_value';
 
 -- Remove a shopping cart
 DELETE FROM ShoppingCart
 WHERE shoppingCartID = 'shoppingCartID_value';
-
 
 -- Instruments
 
