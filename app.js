@@ -519,12 +519,7 @@ app.post('/add-shoppingCart-form', function(req, res){
     // Capture the incoming data and parse it back to a JS object
     let data = req.body;
     // Convert empty string to null if not already done on the frontend
-    if (data['input-instrumentid'] === '') {
-        data['input-instrumentid'] = null;
-    }
-    if (data['input-songid'] === '') {
-        data['input-songid'] = null;
-    }
+    
 
 
     // Create the query and run it on the database
