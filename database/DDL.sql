@@ -46,8 +46,8 @@ CREATE OR REPLACE TABLE Sales (
     saleAmount DECIMAL(10, 2),
     saleDate DATE,
     saleTime TIME,
-    FOREIGN KEY (customerID) REFERENCES Customers(customerID) ON DELETE CASCADE ON UPDATE CASCADE,
-    FOREIGN KEY (employeeID) REFERENCES Employees(employeeID) ON DELETE CASCADE ON UPDATE CASCADE
+    FOREIGN KEY (customerID) REFERENCES Customers(customerID) ON DELETE CASCADE,
+    FOREIGN KEY (employeeID) REFERENCES Employees(employeeID) ON DELETE CASCADE
 );
 
 -- ShoppingCart Table
@@ -60,8 +60,8 @@ CREATE OR REPLACE TABLE ShoppingCart (
     instrumentQuantity INT,
     itemTotalPrice DECIMAL(10, 2),
     FOREIGN KEY (salesID) REFERENCES Sales(salesID),
-    FOREIGN KEY (songID) REFERENCES Songs(songID),
-    FOREIGN KEY (instrumentID) REFERENCES Instruments(instrumentID)
+    FOREIGN KEY (songID) REFERENCES Songs(songID) ON DELETE CASCADE,
+    FOREIGN KEY (instrumentID) REFERENCES Instruments(instrumentID) ON DELETE CASCADE
 );
 
 
