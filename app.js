@@ -98,11 +98,12 @@ app.put('/update-sale-ajax', function(req, res) {
     let employeeID = data.employeeID; 
     let saleAmount = data.saleAmount;
     let saleDate = data.saleDate;
+    let saleTime = data.saleTime;
 
-    let query = `UPDATE Sales SET customerID = ?, employeeID = ?, saleAmount = ?, saleDate = ? WHERE Sales.salesID = ?;`;
+    let query = `UPDATE Sales SET customerID = ?, employeeID = ?, saleAmount = ?, saleDate = ?, saleTime = ? WHERE Sales.salesID = ?;`;
     let showUpdate = `SELECT * FROM Sales WHERE salesID = ?;`;
 
-    db.pool.query(query, [customerID, employeeID, saleAmount, saleDate, salesID], function(error, results) {
+    db.pool.query(query, [customerID, employeeID, saleAmount, saleDate, saleTime, salesID], function(error, results) {
         if (error) {
             console.log(error);
             res.sendStatus(500).send("Internal Server Error");
