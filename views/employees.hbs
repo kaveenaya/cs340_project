@@ -68,8 +68,9 @@
 
         <label for="update-employee-id">Select the employee: </label>
         <select name="update-employee-id" id="update-employee-id">
+            <option value="">Select an Employee</option>
             {{#each employeeIDS}}
-            <option value="{{this.employeeID}}">{{this.employeeFname}} {{this.employeeLname}}</option>
+            <option value="{{this.employeeID}}">{{this.employeeID}}. {{this.employeeFname}} {{this.employeeLname}}</option>
             {{/each}}
         </select>
 
