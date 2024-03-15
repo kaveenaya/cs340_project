@@ -82,8 +82,9 @@
 
         <label for="update-instrument-id">Select the Instrument: </label>
         <select name="update-instrument-id" id="update-instrument-id">
+            <option value="">Select an Instrument</option>
             {{#each instrumentIDS}}
-            <option value="{{this.instrumentID}}">{{this.instrumentName}}</option>
+            <option value="{{this.instrumentID}}">{{this.instrumentID}}. {{this.instrumentName}}</option>
             {{/each}}
         </select>
 

@@ -71,8 +71,9 @@
 
         <label for="update-customer-id">Select the customer: </label>
         <select name="update-customer-id" id="update-customer-id">
+            <option value="">Select a Customer</option>
             {{#each customerIDS}}
-            <option value="{{this.customerID}}">{{this.customerFname}} {{this.customerLname}}</option>
+            <option value="{{this.customerID}}">{{this.customerID}}. {{this.customerFname}} {{this.customerLname}}</option>
             {{/each}}
         </select>
 

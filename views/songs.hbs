@@ -81,8 +81,9 @@
 
         <label for="update-song-id">Select the song: </label>
         <select name="update-song-id" id="update-song-id">
+            <option value="">Select a Song</option>
             {{#each songIDS}}
-            <option value="{{this.songID}}">{{this.songName}}</option>
+            <option value="{{this.songID}}">{{this.songID}}. {{this.songName}}</option>
             {{/each}}
         </select>
 
