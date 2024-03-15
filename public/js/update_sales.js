@@ -68,40 +68,35 @@ updateInstrumentForm.addEventListener("submit", function (e) {
 })
 
 
-function updateRow(data, saleID){
+function updateRow(data, saleID) {
     console.log("Data received for updateRow:", data);
 
     let parsedData = JSON.parse(data);
-    
-    // Get the table we want to update
+    let formattedDate = formatDate(parsedData[0].saleDate); // Use a separate function for date formatting
+
+    // Find the row in the table to update
     let table = document.getElementById("sales-table");
 
-    for (let i = 0, row; row = table.rows[i]; i++) {
-        //iterate through rows and update the one that matches the salesID
-        if(table.rows[i].getAttribute("data-value") == saleID){
-            let updateRowIndex = table.getElementsByTagName("tr")[i];
-
-            //get td of customerID
-            let customerIDTD = updateRowIndex.getElementsByTagName("td")[1];
-
-            //get td of employeeID
-            let employeeIDTD = updateRowIndex.getElementsByTagName("td")[2];
-
-            //get td of saleAmount
-            let saleAmountTD = updateRowIndex.getElementsByTagName("td")[3];
-
-            //get td of saleDate
-            let saleDateTD = updateRowIndex.getElementsByTagName("td")[4];
-
-            //get td of saleTime
-            let saleTimeTD = updateRowIndex.getElementsByTagName("td")[5];
-
-            //reassign the values of the row to the new values
-            customerIDTD.innerHTML = parsedData[0].customerID;
-            employeeIDTD.innerHTML = parsedData[0].employeeID;
-            saleAmountTD.innerHTML = parsedData[0].saleAmount;
-            saleDateTD.innerHTML = parsedData[0].saleDate;
-            saleTimeTD.innerHTML = parsedData[0].saleTime;
+    for (let i = 0; i < table.rows.length; i++) {
+        let row = table.rows[i];
+        // Check if this row's salesID matches the one to update
+        if (row.getAttribute("data-value") == saleID) {
+            // Cells: [0]SalesID, [1]CustomerID, [2]EmployeeID, [3]SaleAmount, [4]SaleDate, [5]SaleTime
+            row.cells[1].innerText = parsedData[0].customerID; // Assuming the order of cells matches
+            row.cells[2].innerText = parsedData[0].employeeID;
+            row.cells[3].innerText = parsedData[0].saleAmount;
+            row.cells[4].innerText = formattedDate; // Use the formatted date here
+            row.cells[5].innerText = parsedData[0].saleTime; // Optionally format the time
+            break; // Stop the loop once the correct row is updated
         }
     }
+}
+
+// Helper function to format ISO date string to "YYYY-MM-DD"
+function formatDate(isoDateString) {
+    let date = new Date(isoDateString);
+    let year = date.getFullYear();
+    let month = ('0' + (date.getMonth() + 1)).slice(-2); // Ensure two digits
+    let day = ('0' + date.getDate()).slice(-2); // Ensure two digits
+    return `${year}-${month}-${day}`;
 }

@@ -77,6 +77,7 @@ addRowToTable = (data) => {
     let parsedData = JSON.parse(data);
     let newRow = parsedData[parsedData.length - 1]
 
+
     // Create a row and 4 cells
     let row = document.createElement("TR");
     let salesIDCell = document.createElement("TD");
@@ -87,13 +88,15 @@ addRowToTable = (data) => {
     let saleAmountCell = document.createElement("TD");
     let deleteCell = document.createElement("TD");
 
+
+
     // Fill the cells with correct data
   
     // Fill the cells with correct data
     salesIDCell.innerText = newRow.salesID;
     customerIDCell.innerText = newRow.customerID;
     employeeIDCell.innerText = newRow.employeeID;
-    saleDateCell.innerText = newRow.saleDate;
+    saleDateCell.innerText = formattedDate(newRow.saleDate);
     saleTimeCell.innerText = newRow.saleTime;
     saleAmountCell.innerText = newRow.saleAmount;
 
@@ -124,4 +127,13 @@ addRowToTable = (data) => {
     //option.text = newRow.customerID;
     option.value = newRow.salesID;
     selectID.add(option);
+}
+
+// Function to format date
+function formattedDate(date){
+    let newDate = new Date(date);
+    let month = newDate.getMonth() + 1;
+    let day = newDate.getDate();
+    let year = newDate.getFullYear();
+    return month + "/" + day + "/" + year;
 }

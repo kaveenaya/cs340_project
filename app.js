@@ -300,6 +300,11 @@ app.get('/sales', function (req, res) {
                 // handle error...
                 db.pool.query(query3, (error, employeeRows, fields) => {
                     // handle error...
+                    salesData.forEach(sale => {
+                        let saleDate = new Date(sale.saleDate);
+                        let formattedDate = saleDate.toISOString().split('T')[0]; // Converts to YYYY-MM-DD
+                        sale.saleDate = formattedDate;
+                      });
                     res.render('sales', {
                         data: salesData,
                         customerIDS: customerRows,
