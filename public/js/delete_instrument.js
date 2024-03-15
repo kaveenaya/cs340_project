@@ -1,3 +1,12 @@
+// Citation for file delete_instrument.js
+// Date: 02/23/2024
+// The code was adapted from the github starter code 
+// Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main
+
+/**
+ * This function deletes an instrument entry via AJAX.
+ * param {string} instrumentID - The ID of the instrument entry to delete.
+ */
 function deleteInstrument(instrumentID) {
     // Put our data we want to send in a javascript object
     let data = {
@@ -25,7 +34,10 @@ function deleteInstrument(instrumentID) {
     xhttp.send(JSON.stringify(data));
 }
 
-
+/**
+ * This function deletes a row from the instruments table based on the provided instrument ID.
+ * param {string} instrumentID - The ID of the instrument entry to delete.
+ */
 function deleteRow(instrumentID){
 
     let table = document.getElementById("instruments-table");

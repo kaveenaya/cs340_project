@@ -1,7 +1,15 @@
+// Citation for file update_instrument.js
+// Date: 02/23/2024
+// The code was adapted from the github starter code 
+// Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main
 
 // Get the objects we need to modify
 let updateInstrumentForm = document.getElementById('update-instrument-form');
 
+/**
+ * This function handles form submission for updating instrument information via AJAX.
+ * param {Event} e - The event object.
+ */
 // Modify the objects we need
 updateInstrumentForm.addEventListener("submit", function (e) {
    
@@ -25,9 +33,6 @@ updateInstrumentForm.addEventListener("submit", function (e) {
     let instrumentSizeValue = inputInstrumentSize.value;
     let instrumentYearValue = inputInstrumentYear.value;
     let instrumentPriceValue = inputInstrumentPrice.value;
-    
-    // currently the database table for bsg_people does not allow updating values to NULL
-    // so we must abort if being bassed NULL for homeworld
 
     if (isNaN(instrumentIDValue)) 
     {
@@ -104,6 +109,11 @@ updateInstrumentForm.addEventListener("submit", function (e) {
 })
 
 
+/**
+ * This function updates a row in the instruments table with new data received from the server.
+ * param {string} data - The JSON string representing the updated instrument data.
+ * param {string} instrumentID - The ID of the instrument to be updated.
+ */
 function updateRow(data, instrumentID){
     let parsedData = JSON.parse(data);
     

@@ -1,7 +1,15 @@
+// Citation for file update_customer.js
+// Date: 02/23/2024
+// The code was adapted from the github starter code 
+// Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main
 
 // Get the objects we need to modify
 let updatecustomerForm = document.getElementById('update-customer-form');
 
+/**
+ * This function handles form submission for updating customer information via AJAX.
+ * param {Event} e - The event object.
+ */
 // Modify the objects we need
 updatecustomerForm.addEventListener("submit", function (e) {
    
@@ -22,9 +30,6 @@ updatecustomerForm.addEventListener("submit", function (e) {
     let customerLNameValue = inputcustomerLName.value;
     let customerphoneValue = inputcustomerphone.value;
     let customeremailValue = inputcustomeremail.value;
-
-    // currently the database table for bsg_people does not allow updating values to NULL
-    // so we must abort if being bassed NULL for homeworld
 
     if (isNaN(customerIDValue))
     {
@@ -88,7 +93,11 @@ updatecustomerForm.addEventListener("submit", function (e) {
 
 })
 
-
+/**
+ * This function updates a row in the customers table with new data received from the server.
+ * param {string} data - The JSON string representing the updated customer data.
+ * param {string} customerID - The ID of the customer to be updated.
+ */
 function updateRow(data, customerID){
     console.log("Data received for updateRow:", data);
 

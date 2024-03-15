@@ -1,7 +1,15 @@
+// Citation for file update_sale.js
+// Date: 02/23/2024
+// The code was adapted from the github starter code 
+// Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main
 
 // Get the objects we need to modify
 let updateInstrumentForm = document.getElementById('update-sale-form');
 
+/**
+ * This function handles form submission for updating sale information via AJAX.
+ * param {Event} e - The event object.
+ */
 // Modify the objects we need
 updateInstrumentForm.addEventListener("submit", function (e) {
    
@@ -67,7 +75,11 @@ updateInstrumentForm.addEventListener("submit", function (e) {
 
 })
 
-
+/**
+ * This function updates a row in the sales table with new data received from the server.
+ * param {string} data - The JSON string representing the updated sale data.
+ * param {string} saleID - The ID of the sale to be updated.
+ */
 function updateRow(data, saleID) {
     console.log("Data received for updateRow:", data);
 

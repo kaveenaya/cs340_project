@@ -1,3 +1,13 @@
+// Citation for file delete_customers.js
+// Date: 02/23/2024
+// The code was adapted from the github starter code 
+// Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main
+
+/**
+ * This function deletes a customer entry via AJAX.
+ * param {string} customerID - The ID of the customer entry to delete.
+ */
+
 function deleteCustomer(customerID) {
     // Put our data we want to send in a javascript object
     let data = {
@@ -25,7 +35,10 @@ function deleteCustomer(customerID) {
     xhttp.send(JSON.stringify(data));
 }
 
-
+/**
+ * This function deletes the row from the customers table based on the provided customer ID.
+ * param {string} customerID - The ID of the customer entry to delete.
+ */
 function deleteRow(customerID){
 
     let table = document.getElementById("customers-table");

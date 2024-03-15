@@ -1,7 +1,15 @@
+// Citation for file update_employee.js
+// Date: 02/23/2024
+// The code was adapted from the github starter code 
+// Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main
 
 // Get the objects we need to modify
 let updateemployeeForm = document.getElementById('update-employee-form');
 
+/**
+ * This function handles form submission for updating employee information via AJAX.
+ * param {Event} e - The event object.
+ */
 // Modify the objects we need
 updateemployeeForm.addEventListener("submit", function (e) {
    
@@ -22,9 +30,6 @@ updateemployeeForm.addEventListener("submit", function (e) {
     let employeeLNameValue = inputemployeeLName.value;
     let employeePhoneValue = inputemployeePhone.value;
     let employeeEmailValue = inputemployeeEmail.value;
-
-    // currently the database table for bsg_people does not allow updating values to NULL
-    // so we must abort if being bassed NULL for homeworld
 
     if (isNaN(employeeIDValue))
     {
@@ -86,6 +91,11 @@ updateemployeeForm.addEventListener("submit", function (e) {
 
 })
 
+/**
+ * This function updates a row in the employees table with new data received from the server.
+ * param {string} data - The JSON string representing the updated employee data.
+ * param {string} employeeID - The ID of the employee to be updated.
+ */
 
 function updateRow(data, employeeID){
     console.log("Data received for updateRow:", data);

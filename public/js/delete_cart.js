@@ -1,3 +1,12 @@
+// Citation for file delete_cart.js
+// Date: 02/23/2024
+// The code was adapted from the github starter code 
+// Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main
+
+/**
+ * This function deletes a shopping cart entry via AJAX.
+ * param {string} shoppingCartID - The ID of the shopping cart entry to delete.
+ */
 function deleteShoppingCart(shoppingCartID) {
     // Put our data we want to send in a javascript object
     let data = {
@@ -25,7 +34,10 @@ function deleteShoppingCart(shoppingCartID) {
     xhttp.send(JSON.stringify(data));
 }
 
-
+/**
+ * Deletes a row from the shopping cart table based on the provided shopping cart ID.
+ * param {string} shoppingCartID - The ID of the shopping cart entry to delete.
+ */
 function deleteRow(shoppingCartID){
 
     let table = document.getElementById("shoppingCart-table");

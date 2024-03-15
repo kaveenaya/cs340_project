@@ -1,6 +1,16 @@
+// Citation for file add_song.js
+// Date: 02/23/2024
+// The code was adapted from the github starter code 
+// Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main
+
+
 // Get the objects we need to modify
 let addSongForm = document.getElementById('add-song-form-ajax');
 
+/**
+ * This Function is to handle form submission for adding a new customer via AJAX.
+ * param {Event} e - The event object.
+ */
 // Modify the objects we need
 addSongForm.addEventListener("submit", function (e) {
     
@@ -63,9 +73,11 @@ addSongForm.addEventListener("submit", function (e) {
 
 })
 
-
+/**
+ * This function is to add a single row to the table based on data received from AJAX response.
+ * param {string} data - The JSON string representing data to be added.
+ */
 // Creates a single row from an Object representing a single record from
-// bsg_people
 addRowToTable = (data) => {
 
     // Get a reference to the current table on the page and clear it out.
