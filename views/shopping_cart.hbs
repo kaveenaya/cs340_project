@@ -117,17 +117,19 @@
 
         <label for="update-shoppingcart-song-id">Update the Song: </label>
         <select name="update-shoppingcart-song-id" id="update-shoppingcart-song-id">
-        <option value="">Select a Song</option>
+            <option value="">Select a Song</option>
+            <option value="NULL">NULL</option>
             {{#each songIDS}}
-            <option value="{{this.songID}}">{{this.songID}}. {{this.songName}} </option>
+                <option value="{{this.songID}}">{{this.songID}}. {{this.songName}}</option>
             {{/each}}
         </select>
 
         <label for="update-shoppingcart-instrument-id">Update the Instrument: </label>
         <select name="update-shoppingcart-instrument-id" id="update-shoppingcart-instrument-id">
-        <option value="">Select an Instrument</option>
+            <option value="">Select an Instrument</option>
+            <option value="NULL">NULL</option>
             {{#each instrumentIDS}}
-            <option value="{{this.instrumentID}}">{{this.instrumentID}}. {{this.instrumentName}} </option>
+                <option value="{{this.instrumentID}}">{{this.instrumentID}}. {{this.instrumentName}}</option>
             {{/each}}
         </select>
 

@@ -20,8 +20,8 @@ updateInstrumentForm.addEventListener("submit", function (e) {
     // Get the values from the form fields
     let shoppingCartIDValue = inputshoppingCartID.value;
     let scSalesIDValue = inputSCSalesID.value;
-    let scSongIDValue = inputSCSongID.value;
-    let scInstrumentIDValue = inputSCInstrumentID.value;
+    let scSongIDValue = inputSCSongID.value === 'NULL' ? null : parseInt(inputSCSongID.value);
+    let scInstrumentIDValue = inputSCInstrumentID.value === 'NULL' ? null : parseInt(inputSCInstrumentID.value);
     let scSongQuantityValue = inputSCSongQuantity.value;
     let scInstrumentQuantityValue = inputSCInstrumentQuantity.value;
     let scTotalPriceValue = inputSCTotalPrice.value;

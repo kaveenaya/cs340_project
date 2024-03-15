@@ -186,36 +186,39 @@ app.put('/update-employee-ajax', function(req, res) {
 
 app.put('/update-shopping-cart-ajax', function(req, res) {
     let data = req.body;
-
     console.log("Request Data:", data);
     let shoppingCartID = parseInt(data.shoppingCartID);
     let salesID = parseInt(data.salesID);
-    let songID = parseInt(data.songID);
-    let instrumentID = data.instrumentID;
+    let songID = data.songID === 'NULL' || data.songID === null ? null : parseInt(data.songID);
+    let instrumentID = data.instrumentID === 'NULL' || data.instrumentID === null ? null : parseInt(data.instrumentID);
     let songQuantity = data.songQuantity;
     let instrumentQuantity = data.instrumentQuantity;
     let itemTotalPrice = data.itemTotalPrice;
 
-    let query = `UPDATE ShoppingCart SET salesID = ?, songID = ?, instrumentID = ?, songQuantity = ?, instrumentQuantity = ?, itemTotalPrice = ? WHERE ShoppingCart.shoppingCartID = ?;`;
-    let showUpdate = `SELECT * FROM ShoppingCart WHERE shoppingCartID = ?;`;
+    let updateQuery = `UPDATE ShoppingCart SET salesID = ?, songID = ?, instrumentID = ?, songQuantity = ?, instrumentQuantity = ?, itemTotalPrice = ? WHERE ShoppingCart.shoppingCartID = ?`;
+    let selectQuery = `SELECT * FROM ShoppingCart WHERE shoppingCartID = ?`;
 
-    db.pool.query(query, [salesID, songID, instrumentID, songQuantity, instrumentQuantity, itemTotalPrice, shoppingCartID], function(error, results) {
-        console.log("Response Data:", results); // Debugging: Log the data to be sent back
+    db.pool.query(updateQuery, [salesID, songID, instrumentID, songQuantity, instrumentQuantity, itemTotalPrice, shoppingCartID], function(error, updateResults) {
         if (error) {
-            console.log(error);
-            res.sendStatus(500).send("Internal Server Error");
+            console.error('Error in the update query', error);
+            res.sendStatus(500); // Internal Server Error
         } else {
-            db.pool.query(showUpdate, [shoppingCartID], function(error, results) {
+            // After update, fetch the updated shopping cart data
+            db.pool.query(selectQuery, [shoppingCartID], function(error, selectResults) {
                 if (error) {
-                    console.log(error);
-                    res.sendStatus(500).send("Internal Server Error");
+                    console.error('Error in the select query', error);
+                    res.sendStatus(500); // Internal Server Error
                 } else {
-                    res.send(results);
+                    // Send the updated shopping cart data back
+                    res.json(selectResults);
                 }
-            })
+            });
         }
     });
 });
+
+
+
 
 
 // Remaining routes...
@@ -486,34 +489,26 @@ app.post('/add-song-form', function(req, res){
 });
 
 app.post('/add-shoppingCart-form', function(req, res){
-    // Capture the incoming data and parse it back to a JS object
     let data = req.body;
-    // Convert empty string to null if not already done on the frontend
+
+    let songID = (data['input-songid'] === 'NULL') ? null : parseInt(data['input-songid']);
+    let instrumentID = (data['input-instrumentid'] === 'NULL') ? null : parseInt(data['input-instrumentid']);
     
-    let songid = parseInt(data['input-songid']);
-    if (isNaN(songid))
-    {
-        songid = 'NULL'
-    }
+    let songQuantity = data['input-squantity'];
+    let instrumentQuantity = data['input-iquantity'];
+    let totalPrice = data['input-totalprice'];
 
-    let instrumentid = parseInt(data['input-instrumentid']);
-    if (isNaN(instrumentid))
-    {
-        instrumentid = 'NULL'
-    }
+    let query1 = `INSERT INTO ShoppingCart (salesID, songID, instrumentID, songQuantity, instrumentQuantity, itemTotalPrice) 
+                  VALUES (?, ?, ?, ?, ?, ?)`;
 
-    // Create the query and run it on the database
-    query1 = `INSERT INTO ShoppingCart (salesID, songID, instrumentID, songQuantity, instrumentQuantity, itemTotalPrice) VALUES ('${data['input-saleid']}', '${songid}', '${instrumentid}', '${data['input-squantity']}', '${data['input-iquantity']}', '${data['input-totalprice']}')`;
-    db.pool.query(query1, function(error, rows, fields){
-        // Check to see if there was an error
+    db.pool.query(query1, [data['input-saleid'], songID, instrumentID, songQuantity, instrumentQuantity, totalPrice], function(error, results){
         if (error) {
-            // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
-            console.log(error)
+            console.log(error);
             res.sendStatus(400);
         } else {
             res.redirect('/shopping_cart');
         }
-    })
+    });
 });
 /*
     LISTENER

@@ -15,10 +15,13 @@ addShoppingCartForm.addEventListener("submit", function (e) {
     let inputIQuantity = document.getElementById("input-iquantity");
     let inputTotalPrice = document.getElementById("input-totalprice");
 
+
+
     // Get the values from the form fields
     let cartSaleIDValue = inputSaleID.value;
-    let cartSongIDValue = inputSongID.value;
-    let cartInstrumentIDValue = inputInstrumentID.value;
+    // Check if 'NULL' was selected and assign null otherwise parse the value
+    let cartSongIDValue = inputSongID.value === 'NULL' ? null : parseInt(inputSongID.value);
+    let cartInstrumentIDValue = inputInstrumentID.value === 'NULL' ? null : parseInt(inputInstrumentID.value);
     let cartSQuantityValue = inputSQuantity.value;
     let cartIQuantityValue = inputIQuantity.value;
     let cartTotalPriceValue = inputTotalPrice.value;
