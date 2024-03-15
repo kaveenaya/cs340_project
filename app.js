@@ -490,10 +490,20 @@ app.post('/add-shoppingCart-form', function(req, res){
     let data = req.body;
     // Convert empty string to null if not already done on the frontend
     
+    let songid = parseInt(data['input-songid']);
+    if (isNaN(songid))
+    {
+        songid = 'NULL'
+    }
 
+    let instrumentid = parseInt(data['input-instrumentid']);
+    if (isNaN(instrumentid))
+    {
+        instrumentid = 'NULL'
+    }
 
     // Create the query and run it on the database
-    query1 = `INSERT INTO ShoppingCart (salesID, songID, instrumentID, songQuantity, instrumentQuantity, itemTotalPrice) VALUES ('${data['input-saleid']}', '${data['input-songid']}', '${data['input-instrumentid']}', '${data['input-squantity']}', '${data['input-iquantity']}', '${data['input-totalprice']}')`;
+    query1 = `INSERT INTO ShoppingCart (salesID, songID, instrumentID, songQuantity, instrumentQuantity, itemTotalPrice) VALUES ('${data['input-saleid']}', '${songid}', '${instrumentid}', '${data['input-squantity']}', '${data['input-iquantity']}', '${data['input-totalprice']}')`;
     db.pool.query(query1, function(error, rows, fields){
         // Check to see if there was an error
         if (error) {
