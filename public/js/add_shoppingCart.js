@@ -8,7 +8,7 @@
 let addShoppingCartForm = document.getElementById('add-shoppingCart-form-ajax');
 
 /**
- * This Function is to handle form submission for adding a new customer via AJAX.
+ * This Function is to handle form submission for adding a new shoppingCart via AJAX.
  * param {Event} e - The event object.
  */
 // Modify the objects we need

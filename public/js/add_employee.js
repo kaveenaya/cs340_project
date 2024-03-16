@@ -10,7 +10,7 @@
 let addEmployeeForm = document.getElementById('add-employee-form-ajax');
 
 /**
- * This Function is to handle form submission for adding a new customer via AJAX.
+ * This Function is to handle form submission for adding a new employee via AJAX.
  * param {Event} e - The event object.
  */
 // Modify the objects we need
