@@ -36,7 +36,7 @@
     {{!-- Body section --}}
     <tbody>
 
-        {{!-- For each row, print the id, fname, lname, homeworld and age, in order --}}
+        {{!-- For each row, print items, in order --}}
         {{#each data}}
         <tr data-value={{this.customerID}}>
             <td>{{this.customerID}}</td>
@@ -51,7 +51,7 @@
 </table>
 <script src="./js/delete_customer.js"></script>
 
-<!-- /views/index.hbs -->
+<!-- Adding form -->
 <h2>Adding Customers</h2>
 <p>To add a new customer, please enter their information below and click `Submit`!</p>
 <form id="add-customer-form" method="POST" action="/add-customer-form">
@@ -71,6 +71,8 @@
 </form>
 
 
+
+<!-- Updating Form -->
 <h2>Updating Customers</h2>
 <p>Select the customerID from the dropdown below and update their information:</p>
 

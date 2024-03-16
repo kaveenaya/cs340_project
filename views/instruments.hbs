@@ -38,7 +38,7 @@
     {{!-- Body section --}}
     <tbody>
 
-        {{!-- For each row, print the id, fname, lname, homeworld and age, in order --}}
+        {{!-- For each row, print items in order --}}
         {{#each data}}
         <tr data-value={{this.instrumentID}}>
             <td>{{this.instrumentID}}</td>
@@ -56,7 +56,7 @@
 </table>
 <script src="./js/delete_instrument.js"></script>
 
-<!-- /views/index.hbs -->
+<!-- Adding form -->
 <h2>Adding Instruments</h2>
 <p>To add a new instrument, please enter their information below and click `Submit`!</p>
 <form id="add-instrument-form" method="POST" action="/add-instrument-form">
@@ -80,6 +80,9 @@
 
     <input type="submit">
 </form>
+
+
+<!-- Updating Form -->
 
 
 <h2>Updating Instruments</h2>

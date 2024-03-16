@@ -34,7 +34,7 @@
     {{!-- Body section --}}
     <tbody>
 
-        {{!-- For each row, print the id, fname, lname, homeworld and age, in order --}}
+        {{!-- For each row, print items in order --}}
         {{#each data}}
         <tr data-value={{this.salesID}}>
             <td>{{this.salesID}}</td>
@@ -51,6 +51,8 @@
 </table>
 <script src="./js/delete_sales.js"></script>
 
+
+{{!-- Form to add sales --}}
 <!-- /views/index.hbs -->
 <h2>Adding Sales</h2>
 <p>To add a new sale, please enter their information below and click `Submit`!</p>
@@ -83,6 +85,8 @@
     <input type="submit">
 </form>
 
+
+<!-- Updating Sales Form -->
 
 <h2>Updating Sales Form</h2>
 <p>Select the Sales ID from the dropdown below and update its information:</p>

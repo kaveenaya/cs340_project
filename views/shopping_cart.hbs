@@ -39,7 +39,7 @@
     {{!-- Body section --}}
     <tbody>
 
-        {{!-- For each row, print the id, fname, lname, homeworld and age, in order --}}
+        {{!-- For each row, print items in order --}}
         {{#each data}}
         <tr data-value={{this.shoppingCartID}}>
             <td>{{this.shoppingCartID}}</td>
@@ -56,6 +56,8 @@
 </table>
 <script src="./js/delete_cart.js"></script>
 
+
+{{!--form to add shopping cart --}}
 <!-- /views/index.hbs -->
 <h2>Adding a Shopping Cart for the Specific Customer</h2>
 <p>To add a new shopping cart, please enter their information below and click `Submit`!</p>
@@ -99,6 +101,8 @@
     <input type="submit">
 </form>
 
+
+{{!--form to update shopping cart --}}
 
 <h2>Updating Shopping Cart Form</h2>
 <p>Select the Shopping Cart ID from the dropdown below and update its information:</p>

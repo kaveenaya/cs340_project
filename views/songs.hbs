@@ -38,7 +38,7 @@
     {{!-- Body section --}}
     <tbody>
 
-        {{!-- For each row, print the id, fname, lname, homeworld and age, in order --}}
+        {{!-- For each row, print items in order --}}
         {{#each data}}
         <tr data-value={{this.songID}}>
             <td>{{this.songID}}</td>
@@ -55,6 +55,8 @@
 </table>
 <script src="./js/delete_songs.js"></script>
 
+
+    {{!-- Form to add songs --}}
 <!-- /views/index.hbs -->
 <h2>Add Songs</h2>
 <p>To add a new song, please enter their information below and click `Submit`!</p>
@@ -81,6 +83,7 @@
 </form>
 
 
+{{!-- Form to update songs --}}
 
 <h2>Updating Song</h2>
 <p>Select the songID from the dropdown below and update its information:</p>
