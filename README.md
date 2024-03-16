@@ -9,6 +9,6 @@ Work Cited
  Citation for all files 
  Date: 02/23/2024
  The ciation scope was for the whole module
- All the code that was used in this project was adapted from the github starter code that was provied from the proffecsors 
+ All the code that was used in this project was adapted from the github starter code that was provided from the professor. 
  Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main
 
